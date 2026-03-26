@@ -19,9 +19,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Syne', 'system-ui', 'sans-serif'],
-        sans:    ['DM Sans', 'system-ui', 'sans-serif'],
-        mono:    ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        display: ['Bricolage Grotesque', 'system-ui', 'sans-serif'],
+        sans:    ['Instrument Sans', 'system-ui', 'sans-serif'],
+        mono:    ['Instrument Sans', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         widest2: '0.2em',

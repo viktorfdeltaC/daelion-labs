@@ -39,12 +39,13 @@ export default function Hero() {
         </div>
 
         <div className="xl:pl-10">
-          <h1 className="font-display font-extrabold leading-[0.9] tracking-tighter overflow-hidden">
+          <h1 className="font-display font-extrabold leading-[0.88] tracking-tight overflow-hidden">
             <span
-              className="block text-brand-text/75"
+              className="block text-brand-text/50"
               style={{
-                fontSize: 'clamp(1.1rem, 2.8vw, 2.5rem)',
-                letterSpacing: '0.08em',
+                fontSize: 'clamp(1rem, 2.4vw, 2.2rem)',
+                letterSpacing: '0.12em',
+                fontWeight: 400,
                 animation: 'word-reveal 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s both',
               }}
             >
@@ -53,9 +54,9 @@ export default function Hero() {
             <span
               className="block text-brand-accent"
               style={{
-                fontSize: 'clamp(2.5rem, 7.8vw, 8rem)',
-                paddingLeft: 'clamp(0.5rem, 1vw, 1.5rem)',
-                textShadow: '0 0 80px rgba(139,92,246,0.35)',
+                fontSize: 'clamp(3.5rem, 15vw, 13rem)',
+                paddingLeft: 'clamp(0.25rem, 0.5vw, 1rem)',
+                textShadow: '0 0 120px rgba(139,92,246,0.25)',
                 animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.3s both',
               }}
             >
