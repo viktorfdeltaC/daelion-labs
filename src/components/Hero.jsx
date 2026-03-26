@@ -4,24 +4,24 @@ export default function Hero() {
 
       {/* ── Background orbs ───────────────────────── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-        <div className="section-orb" style={{ width: '65vw', height: '65vw', top: '5%', left: '30%', background: 'radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 65%)', animation: 'float 10s ease-in-out infinite', maxWidth: '800px', maxHeight: '800px' }} />
-        <div className="section-orb" style={{ width: '40vw', height: '40vw', bottom: '10%', left: '-5%', background: 'radial-gradient(circle, rgba(109,40,217,0.1) 0%, transparent 65%)', animation: 'float-alt 14s ease-in-out infinite', maxWidth: '500px', maxHeight: '500px' }} />
+        <div className="section-orb" style={{ width: '70vw', height: '70vw', top: '-5%', right: '-10%', background: 'radial-gradient(circle, rgba(139,92,246,0.13) 0%, transparent 65%)', animation: 'float 12s ease-in-out infinite', maxWidth: '900px', maxHeight: '900px' }} />
+        <div className="section-orb" style={{ width: '40vw', height: '40vw', bottom: '5%', left: '-8%', background: 'radial-gradient(circle, rgba(109,40,217,0.08) 0%, transparent 65%)', animation: 'float-alt 16s ease-in-out infinite', maxWidth: '520px', maxHeight: '520px' }} />
       </div>
 
       {/* ── Dot grid ──────────────────────────────── */}
-      <div className="absolute inset-0 dot-grid opacity-35 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" aria-hidden="true" />
 
-      {/* ── Top meta row ──────────────────────────── */}
+      {/* ── Section header bar ────────────────────── */}
       <div
-        className="relative z-10 flex items-center justify-between px-6 md:px-10 lg:px-16 pt-10 md:pt-14"
-        style={{ animation: 'fade-up 0.6s ease 0.05s both' }}
+        className="relative z-10 flex items-center justify-between px-6 md:px-10 lg:px-16 py-4 border-b border-brand-border shrink-0"
+        style={{ animation: 'fade-up 0.5s ease 0.05s both' }}
       >
         <span className="section-label text-brand-accent">001 / HERO</span>
-        <span className="section-label text-brand-sub">Solution Architecture</span>
+        <span className="section-label text-brand-sub/60">Solution Architecture</span>
       </div>
 
-      {/* ── Main headline ─────────────────────────── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 py-10 md:py-0">
+      {/* ── Main content — single coherent block ──── */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 py-12 md:py-16">
 
         {/* Vertical side label — desktop only */}
         <div
@@ -29,105 +29,121 @@ export default function Hero() {
           style={{ writingMode: 'vertical-rl', transform: 'translateY(-50%)', zIndex: 20 }}
           aria-hidden="true"
         >
-          <span className="section-label text-brand-sub opacity-60" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
+          <span className="section-label text-brand-sub opacity-40" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
             DAELION LABS
           </span>
-          <div className="w-px h-12 bg-brand-border" />
-          <span className="section-label text-brand-accent opacity-80" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
+          <div className="w-px h-10 bg-brand-border" />
+          <span className="section-label text-brand-accent opacity-60" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
             2026
           </span>
         </div>
 
-        <div className="xl:pl-10">
-          <h1 className="font-display font-extrabold leading-[0.88] tracking-tight overflow-hidden">
+        <div className="xl:pl-10 max-w-[1100px]">
+
+          {/* ── Headline ──────────────────────────── */}
+          <h1 className="font-display font-extrabold overflow-hidden">
             <span
-              className="block text-brand-text/50"
+              className="block text-brand-text/40"
               style={{
-                fontSize: 'clamp(1rem, 2.4vw, 2.2rem)',
-                letterSpacing: '0.12em',
+                fontSize: 'clamp(0.9rem, 1.8vw, 1.6rem)',
+                letterSpacing: '0.18em',
                 fontWeight: 400,
-                animation: 'word-reveal 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s both',
+                lineHeight: 1,
+                marginBottom: 'clamp(0.5rem, 1vw, 0.9rem)',
+                animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both',
               }}
             >
               WIR BAUEN
             </span>
             <span
-              className="block text-brand-accent"
+              className="block text-white leading-[0.88]"
               style={{
-                fontSize: 'clamp(3.5rem, 15vw, 13rem)',
-                paddingLeft: 'clamp(0.25rem, 0.5vw, 1rem)',
-                textShadow: '0 0 120px rgba(139,92,246,0.25)',
-                animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.3s both',
+                fontSize: 'clamp(3.5rem, 13vw, 11rem)',
+                letterSpacing: '-0.02em',
+                animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.32s both',
               }}
             >
-              LÖSUNGEN.
+              LÖSUNGEN
+            </span>
+            <span
+              className="block text-brand-accent leading-[0.88]"
+              style={{
+                fontSize: 'clamp(2rem, 8vw, 7rem)',
+                letterSpacing: '-0.01em',
+                paddingLeft: 'clamp(1rem, 4vw, 5rem)',
+                animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.44s both',
+              }}
+            >
+              DIE BLEIBEN.
             </span>
           </h1>
-        </div>
 
-        {/* ── Stats badges ──────────────────────── */}
-        <div
-          className="flex flex-wrap items-center gap-3 mt-8 xl:pl-10"
-          style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s both' }}
-        >
-          {[
-            { num: '12+', label: 'Projekte' },
-            { num: '100%', label: 'Custom Code' },
-            { num: '<24h', label: 'Antwortzeit' },
-          ].map(({ num, label }) => (
-            <div key={num} className="glass flex items-center gap-3 px-4 py-2.5">
-              <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
-              <span className="section-label text-brand-sub/70">{label}</span>
-            </div>
-          ))}
+          {/* ── Description ───────────────────────── */}
+          <p
+            className="text-brand-sub text-base md:text-lg leading-relaxed mt-8 md:mt-10 max-w-lg"
+            style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.56s both' }}
+          >
+            Individuelle Lösungsarchitekturen für Probleme, die kein Standardtool der Welt lösen kann.
+          </p>
+
+          {/* ── CTA ───────────────────────────────── */}
+          <div
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-8 md:mt-10"
+            style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.64s both' }}
+          >
+            <a
+              href="#contact"
+              className="btn-shimmer bg-brand-accent text-white font-sans font-semibold text-sm px-8 py-4 hover:bg-violet-500 transition-colors duration-200 cursor-pointer whitespace-nowrap"
+              style={{ borderRadius: 0, boxShadow: '0 0 32px rgba(139,92,246,0.3)' }}
+            >
+              Projekt starten →
+            </a>
+            <a
+              href="#problem"
+              className="text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"
+            >
+              Mehr erfahren
+            </a>
+          </div>
+
+          {/* ── Stats ─────────────────────────────── */}
+          <div
+            className="flex flex-wrap items-center gap-3 mt-10 md:mt-12"
+            style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.74s both' }}
+          >
+            {[
+              { num: '12+', label: 'Projekte' },
+              { num: '100%', label: 'Custom Code' },
+              { num: '<24h', label: 'Antwortzeit' },
+            ].map(({ num, label }) => (
+              <div key={num} className="glass flex items-center gap-3 px-4 py-2.5">
+                <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
+                <span className="section-label text-brand-sub/60">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* ── Dividing rule ─────────────────────────── */}
+      {/* ── Bottom rule ───────────────────────────── */}
       <div
-        className="relative z-10 mx-6 md:mx-10 lg:mx-16"
+        className="relative z-10 mx-6 md:mx-10 lg:mx-16 shrink-0"
         style={{ animation: 'line-draw 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s both', transformOrigin: 'left' }}
         aria-hidden="true"
       >
         <div className="h-px bg-brand-border" />
       </div>
 
-      {/* ── Bottom info row ───────────────────────── */}
-      <div
-        className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 px-6 md:px-10 lg:px-16 pt-8 pb-12 md:pb-16"
-        style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s both' }}
-      >
-        <p className="text-brand-sub text-base md:text-lg max-w-sm leading-relaxed">
-          Individuelle Lösungsarchitekturen für Probleme, die kein Standardtool der Welt lösen kann.
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <a
-            href="#contact"
-            className="btn-shimmer bg-brand-accent text-white font-display font-bold text-sm px-8 py-4 hover:bg-violet-500 transition-colors duration-200 cursor-pointer whitespace-nowrap"
-            style={{ borderRadius: 0, boxShadow: '0 0 32px rgba(139,92,246,0.35)' }}
-          >
-            Projekt starten →
-          </a>
-          <a
-            href="#problem"
-            className="text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"
-          >
-            Mehr erfahren
-          </a>
-        </div>
-      </div>
-
       {/* ── Corner marks ──────────────────────────── */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" aria-hidden="true">
-        <line x1="5%" y1="8%"  x2="8%"  y2="8%"  stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="5%" y1="8%"  x2="5%"  y2="11%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="95%" y1="8%"  x2="92%" y2="8%"  stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="95%" y1="8%"  x2="95%" y2="11%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="5%" y1="92%" x2="8%"  y2="92%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="5%" y1="92%" x2="5%"  y2="89%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="95%" y1="92%" x2="92%" y2="92%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
-        <line x1="95%" y1="92%" x2="95%" y2="89%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="5%" y1="8%"  x2="8%"  y2="8%"  stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="5%" y1="8%"  x2="5%"  y2="11%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="95%" y1="8%"  x2="92%" y2="8%"  stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="95%" y1="8%"  x2="95%" y2="11%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="5%" y1="92%" x2="8%"  y2="92%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="5%" y1="92%" x2="5%"  y2="89%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="95%" y1="92%" x2="92%" y2="92%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
+        <line x1="95%" y1="92%" x2="95%" y2="89%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.2" />
       </svg>
     </section>
   )
