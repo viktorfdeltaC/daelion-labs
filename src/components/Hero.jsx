@@ -21,7 +21,7 @@ export default function Hero() {
       </div>
 
       {/* ── Main headline ─────────────────────────── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 py-10 md:py-0">
+      <div className="relative z-10 flex-1 flex flex-col justify-center py-10 md:py-0">
 
         {/* Vertical side label — desktop only */}
         <div
@@ -38,34 +38,39 @@ export default function Hero() {
           </span>
         </div>
 
-        <div className="xl:pl-10">
-          <h1 className="font-display font-extrabold leading-[0.88] tracking-tighter overflow-hidden">
-            <span
-              className="block text-brand-text"
-              style={{
-                fontSize: 'clamp(3.5rem, 11.5vw, 11rem)',
-                animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.15s both',
-              }}
-            >
-              WIR BAUEN
-            </span>
-            <span
-              className="block text-brand-accent"
-              style={{
-                fontSize: 'clamp(3.5rem, 11.5vw, 11rem)',
-                paddingLeft: 'clamp(1rem, 8vw, 9rem)',
-                animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.32s both',
-                textShadow: '0 0 80px rgba(139,92,246,0.35)',
-              }}
-            >
-              LÖSUNGEN.
-            </span>
+        {/* WIR BAUEN — small qualifier label */}
+        <div
+          className="px-6 md:px-10 lg:px-16 xl:pl-10 mb-2"
+          style={{ animation: 'fade-up 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s both' }}
+        >
+          <span
+            className="font-mono text-brand-sub/40 uppercase tracking-[0.3em]"
+            style={{ fontSize: '0.75rem' }}
+          >
+            WIR BAUEN
+          </span>
+        </div>
+
+        {/* LÖSUNGEN. — architectural, fills the viewport width */}
+        <div
+          className="overflow-hidden"
+          style={{ animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.2s both' }}
+        >
+          <h1
+            className="font-display font-extrabold leading-[0.88] tracking-tighter text-brand-accent block"
+            style={{
+              fontSize: 'clamp(3.5rem, 15vw, 14rem)',
+              paddingLeft: 'clamp(1.5rem, 2.5vw, 4rem)',
+              textShadow: '0 0 120px rgba(139,92,246,0.4)',
+            }}
+          >
+            LÖSUNGEN.
           </h1>
         </div>
 
         {/* ── Stats badges ──────────────────────── */}
         <div
-          className="flex flex-wrap items-center gap-3 mt-8 xl:pl-10"
+          className="flex flex-wrap items-center gap-3 mt-6 px-6 md:px-10 lg:px-16 xl:pl-10"
           style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s both' }}
         >
           {[

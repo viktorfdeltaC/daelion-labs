@@ -33,38 +33,41 @@ function CapabilityRow({ number, title, description, tag, index, sectionInView }
 
   return (
     <div
-      className={`group border-b border-brand-border cursor-default transition-all duration-500 ease-out ${
+      className={`relative group border-b border-brand-border cursor-default overflow-hidden transition-all duration-500 ease-out ${
         sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
       }`}
       style={{ transitionDelay: `${index * 75}ms` }}
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
     >
-      <div className="flex items-start gap-4 md:gap-8 px-6 md:px-10 lg:px-16 py-5 md:py-7 group-hover:bg-white/[0.025] transition-colors duration-200">
+      {/* Left accent bar — scaleY from 0 → 1 on hover */}
+      <div
+        className="absolute left-0 top-0 bottom-0 w-[2px] bg-brand-accent origin-top transition-transform duration-400 ease-out"
+        style={{ transform: expanded ? 'scaleY(1)' : 'scaleY(0)' }}
+        aria-hidden="true"
+      />
 
-        {/* Number */}
-        <span className="section-label text-brand-accent shrink-0 mt-1 w-6">{number}</span>
+      <div className="flex items-start justify-between px-6 md:px-10 lg:px-16 py-6 md:py-8 group-hover:bg-white/[0.02] transition-colors duration-200">
 
-        {/* Title + description */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-4">
-            <h3
-              className="font-display font-bold text-brand-text group-hover:text-white transition-colors leading-tight"
-              style={{ fontSize: 'clamp(1rem, 2.2vw, 1.5rem)' }}
-            >
-              {title}
-            </h3>
-            <div
-              className={`shrink-0 text-brand-accent transition-all duration-300 mt-1 ${
-                expanded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
-              }`}
-              aria-hidden="true"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </div>
-          </div>
+          {/* Number — small superscript label */}
+          <span
+            className="section-label text-brand-accent/50 block mb-1.5 transition-colors duration-300 group-hover:text-brand-accent/80"
+          >
+            {number}
+          </span>
+
+          {/* Title — large, shifts right on hover */}
+          <h3
+            className="font-display font-bold text-brand-sub group-hover:text-white leading-tight"
+            style={{
+              fontSize: 'clamp(1.5rem, 3.5vw, 3rem)',
+              transform: expanded ? 'translateX(10px)' : 'translateX(0)',
+              transition: 'transform 0.35s cubic-bezier(0.22,1,0.36,1), color 0.25s',
+            }}
+          >
+            {title}
+          </h3>
 
           {/* Expandable description */}
           <div
@@ -75,12 +78,12 @@ function CapabilityRow({ number, title, description, tag, index, sectionInView }
               marginTop: expanded ? '10px' : '0',
             }}
           >
-            <p className="text-brand-sub text-sm leading-relaxed pr-4 md:pr-16">{description}</p>
+            <p className="text-brand-sub text-sm leading-relaxed pr-4 md:pr-24">{description}</p>
           </div>
         </div>
 
         {/* Tag */}
-        <span className="shrink-0 section-label text-brand-sub/50 group-hover:text-brand-accent/70 transition-colors mt-1 hidden sm:inline">
+        <span className="shrink-0 section-label text-brand-sub/40 group-hover:text-brand-accent/70 transition-colors mt-2 ml-6 hidden sm:inline">
           {tag}
         </span>
       </div>
