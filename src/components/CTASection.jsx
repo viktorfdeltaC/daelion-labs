@@ -24,7 +24,7 @@ export default function CTASection() {
 
       {/* Section label */}
       <div className="relative z-10 border-b border-white/10 px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between shrink-0">
-        <span className="section-label text-white/60">006 / CONTACT</span>
+        <span className="section-label text-white/60">007 / CONTACT</span>
         <span className="section-label text-white/40">Jetzt starten</span>
       </div>
 
@@ -41,10 +41,10 @@ export default function CTASection() {
             className="font-display font-extrabold text-white leading-[0.88] tracking-tighter"
             style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
           >
-            Bereit, dein<br />Problem zu<br />lösen?
+            Lass uns<br />dein Problem<br />lösen.
           </h2>
           <p className="text-white/60 text-base md:text-lg leading-relaxed mt-8 max-w-md">
-            Erzähl uns, was dich aufhält. Wir antworten innerhalb von 24 Stunden.
+            Schreib uns kurz, womit du kämpfst. Wir antworten innerhalb von 24 Stunden — mit einem konkreten ersten Ansatz, kostenlos.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function CTASection() {
               boxShadow: '0 0 0 1px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 60px rgba(0,0,0,0.25)',
             }}
           >
-            Jetzt Kontakt aufnehmen →
+            Lösung anfragen →
           </a>
           <span className="section-label text-white/30 hidden sm:inline">
             hello@daelionlabs.com

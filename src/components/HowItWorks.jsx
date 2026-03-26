@@ -96,7 +96,7 @@ export default function HowItWorks() {
 
       {/* Section header bar */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
-        <span className="section-label text-brand-accent">004 / PROCESS</span>
+        <span className="section-label text-brand-accent">005 / PROCESS</span>
         <span className="section-label text-brand-sub">So arbeiten wir</span>
       </div>
 

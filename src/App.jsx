@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
 import WhatWeBuild from './components/WhatWeBuild'
+import WinsSection from './components/WinsSection'
 import HowItWorks from './components/HowItWorks'
 import Pricing from './components/Pricing'
 import CTASection from './components/CTASection'
@@ -54,6 +55,7 @@ export default function App() {
         <Problem />
         <Marquee />
         <WhatWeBuild />
+        <WinsSection />
         <HowItWorks />
         <Pricing />
         <CTASection />

@@ -5,25 +5,25 @@ const capabilities = [
   {
     number: '01',
     title: 'Individuelle Buchungs- & Automatisierungssysteme',
-    description: 'Maßgeschneiderte Buchungsabläufe, Planungslogik und automatisierte Pipelines — exakt auf die Funktionsweise deines Unternehmens zugeschnitten.',
+    description: 'Kein manuelles Koordinieren mehr. Buchungen, Planungslogik und Pipelines laufen automatisch — exakt so, wie dein Betrieb funktioniert. Mehr Kapazität, weniger Fehler.',
     tag: 'Automation',
   },
   {
     number: '02',
     title: 'KI-gestützte Workflow-Optimierungen',
-    description: 'Intelligente Automatisierungen und KI-Integrationen, die Routinearbeit eliminieren und die wirklich relevanten Entscheidungen nach oben bringen.',
+    description: 'Routineaufgaben, die heute Stunden fressen, erledigen sich morgen von selbst. KI übernimmt das Repetitive — du behältst den Kopf frei für Entscheidungen, die wirklich zählen.',
     tag: 'AI / ML',
   },
   {
     number: '03',
     title: 'Interne Business-Tools & digitale Assistenten',
-    description: 'Individuelle Dashboards, interne Portale und intelligente Assistenten — gebaut für dein Team, nicht für den generischen Markt.',
+    description: 'Dashboards und Tools, die dein Team wirklich nutzt — weil sie für eure genauen Abläufe gebaut wurden, nicht für irgendeinen Durchschnittskunden.',
     tag: 'Tooling',
   },
   {
     number: '04',
-    title: 'Prozessautomatisierungen, die Zeit und Geld sparen',
-    description: 'Vollständige Automatisierung komplexer operativer Prozesse — weniger Reibung, niedrigere Kosten, mehr Zeit für das Wesentliche.',
+    title: 'Prozessautomatisierungen, die sich rechnen',
+    description: 'Komplexe Abläufe, die heute Nerven und Budget kosten, laufen morgen vollautomatisch. Weniger Fehler, niedrigere Kosten, mehr Kapazität — ohne zusätzliches Personal.',
     tag: 'Process',
   },
 ]
@@ -141,7 +141,7 @@ export default function WhatWeBuild() {
             Was wir<br />bauen
           </h2>
           <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
-            Branchenübergreifend. Fallübergreifend. Weltweit.
+            Für jede Branche. Für jeden Sonderfall. Überall.
           </p>
         </div>
       </div>

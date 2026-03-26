@@ -56,7 +56,7 @@ export default function Problem() {
               className="relative section-label text-brand-accent/70 mt-4"
               style={{ animation: sectionInView ? 'fade-up 0.6s ease 0.7s both' : 'none' }}
             >
-              — Die letzte Meile gehört uns.
+              — Die letzten 30 % kosten dich am meisten.
             </p>
           </div>
         </div>
@@ -74,10 +74,10 @@ export default function Problem() {
 
           <div className="space-y-5">
             <p className="text-brand-sub text-base leading-relaxed">
-              Jedes Unternehmen basiert auf spezifischen Workflows. Speziellen Sonderfällen. Prozessen, die über Jahre im echten Betrieb gewachsen sind. Generische Tools — Calendly, Notion, Standard-CRMs — sind für den Durchschnitt gebaut. Sie lösen das Allgemeine, nicht das Deine.
+              Calendly, Notion, Standard-CRMs — all das ist für den Durchschnitt gebaut. Dein Unternehmen hat Workflows, Sonderfälle und Abläufe, die über Jahre im echten Betrieb gewachsen sind. Generische Software löst das Allgemeine, nicht das Deine.
             </p>
             <p className="text-brand-sub text-base leading-relaxed">
-              Die verbleibenden 30&nbsp;% sind kein kleines Ärgernis. Sie sind der Engpass, der deinen Betrieb ausbremst — die Lücke, die manuelle Workarounds erzwingt. Diese letzte Meile ist unser Terrain.
+              Diese fehlenden 30&nbsp;% kosten dich täglich Stunden, erzwingen manuelle Workarounds und frustrieren dein Team. Sie sind der Engpass, der dein Wachstum deckelt. Genau dort setzen wir an.
             </p>
           </div>
         </div>

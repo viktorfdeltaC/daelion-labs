@@ -83,7 +83,7 @@ export default function Hero() {
             className="text-brand-sub text-base md:text-lg leading-relaxed mt-8 md:mt-10 max-w-lg"
             style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.56s both' }}
           >
-            Individuelle Lösungsarchitekturen für Probleme, die kein Standardtool der Welt lösen kann.
+            Du verlierst täglich Zeit an Prozessen, die kein Standardtool wirklich löst. Wir bauen die maßgeschneiderte Lösung — präzise, schnell, dauerhaft.
           </p>
 
           {/* ── CTA ───────────────────────────────── */}

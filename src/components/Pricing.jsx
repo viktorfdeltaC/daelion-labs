@@ -9,7 +9,7 @@ export default function Pricing() {
 
       {/* Section header bar */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
-        <span className="section-label text-brand-accent">005 / PRICING</span>
+        <span className="section-label text-brand-accent">006 / PRICING</span>
         <span className="section-label text-brand-sub">Preismodell</span>
       </div>
 
