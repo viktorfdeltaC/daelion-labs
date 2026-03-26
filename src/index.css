@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #08080F;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* ── Glassmorphism ─────────────────────────────── */
+  .glass {
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 4px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-accent {
+    background: rgba(139, 92, 246, 0.05);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow:
+      inset 0 1px 0 rgba(139, 92, 246, 0.1),
+      0 4px 32px rgba(139, 92, 246, 0.08);
+  }
+
+  /* ── Shimmer button ────────────────────────────── */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.18),
+      transparent
+    );
+    transform: skewX(-12deg);
+  }
+
+  .btn-shimmer:hover::after {
+    animation: shimmer 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* ── Tilt cards ────────────────────────────────── */
+  .tilt-card {
+    transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition:
+      transform 0.12s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.3s,
+      box-shadow 0.3s,
+      background 0.3s;
+  }
+
+  .card-mouse-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      280px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+      rgba(139, 92, 246, 0.13),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tilt-card:hover .card-mouse-glow {
+    opacity: 1;
+  }
+
+  /* ── Dot grid ──────────────────────────────────── */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* ── Section orb helper ────────────────────────── */
+  .section-orb {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+    user-select: none;
+    filter: blur(80px);
+  }
+}
+
+/* ── Keyframes ──────────────────────────────────────── */
+
+@keyframes shimmer {
+  0%   { left: -100%; }
+  100% { left: 160%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-28px) scale(1.04); }
+}
+
+@keyframes float-alt {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33%       { transform: translateY(-18px) translateX(14px); }
+  66%       { transform: translateY(10px) translateX(-10px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes word-reveal {
+  from { opacity: 0; transform: translateY(28px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.35),
+                0 0 60px rgba(139, 92, 246, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 48px rgba(139, 92, 246, 0.55),
+                0 0 100px rgba(139, 92, 246, 0.22);
+  }
+}
+
+@keyframes orb-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%       { opacity: 0.65; transform: scale(1.06); }
+}
+
+@keyframes line-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes badge-pop {
+  0%   { opacity: 0; transform: scale(0.85) translateY(8px); }
+  60%  { transform: scale(1.04) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
