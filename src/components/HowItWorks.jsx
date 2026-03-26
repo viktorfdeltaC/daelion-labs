@@ -18,43 +18,42 @@ const steps = [
   },
 ]
 
-function Step({ number, title, description, index, isLast }) {
-  const [ref, inView] = useInView()
+function Step({ number, title, description, index, inView, isLast }) {
   return (
     <div
-      ref={ref}
-      className={`relative flex-1 transition-all duration-700 ease-out ${
-        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      className={`relative group ${!isLast ? 'border-r border-brand-border' : ''} transition-all duration-700 ease-out ${
+        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
-      style={{ transitionDelay: `${index * 130}ms` }}
+      style={{ transitionDelay: `${index * 120}ms` }}
     >
-      {/* Connector line — desktop only */}
-      {!isLast && (
-        <div
-          className="hidden md:block absolute top-[1.75rem] left-[calc(50%+2.5rem)] right-0 h-px overflow-hidden"
-          aria-hidden="true"
+      {/* Giant background number */}
+      <div
+        className="absolute inset-0 flex items-end justify-end px-6 pb-4 pointer-events-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <span
+          className="font-display font-extrabold leading-none text-brand-text/[0.04] group-hover:text-brand-accent/[0.08] transition-colors duration-500 select-none"
+          style={{ fontSize: 'clamp(6rem, 12vw, 10rem)' }}
         >
-          <div
-            className={`h-full bg-gradient-to-r from-brand-accent/40 to-transparent transition-all duration-1000 ${
-              inView ? 'w-full' : 'w-0'
-            }`}
-            style={{ transitionDelay: `${index * 130 + 300}ms` }}
-          />
-        </div>
-      )}
+          {number}
+        </span>
+      </div>
 
-      <div className="glass p-8 mr-0 md:mr-8 h-full group hover:border-brand-accent-border transition-all duration-300">
-        {/* Number with glow */}
-        <div className="flex items-center gap-4 mb-6">
-          <span
-            className="text-brand-accent font-black text-4xl leading-none tabular-nums group-hover:text-violet-300 transition-colors"
-            style={{ textShadow: '0 0 20px rgba(139,92,246,0.3)' }}
-          >
-            {number}
-          </span>
-          <div className="h-px flex-1 bg-gradient-to-r from-brand-border to-transparent md:hidden" aria-hidden="true" />
-        </div>
-        <h3 className="text-brand-text font-bold text-xl mb-3 group-hover:text-white transition-colors">{title}</h3>
+      <div className="relative z-10 p-8 md:p-10 lg:p-14">
+        {/* Step number — small */}
+        <span className="section-label text-brand-accent block mb-6">{number}</span>
+
+        {/* Title */}
+        <h3
+          className="font-display font-bold text-brand-text leading-tight mb-4 group-hover:text-white transition-colors"
+          style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
+        >
+          {title}
+        </h3>
+
+        {/* Divider */}
+        <div className="h-px bg-brand-border mb-5 group-hover:bg-brand-accent/30 transition-colors duration-300" />
+
         <p className="text-brand-sub text-sm leading-relaxed">{description}</p>
       </div>
     </div>
@@ -63,45 +62,45 @@ function Step({ number, title, description, index, isLast }) {
 
 export default function HowItWorks() {
   const [headRef, headInView] = useInView()
+  const [stepsRef, stepsInView] = useInView()
 
   return (
-    <section id="process" className="relative bg-brand-bg border-t border-brand-border py-32 px-6 overflow-hidden">
+    <section id="process" className="relative bg-brand-bg overflow-hidden">
+
+      {/* Section header bar */}
+      <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
+        <span className="section-label text-brand-accent">004 / PROCESS</span>
+        <span className="section-label text-brand-sub">So arbeiten wir</span>
+      </div>
 
       {/* Background orb */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="section-orb"
-          style={{
-            width: '450px',
-            height: '450px',
-            top: '50%',
-            right: '-5%',
-            transform: 'translateY(-50%)',
-            background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%)',
-          }}
-        />
+        <div className="section-orb" style={{ width: '400px', height: '400px', top: '50%', right: '-5%', transform: 'translateY(-50%)', background: 'radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 65%)' }} />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <div
-          ref={headRef}
-          className={`mb-20 transition-all duration-700 ease-out ${
-            headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
+      {/* Section headline */}
+      <div
+        ref={headRef}
+        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-all duration-700 ${
+          headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+        }`}
+      >
+        <h2
+          className="font-display font-extrabold text-brand-text leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
         >
-          <p className="text-brand-accent text-xs font-semibold tracking-widest2 uppercase mb-4">
-            Prozess
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-text tracking-tight">
-            So arbeiten wir
-          </h2>
-        </div>
+          So arbeiten<br />wir
+        </h2>
+      </div>
 
-        <div className="flex flex-col md:flex-row gap-4 md:gap-0">
-          {steps.map((step, i) => (
-            <Step key={step.number} {...step} index={i} isLast={i === steps.length - 1} />
-          ))}
-        </div>
+      {/* Steps grid */}
+      <div
+        ref={stepsRef}
+        className="relative z-10 grid md:grid-cols-3 border-b border-brand-border"
+      >
+        {steps.map((step, i) => (
+          <Step key={step.number} {...step} index={i} inView={stepsInView} isLast={i === steps.length - 1} />
+        ))}
       </div>
     </section>
   )

@@ -14,18 +14,22 @@ export default {
           text:    '#FFFFFF',
           sub:     '#A0A0B0',
           border:  'rgba(255,255,255,0.06)',
-          'accent-dim': 'rgba(139,92,246,0.08)',
+          'accent-dim':    'rgba(139,92,246,0.08)',
           'accent-border': 'rgba(139,92,246,0.25)',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Syne', 'system-ui', 'sans-serif'],
+        sans:    ['DM Sans', 'system-ui', 'sans-serif'],
+        mono:    ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       letterSpacing: {
         widest2: '0.2em',
+      },
+      transitionDuration: {
+        400: '400ms',
       },
     },
   },
   plugins: [],
 }
-

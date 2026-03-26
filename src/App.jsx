@@ -7,10 +7,10 @@ import HowItWorks from './components/HowItWorks'
 import Pricing from './components/Pricing'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
+import Marquee from './components/Marquee'
 
 function ScrollProgress() {
   const [progress, setProgress] = useState(0)
-
   useEffect(() => {
     const onScroll = () => {
       const doc = document.documentElement
@@ -47,7 +47,9 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
         <Problem />
+        <Marquee />
         <WhatWeBuild />
         <HowItWorks />
         <Pricing />

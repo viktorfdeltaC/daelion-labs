@@ -6,61 +6,69 @@ export default function Problem() {
   const [countRef, count] = useCountUp(70)
 
   return (
-    <section id="problem" className="relative bg-brand-bg border-t border-brand-border py-32 px-6 overflow-hidden">
+    <section id="problem" className="relative bg-brand-bg overflow-hidden">
 
-      {/* Background orbs */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="section-orb"
-          style={{
-            width: '500px',
-            height: '500px',
-            top: '-10%',
-            right: '-5%',
-            background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 65%)',
-          }}
-        />
+      {/* ── Section header bar ─────────────────────── */}
+      <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
+        <span className="section-label text-brand-accent">002 / PROBLEM</span>
+        <span className="section-label text-brand-sub">Das Problem</span>
       </div>
 
+      {/* ── Background orb ────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="section-orb" style={{ width: '500px', height: '500px', top: '-10%', right: '-5%', background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 65%)' }} />
+      </div>
+
+      {/* ── Split layout ──────────────────────────── */}
       <div
         ref={sectionRef}
-        className={`relative z-10 max-w-4xl mx-auto transition-all duration-700 ease-out ${
+        className={`relative z-10 grid lg:grid-cols-2 border-b border-brand-border transition-all duration-700 ease-out ${
           sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        {/* Stat callout */}
-        <div className="flex items-start gap-6 mb-16">
-          <div ref={countRef}>
+        {/* Left — giant counter */}
+        <div
+          ref={countRef}
+          className="flex items-center justify-center lg:border-r border-brand-border py-20 md:py-28 px-6 md:px-10"
+        >
+          <div className="text-center leading-none">
             <span
-              className="block text-7xl sm:text-8xl font-black leading-none text-brand-accent tabular-nums"
+              className="font-display font-extrabold text-brand-accent block"
               style={{
-                textShadow: '0 0 40px rgba(139,92,246,0.4)',
-                transition: 'text-shadow 0.3s',
+                fontSize: 'clamp(7rem, 22vw, 18rem)',
+                lineHeight: 1,
+                textShadow: '0 0 120px rgba(139,92,246,0.4)',
+                animation: sectionInView ? 'number-rise 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both' : 'none',
               }}
             >
               {count}%
             </span>
-          </div>
-          <div className="pt-3">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-text leading-tight mb-4">
-              Standardtools lösen 70 % deines Problems.
-            </h2>
-            <p className="text-brand-accent text-sm font-semibold tracking-widest2 uppercase">
-              Die letzte Meile gehört uns.
+            <p
+              className="section-label text-brand-accent mt-4 tracking-widest"
+              style={{ animation: sectionInView ? 'fade-up 0.6s ease 0.7s both' : 'none' }}
+            >
+              — Die letzte Meile gehört uns.
             </p>
           </div>
         </div>
 
-        {/* Body — glass panels */}
-        <div className="grid md:grid-cols-2 gap-px bg-brand-border">
-          <div className="glass p-8 md:p-10">
+        {/* Right — headline + text */}
+        <div className="flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 lg:px-14">
+          <h2
+            className="font-display font-bold text-brand-text leading-[1.05] tracking-tight mb-6"
+            style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
+          >
+            Standardtools lösen 70&nbsp;% deines Problems.
+          </h2>
+
+          <div className="h-px bg-brand-border mb-8" />
+
+          <div className="space-y-5">
             <p className="text-brand-sub text-base leading-relaxed">
               Jedes Unternehmen basiert auf spezifischen Workflows. Speziellen Sonderfällen. Prozessen, die über Jahre im echten Betrieb gewachsen sind. Generische Tools — Calendly, Notion, Standard-CRMs — sind für den Durchschnitt gebaut. Sie lösen das Allgemeine, nicht das Deine.
             </p>
-          </div>
-          <div className="glass p-8 md:p-10">
             <p className="text-brand-sub text-base leading-relaxed">
-              Die verbleibenden 30 % sind kein kleines Ärgernis. Sie sind der Engpass, der deinen Betrieb ausbremst. Die Lücke, die manuelle Workarounds erzwingt. Genau das, was dich jeden Tag aufhält. Diese letzte Meile ist unser Terrain — und wo Standardprodukte einfach aufhören.
+              Die verbleibenden 30&nbsp;% sind kein kleines Ärgernis. Sie sind der Engpass, der deinen Betrieb ausbremst — die Lücke, die manuelle Workarounds erzwingt. Diese letzte Meile ist unser Terrain.
             </p>
           </div>
         </div>

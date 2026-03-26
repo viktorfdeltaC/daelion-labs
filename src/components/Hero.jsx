@@ -1,162 +1,115 @@
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-bg pt-16">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-brand-bg pt-16">
 
-      {/* ── Floating orbs ─────────────────────────────── */}
+      {/* ── Background orbs ───────────────────────── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-        {/* Main center orb */}
-        <div
-          className="section-orb"
-          style={{
-            width: '700px',
-            height: '700px',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -58%)',
-            background: 'radial-gradient(circle, rgba(139,92,246,0.22) 0%, transparent 65%)',
-            animation: 'float 9s ease-in-out infinite',
-          }}
-        />
-        {/* Left orb */}
-        <div
-          className="section-orb"
-          style={{
-            width: '420px',
-            height: '420px',
-            top: '20%',
-            left: '-5%',
-            background: 'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)',
-            animation: 'float-alt 13s ease-in-out infinite',
-          }}
-        />
-        {/* Right bottom orb */}
-        <div
-          className="section-orb"
-          style={{
-            width: '320px',
-            height: '320px',
-            bottom: '15%',
-            right: '5%',
-            background: 'radial-gradient(circle, rgba(109,40,217,0.1) 0%, transparent 70%)',
-            animation: 'float 11s ease-in-out infinite reverse',
-            animationDelay: '-4s',
-          }}
-        />
+        <div className="section-orb" style={{ width: '65vw', height: '65vw', top: '5%', left: '30%', background: 'radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 65%)', animation: 'float 10s ease-in-out infinite', maxWidth: '800px', maxHeight: '800px' }} />
+        <div className="section-orb" style={{ width: '40vw', height: '40vw', bottom: '10%', left: '-5%', background: 'radial-gradient(circle, rgba(109,40,217,0.1) 0%, transparent 65%)', animation: 'float-alt 14s ease-in-out infinite', maxWidth: '500px', maxHeight: '500px' }} />
       </div>
 
-      {/* ── Dot grid ──────────────────────────────────── */}
-      <div className="absolute inset-0 dot-grid pointer-events-none" aria-hidden="true" />
+      {/* ── Dot grid ──────────────────────────────── */}
+      <div className="absolute inset-0 dot-grid opacity-35 pointer-events-none" aria-hidden="true" />
 
-      {/* ── Corner precision marks ────────────────────── */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
+      {/* ── Top meta row ──────────────────────────── */}
+      <div
+        className="relative z-10 flex items-center justify-between px-6 md:px-10 lg:px-16 pt-10 md:pt-14"
+        style={{ animation: 'fade-up 0.6s ease 0.05s both' }}
       >
-        {/* top-left */}
-        <line x1="7%" y1="10%" x2="9.5%" y2="10%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        <line x1="7%" y1="10%" x2="7%"   y2="13%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        {/* top-right */}
-        <line x1="93%" y1="10%" x2="90.5%" y2="10%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        <line x1="93%" y1="10%" x2="93%"   y2="13%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        {/* bottom-left */}
-        <line x1="7%" y1="90%" x2="9.5%" y2="90%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        <line x1="7%" y1="90%" x2="7%"   y2="87%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        {/* bottom-right */}
-        <line x1="93%" y1="90%" x2="90.5%" y2="90%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        <line x1="93%" y1="90%" x2="93%"   y2="87%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.4" />
-        {/* subtle center cross */}
-        <circle cx="50%" cy="50%" r="1.5" fill="#8B5CF6" fillOpacity="0.2" />
-      </svg>
+        <span className="section-label text-brand-accent">001 / HERO</span>
+        <span className="section-label text-brand-sub">Solution Architecture</span>
+      </div>
 
-      {/* ── Content ───────────────────────────────────── */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      {/* ── Main headline ─────────────────────────── */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 py-10 md:py-0">
 
-        {/* Badge */}
+        {/* Vertical side label — desktop only */}
         <div
-          className="inline-flex items-center gap-2 glass px-4 py-2 mb-10"
-          style={{ animation: 'badge-pop 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both' }}
+          className="absolute left-0 top-1/2 hidden xl:flex flex-col items-center gap-3 pl-3"
+          style={{ writingMode: 'vertical-rl', transform: 'translateY(-50%)', zIndex: 20 }}
+          aria-hidden="true"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" style={{ animation: 'orb-breathe 2s ease-in-out infinite' }} />
-          <span className="text-brand-accent text-xs font-semibold tracking-widest2 uppercase">
-            Solution Architecture
+          <span className="section-label text-brand-sub opacity-60" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
+            DAELION LABS
+          </span>
+          <div className="w-px h-12 bg-brand-border" />
+          <span className="section-label text-brand-accent opacity-80" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
+            2025
           </span>
         </div>
 
-        {/* Headline — staggered word reveal */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-brand-text leading-[0.93] tracking-tight mb-8">
-          <span
-            className="inline-block"
-            style={{ animation: 'word-reveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s both' }}
-          >
-            Wir&nbsp;
-          </span>
-          <span
-            className="inline-block"
-            style={{ animation: 'word-reveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.38s both' }}
-          >
-            bauen
-          </span>
-          <br />
-          <span
-            className="inline-block relative"
-            style={{ animation: 'word-reveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s both' }}
-          >
-            <span className="relative z-10">Lösungen.</span>
-            {/* underline glow */}
+        <div className="xl:pl-10">
+          <h1 className="font-display font-extrabold leading-[0.88] tracking-tighter overflow-hidden">
             <span
-              className="absolute bottom-1 left-0 right-0 h-px"
+              className="block text-brand-text"
               style={{
-                background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.5), transparent)',
-                animation: 'line-draw 1s cubic-bezier(0.22,1,0.36,1) 1s both',
-                transformOrigin: 'left',
+                fontSize: 'clamp(3.5rem, 11.5vw, 11rem)',
+                animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.15s both',
               }}
-            />
-          </span>
-        </h1>
+            >
+              WIR BAUEN
+            </span>
+            <span
+              className="block text-brand-accent"
+              style={{
+                fontSize: 'clamp(3.5rem, 11.5vw, 11rem)',
+                paddingLeft: 'clamp(1rem, 8vw, 9rem)',
+                animation: 'word-reveal 1s cubic-bezier(0.22,1,0.36,1) 0.32s both',
+                textShadow: '0 0 80px rgba(139,92,246,0.35)',
+              }}
+            >
+              LÖSUNGEN.
+            </span>
+          </h1>
+        </div>
+      </div>
 
-        {/* Subline */}
-        <p
-          className="text-brand-sub text-lg sm:text-xl max-w-xl mx-auto leading-relaxed mb-12"
-          style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.62s both' }}
-        >
+      {/* ── Dividing rule ─────────────────────────── */}
+      <div
+        className="relative z-10 mx-6 md:mx-10 lg:mx-16"
+        style={{ animation: 'line-draw 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s both', transformOrigin: 'left' }}
+        aria-hidden="true"
+      >
+        <div className="h-px bg-brand-border" />
+      </div>
+
+      {/* ── Bottom info row ───────────────────────── */}
+      <div
+        className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 px-6 md:px-10 lg:px-16 pt-8 pb-12 md:pb-16"
+        style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s both' }}
+      >
+        <p className="text-brand-sub text-base md:text-lg max-w-sm leading-relaxed">
           Individuelle Lösungsarchitekturen für Probleme, die kein Standardtool der Welt lösen kann.
         </p>
 
-        {/* CTA */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.72s both' }}
-        >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <a
             href="#contact"
-            className="btn-shimmer relative inline-block bg-brand-accent text-white font-semibold text-sm px-8 py-4 hover:bg-violet-500 transition-colors duration-200 cursor-pointer"
-            style={{
-              borderRadius: 0,
-              boxShadow: '0 0 32px rgba(139,92,246,0.35)',
-            }}
+            className="btn-shimmer bg-brand-accent text-white font-display font-bold text-sm px-8 py-4 hover:bg-violet-500 transition-colors duration-200 cursor-pointer whitespace-nowrap"
+            style={{ borderRadius: 0, boxShadow: '0 0 32px rgba(139,92,246,0.35)' }}
           >
-            Projekt starten
+            Projekt starten →
           </a>
           <a
             href="#problem"
-            className="text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer flex items-center gap-2"
+            className="text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"
           >
             Mehr erfahren
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
           </a>
         </div>
-
-        {/* Scroll hint */}
-        <div
-          className="mt-24 flex flex-col items-center gap-3"
-          style={{ animation: 'fade-up 1s cubic-bezier(0.22,1,0.36,1) 1.1s both' }}
-        >
-          <div className="w-px h-14 bg-gradient-to-b from-transparent via-brand-accent to-transparent opacity-40" />
-        </div>
       </div>
+
+      {/* ── Corner marks ──────────────────────────── */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" aria-hidden="true">
+        <line x1="5%" y1="8%"  x2="8%"  y2="8%"  stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="5%" y1="8%"  x2="5%"  y2="11%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="95%" y1="8%"  x2="92%" y2="8%"  stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="95%" y1="8%"  x2="95%" y2="11%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="5%" y1="92%" x2="8%"  y2="92%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="5%" y1="92%" x2="5%"  y2="89%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="95%" y1="92%" x2="92%" y2="92%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+        <line x1="95%" y1="92%" x2="95%" y2="89%" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.35" />
+      </svg>
     </section>
   )
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -61,12 +63,7 @@
     left: -100%;
     width: 55%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.18),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
     transform: skewX(-12deg);
   }
 
@@ -108,13 +105,22 @@
     background-size: 28px 28px;
   }
 
-  /* ── Section orb helper ────────────────────────── */
+  /* ── Section orb ───────────────────────────────── */
   .section-orb {
     position: absolute;
     border-radius: 9999px;
     pointer-events: none;
     user-select: none;
     filter: blur(80px);
+  }
+
+  /* ── Section label ─────────────────────────────── */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(139, 92, 246, 0.9);
   }
 }
 
@@ -142,18 +148,16 @@
 }
 
 @keyframes word-reveal {
-  from { opacity: 0; transform: translateY(28px); filter: blur(6px); }
-  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+  from { opacity: 0; transform: translateY(40px) skewY(2deg); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0)    skewY(0deg); filter: blur(0); }
 }
 
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 24px rgba(139, 92, 246, 0.35),
-                0 0 60px rgba(139, 92, 246, 0.12);
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.35), 0 0 60px rgba(139, 92, 246, 0.12);
   }
   50% {
-    box-shadow: 0 0 48px rgba(139, 92, 246, 0.55),
-                0 0 100px rgba(139, 92, 246, 0.22);
+    box-shadow: 0 0 48px rgba(139, 92, 246, 0.55), 0 0 100px rgba(139, 92, 246, 0.22);
   }
 }
 
@@ -171,4 +175,14 @@
   0%   { opacity: 0; transform: scale(0.85) translateY(8px); }
   60%  { transform: scale(1.04) translateY(-2px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes number-rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
