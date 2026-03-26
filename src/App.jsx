@@ -8,6 +8,7 @@ import Pricing from './components/Pricing'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 import Marquee from './components/Marquee'
+import Cursor from './components/Cursor'
 
 function ScrollProgress() {
   const [progress, setProgress] = useState(0)
@@ -43,6 +44,8 @@ function ScrollProgress() {
 export default function App() {
   return (
     <div className="bg-brand-bg min-h-screen font-sans antialiased relative">
+      <Cursor />
+      <div className="grain-overlay" aria-hidden="true" />
       <ScrollProgress />
       <Navbar />
       <main>

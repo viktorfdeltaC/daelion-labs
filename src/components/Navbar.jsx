@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
 
+const navLinks = [
+  { label: 'Leistungen', href: '#solutions' },
+  { label: 'Prozess', href: '#process' },
+  { label: 'Preise', href: '#pricing' },
+]
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -9,19 +16,28 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close menu on scroll
+  useEffect(() => {
+    if (menuOpen && scrolled) setMenuOpen(false)
+  }, [scrolled, menuOpen])
+
+  const handleLinkClick = () => setMenuOpen(false)
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
         scrolled
           ? 'glass border-b border-white/[0.06] shadow-xl shadow-black/30'
           : 'bg-transparent border-b border-transparent'
       }`}
       style={{ transitionDuration: '350ms' }}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+
+        {/* Logo */}
         <a
           href="#"
-          className="flex items-baseline gap-1 cursor-pointer group"
+          className="flex items-baseline gap-1 cursor-pointer group shrink-0"
           aria-label="Daelion Labs home"
         >
           <span className="text-brand-text font-bold text-lg tracking-tight group-hover:text-white transition-colors">
@@ -35,17 +51,80 @@ export default function Navbar() {
           </span>
         </a>
 
-        <a
-          href="#contact"
-          className="btn-shimmer text-sm font-semibold text-white bg-brand-accent px-5 py-2.5 hover:bg-violet-500 transition-colors duration-200 cursor-pointer"
-          style={{
-            borderRadius: 0,
-            boxShadow: scrolled ? '0 0 20px rgba(139,92,246,0.3)' : 'none',
-            transition: 'background 0.2s, box-shadow 0.3s',
-          }}
-        >
-          Projekt starten
-        </a>
+        {/* Desktop nav links */}
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+          {navLinks.map(({ label, href }) => (
+            <a
+              key={href}
+              href={href}
+              className="nav-link section-label text-brand-sub hover:text-brand-text transition-colors duration-200"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Right side */}
+        <div className="flex items-center gap-4">
+          <a
+            href="#contact"
+            className="btn-shimmer text-sm font-semibold text-white bg-brand-accent px-5 py-2.5 hover:bg-violet-500 transition-colors duration-200 cursor-pointer hidden sm:inline-flex items-center"
+            style={{
+              borderRadius: 0,
+              minHeight: '44px',
+              boxShadow: scrolled ? '0 0 20px rgba(139,92,246,0.3)' : 'none',
+              transition: 'background 0.2s, box-shadow 0.3s',
+            }}
+          >
+            Projekt starten
+          </a>
+
+          {/* Hamburger */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 text-brand-sub hover:text-brand-text transition-colors"
+            aria-label={menuOpen ? 'Menu schließen' : 'Menu öffnen'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span
+              className={`block h-px w-5 bg-current transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
+            />
+            <span
+              className={`block h-px w-5 bg-current transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`}
+            />
+            <span
+              className={`block h-px w-5 bg-current transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
+            />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden glass border-t border-white/[0.06] overflow-hidden transition-all duration-300 ease-out ${
+          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <nav className="px-6 py-6 flex flex-col gap-1" aria-label="Mobile navigation">
+          {navLinks.map(({ label, href }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={handleLinkClick}
+              className="font-display font-bold text-2xl text-brand-sub hover:text-white transition-colors py-2"
+            >
+              {label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={handleLinkClick}
+            className="btn-shimmer mt-4 text-sm font-semibold text-white bg-brand-accent px-5 py-3 text-center hover:bg-violet-500 transition-colors duration-200"
+            style={{ borderRadius: 0 }}
+          >
+            Projekt starten
+          </a>
+        </nav>
       </div>
     </header>
   )

@@ -46,7 +46,7 @@ export default function Pricing() {
         }`}
       >
         {/* Setup Fee */}
-        <div className="relative group border-r border-brand-border p-10 md:p-14 lg:p-16 overflow-hidden hover:bg-white/[0.015] transition-colors duration-300">
+        <div className="relative group glass-accent border-r border-brand-accent-border p-10 md:p-14 lg:p-16 overflow-hidden hover:shadow-lg hover:shadow-violet-900/20 transition-all duration-300">
           {/* Accent top border */}
           <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, rgba(139,92,246,0.8), rgba(139,92,246,0.2), transparent)' }} aria-hidden="true" />
 
@@ -77,7 +77,7 @@ export default function Pricing() {
         </div>
 
         {/* Retainer */}
-        <div className="relative group p-10 md:p-14 lg:p-16 overflow-hidden hover:bg-white/[0.015] transition-colors duration-300">
+        <div className="relative group glass p-10 md:p-14 lg:p-16 overflow-hidden hover:shadow-lg hover:shadow-black/20 transition-all duration-300">
           <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.1), transparent)' }} aria-hidden="true" />
 
           <div className="flex items-start justify-between mb-10">

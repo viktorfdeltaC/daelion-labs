@@ -34,7 +34,7 @@ export default function Hero() {
           </span>
           <div className="w-px h-12 bg-brand-border" />
           <span className="section-label text-brand-accent opacity-80" style={{ writingMode: 'vertical-rl', letterSpacing: '0.2em' }}>
-            2025
+            2026
           </span>
         </div>
 
@@ -61,6 +61,23 @@ export default function Hero() {
               LÖSUNGEN.
             </span>
           </h1>
+        </div>
+
+        {/* ── Stats badges ──────────────────────── */}
+        <div
+          className="flex flex-wrap items-center gap-3 mt-8 xl:pl-10"
+          style={{ animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s both' }}
+        >
+          {[
+            { num: '12+', label: 'Projekte' },
+            { num: '100%', label: 'Custom Code' },
+            { num: '<24h', label: 'Antwortzeit' },
+          ].map(({ num, label }) => (
+            <div key={num} className="glass flex items-center gap-3 px-4 py-2.5">
+              <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
+              <span className="section-label text-brand-sub/70">{label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
