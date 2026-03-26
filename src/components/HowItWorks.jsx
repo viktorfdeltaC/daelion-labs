@@ -19,20 +19,50 @@ const steps = [
 ]
 
 function Step({ number, title, description, index, inView, isLast }) {
+  const handleMouseMove = (e) => {
+    const el = e.currentTarget
+    const rect = el.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
+    el.style.setProperty('--glow-x', `${x}%`)
+    el.style.setProperty('--glow-y', `${y}%`)
+    const rotX = ((e.clientY - rect.top) / rect.height - 0.5) * -6
+    const rotY = ((e.clientX - rect.left) / rect.width - 0.5) * 6
+    el.style.setProperty('--tilt-x', `${rotX}deg`)
+    el.style.setProperty('--tilt-y', `${rotY}deg`)
+  }
+  const handleMouseLeave = (e) => {
+    const el = e.currentTarget
+    el.style.setProperty('--tilt-x', '0deg')
+    el.style.setProperty('--tilt-y', '0deg')
+  }
+
   return (
     <div
-      className={`relative group ${!isLast ? 'border-r border-brand-border' : ''} transition-all duration-700 ease-out ${
+      className={`relative group tilt-card overflow-hidden ${!isLast ? 'border-r border-brand-border' : ''} transition-all duration-700 ease-out ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
       style={{ transitionDelay: `${index * 120}ms` }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
+      {/* Mouse glow */}
+      <div className="card-mouse-glow" aria-hidden="true" />
+
+      {/* Top accent border — appears on hover */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.6), transparent)' }}
+        aria-hidden="true"
+      />
+
       {/* Giant background number */}
       <div
         className="absolute inset-0 flex items-end justify-end px-6 pb-4 pointer-events-none overflow-hidden"
         aria-hidden="true"
       >
         <span
-          className="font-display font-extrabold leading-none text-brand-text/[0.04] group-hover:text-brand-accent/[0.08] transition-colors duration-500 select-none"
+          className="font-display font-extrabold leading-none text-brand-text/[0.03] group-hover:text-brand-accent/[0.07] transition-colors duration-500 select-none"
           style={{ fontSize: 'clamp(6rem, 12vw, 10rem)' }}
         >
           {number}
@@ -40,19 +70,16 @@ function Step({ number, title, description, index, inView, isLast }) {
       </div>
 
       <div className="relative z-10 p-8 md:p-10 lg:p-14">
-        {/* Step number — small */}
         <span className="section-label text-brand-accent block mb-6">{number}</span>
 
-        {/* Title */}
         <h3
-          className="font-display font-bold text-brand-text leading-tight mb-4 group-hover:text-white transition-colors"
+          className="font-display font-bold text-brand-text leading-tight mb-4 group-hover:text-white transition-colors duration-300"
           style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
         >
           {title}
         </h3>
 
-        {/* Divider */}
-        <div className="h-px bg-brand-border mb-5 group-hover:bg-brand-accent/30 transition-colors duration-300" />
+        <div className="h-px bg-brand-border mb-5 group-hover:bg-brand-accent/25 transition-colors duration-300" />
 
         <p className="text-brand-sub text-sm leading-relaxed">{description}</p>
       </div>

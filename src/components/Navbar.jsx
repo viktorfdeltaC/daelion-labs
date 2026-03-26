@@ -32,6 +32,15 @@ export default function Navbar() {
       }`}
       style={{ transitionDuration: '350ms' }}
     >
+      {/* Purple accent line at top — appears on scroll */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-500"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(139,92,246,0.6) 30%, rgba(139,92,246,0.9) 50%, rgba(139,92,246,0.6) 70%, transparent 100%)',
+          opacity: scrolled ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
 
         {/* Logo */}

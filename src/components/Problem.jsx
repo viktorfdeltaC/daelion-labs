@@ -31,20 +31,29 @@ export default function Problem() {
           ref={countRef}
           className="flex items-center justify-center lg:border-r border-brand-border py-20 md:py-28 px-6 md:px-10"
         >
-          <div className="text-center leading-none">
+          <div className="relative text-center leading-none">
+            {/* Glass card behind the number */}
+            <div
+              className="absolute inset-0 -m-8 rounded-none"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.08) 0%, transparent 70%)',
+                filter: 'blur(40px)',
+              }}
+              aria-hidden="true"
+            />
             <span
-              className="font-display font-extrabold text-brand-accent block"
+              className="relative font-display font-extrabold text-brand-accent block"
               style={{
                 fontSize: 'clamp(7rem, 22vw, 18rem)',
                 lineHeight: 1,
-                textShadow: '0 0 120px rgba(139,92,246,0.4)',
+                textShadow: '0 0 80px rgba(139,92,246,0.3), 0 0 200px rgba(139,92,246,0.1)',
                 animation: sectionInView ? 'number-rise 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both' : 'none',
               }}
             >
               {count}%
             </span>
             <p
-              className="section-label text-brand-accent mt-4 tracking-widest"
+              className="relative section-label text-brand-accent/70 mt-4"
               style={{ animation: sectionInView ? 'fade-up 0.6s ease 0.7s both' : 'none' }}
             >
               — Die letzte Meile gehört uns.

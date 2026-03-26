@@ -18,6 +18,10 @@ export default function Marquee({ inverted = false }) {
           ? 'border-white/10 bg-brand-accent'
           : 'border-brand-border bg-brand-bg'
       }`}
+      style={{
+        maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+      }}
       aria-hidden="true"
     >
       <div

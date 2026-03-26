@@ -46,9 +46,19 @@ export default function Pricing() {
         }`}
       >
         {/* Setup Fee */}
-        <div className="relative group glass-accent border-r border-brand-accent-border p-10 md:p-14 lg:p-16 overflow-hidden hover:shadow-lg hover:shadow-violet-900/20 transition-all duration-300">
-          {/* Accent top border */}
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, rgba(139,92,246,0.8), rgba(139,92,246,0.2), transparent)' }} aria-hidden="true" />
+        <div className="relative group glass-accent border-r border-brand-accent-border p-10 md:p-14 lg:p-16 overflow-hidden transition-all duration-500 hover:shadow-[0_0_60px_rgba(139,92,246,0.12)]">
+          {/* Radial glow on hover */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.1) 0%, transparent 60%)' }}
+            aria-hidden="true"
+          />
+          {/* Accent top border — animated width */}
+          <div
+            className="absolute top-0 left-0 h-px transition-all duration-700 group-hover:right-0"
+            style={{ right: '40%', background: 'linear-gradient(90deg, rgba(139,92,246,0.9), rgba(139,92,246,0.3))' }}
+            aria-hidden="true"
+          />
 
           <div className="flex items-start justify-between mb-10">
             <div>
@@ -77,8 +87,12 @@ export default function Pricing() {
         </div>
 
         {/* Retainer */}
-        <div className="relative group glass p-10 md:p-14 lg:p-16 overflow-hidden hover:shadow-lg hover:shadow-black/20 transition-all duration-300">
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.1), transparent)' }} aria-hidden="true" />
+        <div className="relative group glass p-10 md:p-14 lg:p-16 overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,0,0,0.25)]">
+          <div
+            className="absolute top-0 left-0 h-px transition-all duration-700 group-hover:right-0"
+            style={{ right: '60%', background: 'linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.04))' }}
+            aria-hidden="true"
+          />
 
           <div className="flex items-start justify-between mb-10">
             <div>
