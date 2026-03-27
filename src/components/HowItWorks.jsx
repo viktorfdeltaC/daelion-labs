@@ -85,7 +85,7 @@ function Step({ number, title, description, index, inView, isLast }) {
         <span className="section-label text-brand-accent block mb-6">{number}</span>
 
         <h3
-          className="font-display font-bold text-brand-text leading-tight mb-4 group-hover:text-white transition-colors duration-300"
+          className="font-display font-bold text-brand-text leading-tight mb-4 group-hover:text-brand-accent transition-colors duration-300"
           style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
         >
           {title}
