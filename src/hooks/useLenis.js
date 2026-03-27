@@ -47,8 +47,9 @@ export function useLenis({ onScroll } = {}) {
       duration: 0.6,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      smoothTouch: false,   // native touch inertia feels better
+      wheelMultiplier: 1,
+      touchMultiplier: 2,   // more responsive on hybrid touchscreens
       infinite: false,
     })
 
@@ -69,6 +70,19 @@ export function useLenis({ onScroll } = {}) {
     }
     document.addEventListener('click', handleAnchorClick)
 
+    // Stop Lenis while a text input is focused on hybrid touch devices
+    // (touchscreen laptops where pointer:fine passes but touch is available).
+    // Prevents Lenis fighting with the browser's scroll-into-view behaviour.
+    const handleTouchStart = () => {
+      const tag = document.activeElement?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+        lenis.stop()
+      } else {
+        lenis.start()
+      }
+    }
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+
     // Drive Lenis via requestAnimationFrame
     let raf
     const animate = (time) => {
@@ -80,6 +94,7 @@ export function useLenis({ onScroll } = {}) {
     return () => {
       cancelAnimationFrame(raf)
       document.removeEventListener('click', handleAnchorClick)
+      document.removeEventListener('touchstart', handleTouchStart)
       lenis.destroy()
       lenisRef.current = null
     }
