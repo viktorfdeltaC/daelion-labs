@@ -414,25 +414,25 @@
      All hover effects live here. JS only toggles .is-expanded class.
      GPU-composited properties only (transform, opacity) to avoid layout. */
 
-  /* Entrance animation — driven by CSS class added via IntersectionObserver,
-     zero React re-renders. nth-child stagger replaces transitionDelay prop. */
+  /* Cap-rows: GPU layer from the start so Lenis + Marquee rAF don't repaint
+     large text on every frame. will-change released via JS after entrance. */
   .cap-list .cap-row {
+    will-change: transform, opacity;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(16px);
   }
-  .cap-list.cap-list-visible .cap-row:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
-  .cap-list.cap-list-visible .cap-row:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 75ms; }
-  .cap-list.cap-list-visible .cap-row:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
-  .cap-list.cap-list-visible .cap-row:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 225ms; }
 
-  /* backface-visibility:hidden promotes each row to its own GPU compositor layer.
-     No overflow:hidden → Lenis transform-scroll doesn't need to re-clip 4 regions per frame.
-     No contain:layout → browser can batch layout across all rows in one pass. */
-  .cap-row {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+  /* Entrance — @keyframes instead of transition: browser optimises these
+     better for GPU-composited elements, no simultaneous transition collision */
+  @keyframes cap-row-in {
+    to { opacity: 1; transform: translateY(0); }
   }
+  .cap-list.cap-list-visible .cap-row:nth-child(1) { animation: cap-row-in 0.55s cubic-bezier(0.22,1,0.36,1) 0ms    both; }
+  .cap-list.cap-list-visible .cap-row:nth-child(2) { animation: cap-row-in 0.55s cubic-bezier(0.22,1,0.36,1) 80ms   both; }
+  .cap-list.cap-list-visible .cap-row:nth-child(3) { animation: cap-row-in 0.55s cubic-bezier(0.22,1,0.36,1) 160ms  both; }
+  .cap-list.cap-list-visible .cap-row:nth-child(4) { animation: cap-row-in 0.55s cubic-bezier(0.22,1,0.36,1) 240ms  both; }
+
+  /* will-change set on .cap-list .cap-row above — released via JS post-animation */
 
   /* Left accent bar */
   .cap-bar {
