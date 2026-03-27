@@ -460,11 +460,11 @@
   }
   .cap-row.is-expanded .cap-title { transform: translateX(10px); color: var(--color-accent); }
 
-  /* Description grid-reveal */
+  /* Description grid-reveal — NO transition on grid-template-rows.
+     Height snaps instantly (1 layout reflow) instead of per-frame layout. */
   .cap-desc-grid {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .cap-row.is-expanded .cap-desc-grid { grid-template-rows: 1fr; }
 

@@ -10,12 +10,7 @@ function useDomInView(className, threshold = 0.05) {
       if (entry.isIntersecting) {
         el.classList.add(className)
         observer.disconnect()
-        // Release GPU memory after entrance animation completes
-        setTimeout(() => {
-          el.querySelectorAll('.cap-row').forEach(row => {
-            row.style.willChange = 'auto'
-          })
-        }, 900)
+        // Keep rows on GPU layers — hover animations stay smooth
       }
     }, { threshold })
     observer.observe(el)
