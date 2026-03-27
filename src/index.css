@@ -565,6 +565,11 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes problem-result {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes reveal-up {
   from { transform: translateY(108%); }
   to   { transform: translateY(0); }

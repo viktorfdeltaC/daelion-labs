@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useScramble } from '../hooks/useScramble'
 import { useMagnet } from '../hooks/useMagnet'
+import ProblemFinder from './ProblemFinder'
 
 export default function Hero() {
   const heroRef = useRef(null)
@@ -203,6 +204,9 @@ export default function Hero() {
           >
             Du verlierst täglich Zeit an Prozessen, die kein Standardtool wirklich löst. Wir bauen die maßgeschneiderte Lösung — präzise, schnell, dauerhaft.
           </p>
+
+          {/* ── Problem Finder ──────────────────────────────── */}
+          <ProblemFinder />
 
           {/* ── CTA ─────────────────────────────────────────── */}
           <div
