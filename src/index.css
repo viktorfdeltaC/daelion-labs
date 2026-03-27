@@ -30,6 +30,36 @@
    variants: rgb(var(--c-accent) / 0.5) works everywhere.
    ══════════════════════════════════════════════════════════ */
 
+/* ── Viewport height variables ────────────────────────────
+   dvh = dynamic (resizes with keyboard), used for full-screen
+   svh = small  (keyboard visible — safest for min-height)
+   lvh = large  (keyboard hidden)
+   --vh fallback updated by JS on iOS Safari via setVhVar()
+   (see main.jsx or App.jsx if JS fallback is needed)       */
+:root {
+  --vh:  1vh;
+  --dvh: 1dvh;
+  --svh: 1svh;
+  --lvh: 1lvh;
+}
+
+/* ── Full-height utilities ────────────────────────────────
+   Use these instead of 100vh on hero / full-screen sections.
+   Tailwind equivalent: min-h-dvh (v3.3+)                  */
+.full-height {
+  height: 100dvh;
+}
+
+.min-full-height {
+  min-height: 100dvh;
+}
+
+/* Safari iOS < 15.4 fallback (no dvh support) */
+@supports not (height: 100dvh) {
+  .full-height     { height:     calc(var(--vh, 1vh) * 100); }
+  .min-full-height { min-height: calc(var(--vh, 1vh) * 100); }
+}
+
 /* ── DARK THEME (default) ─────────────────────────────── */
 :root,
 [data-theme="dark"] {

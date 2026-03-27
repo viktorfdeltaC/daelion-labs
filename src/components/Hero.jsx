@@ -45,7 +45,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex flex-col overflow-hidden bg-brand-bg pt-16">
+    <section ref={heroRef} className="relative min-h-dvh flex flex-col overflow-hidden bg-brand-bg pt-16">
 
       {/* ── Geometric background — architectural, not blobby ── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">

@@ -7,7 +7,7 @@ export default function CTASection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden min-h-screen flex flex-col"
+      className="relative overflow-hidden min-h-dvh flex flex-col"
       style={{ background: '#8B5CF6' }}
     >
       {/* Orbs */}
