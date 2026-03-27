@@ -418,7 +418,7 @@
     transform: translateX(0);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
   }
-  .cap-row.is-expanded .cap-title { transform: translateX(10px); color: #fff; }
+  .cap-row.is-expanded .cap-title { transform: translateX(10px); color: var(--color-accent); }
 
   /* Description grid-reveal */
   .cap-desc-grid {
