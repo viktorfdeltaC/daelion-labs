@@ -441,11 +441,10 @@
   }
   .cap-row.is-expanded .cap-bar { transform: scaleY(1); }
 
-  /* Row background tint */
-  .cap-bg { transition: background 0.2s ease; }
+  /* Row background tint — snaps instantly, no repaint per frame */
   .cap-row.is-expanded .cap-bg { background: rgba(255,255,255,0.02); }
 
-  /* Icon */
+  /* Icon — opacity + transform only (GPU composited) */
   .cap-icon {
     opacity: 0.4;
     transform: translateY(2px);
@@ -453,10 +452,10 @@
   }
   .cap-row.is-expanded .cap-icon { opacity: 1; transform: translateY(0); }
 
-  /* Title slide */
+  /* Title — transform only (GPU). Color snaps, no per-frame repaint */
   .cap-title {
     transform: translateX(0);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .cap-row.is-expanded .cap-title { transform: translateX(10px); color: var(--color-accent); }
 
@@ -483,8 +482,7 @@
   }
   .cap-row.is-expanded .cap-arrow { opacity: 1; transform: translateX(0); }
 
-  /* Tag */
-  .cap-tag { transition: color 0.25s ease; }
+  /* Tag — color snaps, no repaint per frame */
   .cap-row.is-expanded .cap-tag { color: rgb(var(--c-accent) / 0.7); }
 
   /* ── Nav link hover underline ───────────────────────── */
