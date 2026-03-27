@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useMagnet } from '../hooks/useMagnet'
+import ThemeToggle from './ThemeToggle'
 
 const navLinks = [
   { label: 'Leistungen', href: '#solutions' },
@@ -75,7 +76,8 @@ export default function Navbar() {
         </nav>
 
         {/* Right side */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           <a
             ref={ctaRef}
             href="#contact"
