@@ -129,7 +129,15 @@ export default function ProblemFinder() {
   return (
     <div
       className="mt-8 md:mt-10"
-      style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.58s both' }}
+      style={{
+        animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.58s both',
+        // position:relative + z-index creates a stacking context that sits
+        // above the CTA row which follows in the DOM. Without this the
+        // dropdown (z-50) is clipped by the CTA row's own stacking context
+        // (created by its animation property).
+        position: 'relative',
+        zIndex: 10,
+      }}
     >
       {/* Label */}
       <label
