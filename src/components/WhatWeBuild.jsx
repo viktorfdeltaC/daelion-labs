@@ -104,7 +104,7 @@ const CapabilityRow = memo(function CapabilityRow({ number, title, description, 
             <span className="cap-icon text-brand-accent shrink-0">{icon}</span>
             <h3
               className="cap-title font-display font-bold text-brand-sub leading-tight"
-              style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)', letterSpacing: '-0.01em' }}
+              style={{ fontSize: 'clamp(1.15rem, 4vw, 3.5rem)', letterSpacing: '-0.01em' }}
             >
               {title}
             </h3>

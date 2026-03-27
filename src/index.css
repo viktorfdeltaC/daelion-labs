@@ -414,12 +414,16 @@
      All hover effects live here. JS only toggles .is-expanded class.
      GPU-composited properties only (transform, opacity) to avoid layout. */
 
-  /* Cap-rows: GPU layer from the start so Lenis + Marquee rAF don't repaint
-     large text on every frame. will-change released via JS after entrance. */
+  /* Cap-rows: GPU layer on desktop (Lenis + Marquee rAF). Mobile gets
+     will-change:auto — mobile GPUs have limited memory and native scroll
+     handles compositing itself without will-change hints. */
   .cap-list .cap-row {
     will-change: transform, opacity;
     opacity: 0;
     transform: translateY(16px);
+  }
+  @media (pointer: coarse) {
+    .cap-list .cap-row { will-change: auto; }
   }
 
   /* Entrance — @keyframes instead of transition: browser optimises these
