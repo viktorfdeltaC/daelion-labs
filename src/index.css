@@ -585,6 +585,96 @@
     background-clip: text;
   }
 
+  /* ══════════════════════════════════════════════════════
+     MAGNETIC BUTTON
+     Applied via <MagneticButton> — layered on top of
+     btn-shimmer / btn-purple / btn-glass.  All visual
+     enhancements are pure CSS; the JS only handles the
+     translate transform.
+     ══════════════════════════════════════════════════════ */
+  .magnetic-btn {
+    -webkit-tap-highlight-color: transparent;
+    /* Ensure inherited border-radius is used by outline */
+    border-radius: inherit;
+  }
+
+  /* Touch tap feedback — :active overrides the JS transform */
+  @media (pointer: coarse) {
+    .magnetic-btn:active {
+      transform: scale(0.98) !important;
+      transition: transform 0.08s ease !important;
+    }
+  }
+
+  /* Arrow: slightly dimmed at rest, full + shifted on engage */
+  .magnetic-btn .btn-arrow {
+    opacity: 0.72;
+    transition:
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.2s  ease;
+  }
+
+  .magnetic-btn:hover .btn-arrow,
+  .magnetic-btn:focus-visible .btn-arrow,
+  .magnetic-btn[data-hovered] .btn-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  /* Glow — composited on top of existing btn-purple / btn-glass shadows.
+     color-mix() is supported in all evergreen browsers (Chrome 111+,
+     Firefox 113+, Safari 16.2+).  The rgb() fallback fires in older browsers. */
+  .btn-purple.magnetic-btn:hover,
+  .btn-purple.magnetic-btn[data-hovered] {
+    /* Fallback (no color-mix support) */
+    box-shadow:
+      0 0 22px rgb(var(--c-accent) / 0.50),
+      0 0 52px rgb(var(--c-accent) / 0.28),
+      0 8px 32px rgb(var(--c-accent) / 0.22);
+    /* Progressive enhancement */
+    @supports (color: color-mix(in srgb, red, blue)) {
+      box-shadow:
+        0 0 22px color-mix(in srgb, var(--color-accent) 50%, transparent),
+        0 0 52px rgb(var(--c-accent) / 0.28),
+        0 8px 32px rgb(var(--c-accent) / 0.22);
+    }
+  }
+
+  .btn-glass.magnetic-btn:hover,
+  .btn-glass.magnetic-btn[data-hovered] {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.35),
+      0 0 22px rgb(var(--c-accent) / 0.30),
+      inset 0 1px 0 rgba(255, 255, 255, 0.20),
+      0 24px 64px rgba(0, 0, 0, 0.35);
+    @supports (color: color-mix(in srgb, red, blue)) {
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.35),
+        0 0 22px color-mix(in srgb, var(--color-accent) 35%, transparent),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20),
+        0 24px 64px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  /* Focus ring — explicit override to use accent + rounded */
+  .magnetic-btn:focus-visible {
+    outline: 2px solid rgb(var(--c-accent) / 0.9);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion: disable arrow transform, keep opacity fade */
+  @media (prefers-reduced-motion: reduce) {
+    .magnetic-btn .btn-arrow {
+      transition: opacity 0.15s ease !important;
+    }
+    .magnetic-btn:hover .btn-arrow,
+    .magnetic-btn:focus-visible .btn-arrow,
+    .magnetic-btn[data-hovered] .btn-arrow {
+      transform: none !important;
+    }
+  }
+
   /* ── Prose container ─────────────────────────────────── */
   .prose-max      { max-width: var(--max-prose); }
   .prose-max-wide { max-width: var(--max-prose-wide); }

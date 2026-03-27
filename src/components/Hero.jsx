@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useScramble } from '../hooks/useScramble'
-import { useMagnet } from '../hooks/useMagnet'
 import ProblemFinder from './ProblemFinder'
+import MagneticButton from './MagneticButton'
 
 export default function Hero() {
   const heroRef = useRef(null)
@@ -11,9 +11,6 @@ export default function Hero() {
 
   // Scramble the main word on load
   const scrambled = useScramble('LÖSUNGEN', { startDelay: 300, tickMs: 32, resolveEvery: 2 })
-
-  // Magnetic CTA
-  const ctaRef = useMagnet({ strength: 0.28, ease: 0.1 })
 
   // Mouse parallax — lerped, direct DOM, no React re-renders
   useEffect(() => {
@@ -214,16 +211,17 @@ export default function Hero() {
             style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.64s both' }}
           >
             {/* Magnetic primary CTA */}
-            <a
-              ref={ctaRef}
+            <MagneticButton
+              as="a"
               href="#contact"
-              className="btn-shimmer btn-purple bg-brand-accent hover:bg-violet-500 text-white font-sans font-semibold text-sm px-8 py-4 cursor-pointer whitespace-nowrap inline-block"
-              style={{ borderRadius: 0, willChange: 'transform' }}
+              aria-label="Projekt starten"
+              className="btn-shimmer btn-purple bg-brand-accent text-white font-sans font-semibold text-sm px-8 py-4 cursor-pointer whitespace-nowrap inline-block"
+              style={{ borderRadius: 0 }}
             >
               <span className="btn-inner">
                 Projekt starten <span className="btn-arrow">→</span>
               </span>
-            </a>
+            </MagneticButton>
             <a
               href="#problem"
               className="btn-text text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"

@@ -1,9 +1,8 @@
 import { useInView } from '../hooks/useInView'
-import { useMagnet } from '../hooks/useMagnet'
+import MagneticButton from './MagneticButton'
 
 export default function CTASection() {
   const [ref, inView] = useInView()
-  const ctaRef = useMagnet({ strength: 0.3, ease: 0.1 })
 
   return (
     <section
@@ -64,16 +63,17 @@ export default function CTASection() {
 
         {/* Action row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-14">
-          <a
-            ref={ctaRef}
+          <MagneticButton
+            as="a"
             href="mailto:hello@daelionlabs.com"
+            aria-label="Lösung anfragen per E-Mail"
             className="btn-shimmer btn-glass text-white font-sans font-semibold text-sm px-10 py-5 cursor-pointer whitespace-nowrap inline-block"
-            style={{ borderRadius: 0, willChange: 'transform' }}
+            style={{ borderRadius: 0 }}
           >
             <span className="btn-inner">
               Lösung anfragen <span className="btn-arrow">→</span>
             </span>
-          </a>
+          </MagneticButton>
           <span className="section-label text-white/30 hidden sm:inline">
             hello@daelionlabs.com
           </span>

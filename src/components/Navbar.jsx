@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useMagnet } from '../hooks/useMagnet'
 import { useActiveSection } from '../hooks/useActiveSection'
 import ThemeToggle from './ThemeToggle'
+import MagneticButton from './MagneticButton'
 
 const navLinks = [
   { label: 'Leistungen', href: '#solutions' },
@@ -14,7 +14,6 @@ const SECTION_IDS = navLinks.map(l => l.href.slice(1))
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const ctaRef = useMagnet({ strength: 0.25, ease: 0.1 })
   const activeSection = useActiveSection(SECTION_IDS)
 
   useEffect(() => {
@@ -85,14 +84,16 @@ export default function Navbar() {
           {/* Right controls */}
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <a
-              ref={ctaRef}
+            <MagneticButton
+              as="a"
               href="#contact"
+              aria-label="Projekt starten"
+              maxPx={7}
               className="btn-shimmer btn-purple text-sm font-semibold text-white bg-brand-accent px-5 cursor-pointer hidden sm:inline-flex items-center"
-              style={{ borderRadius: 0, minHeight: '44px', willChange: 'transform' }}
+              style={{ borderRadius: 0, minHeight: '44px' }}
             >
               <span className="btn-inner">Projekt starten</span>
-            </a>
+            </MagneticButton>
 
             {/* Hamburger — 44×44 tap target */}
             <button
@@ -169,9 +170,12 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* CTA */}
-          <a
+          {/* CTA — MagneticButton handles desktop hover; on mobile the menu
+               overlay is touch-only so magnetic is automatically disabled */}
+          <MagneticButton
+            as="a"
             href="#contact"
+            aria-label="Projekt starten"
             onClick={close}
             className="btn-shimmer btn-purple mt-8 text-white font-semibold text-sm inline-flex items-center justify-center"
             style={{
@@ -183,7 +187,7 @@ export default function Navbar() {
             }}
           >
             <span className="btn-inner">Projekt starten <span className="btn-arrow">→</span></span>
-          </a>
+          </MagneticButton>
         </nav>
 
         {/* Bottom info */}

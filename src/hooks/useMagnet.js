@@ -1,14 +1,34 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Makes an element magnetically attract to the cursor when nearby.
- * Only activates on pointer-fine devices (desktop).
+ * useMagnet — makes an element magnetically attract to the cursor when nearby.
+ *
+ * Movement is pixel-capped (maxPx) and direction-normalised so the button
+ * always moves the same distance regardless of where inside the activation
+ * radius the cursor sits.  Lerp easing gives smooth follow; a boosted ease
+ * factor on leave produces a snappier spring-back.
+ *
+ * Feature detection (ALL must pass to activate):
+ *   ✓ (hover: hover) and (pointer: fine)  — desktop mouse / trackpad
+ *   ✓ !prefers-reduced-motion             — user opted in to motion
+ *
+ * Touch / coarse-pointer devices are explicitly excluded; the element stays
+ * perfectly centred and receives the tap-scale via CSS :active instead.
  *
  * @param {object} opts
- *   strength — how far the element moves (0–1)
- *   ease     — lerp factor per frame (lower = smoother/slower)
+ *   maxPx    — maximum translation in px (default 10, split ±X and ±Y)
+ *   ease     — lerp smoothness while following (default 0.15)
+ *   onEnter  — called when cursor enters the activation radius
+ *   onLeave  — called when cursor leaves the activation radius
+ *
+ * Returns a ref to attach to the target element.
  */
-export function useMagnet({ strength = 0.32, ease = 0.12 } = {}) {
+export function useMagnet({
+  maxPx   = 10,
+  ease    = 0.15,
+  onEnter = null,
+  onLeave = null,
+} = {}) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -17,37 +37,59 @@ export function useMagnet({ strength = 0.32, ease = 0.12 } = {}) {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    let targetX = 0, targetY = 0
+    let targetX  = 0, targetY  = 0
     let currentX = 0, currentY = 0
+    let isNear   = false
+    let isLeaving = false
     let raf
 
     const onMove = (e) => {
       const rect = el.getBoundingClientRect()
-      const cx = rect.left + rect.width / 2
-      const cy = rect.top + rect.height / 2
-      const dx = e.clientX - cx
-      const dy = e.clientY - cy
+      const cx   = rect.left + rect.width  / 2
+      const cy   = rect.top  + rect.height / 2
+      const dx   = e.clientX - cx
+      const dy   = e.clientY - cy
       const dist = Math.sqrt(dx * dx + dy * dy)
-      const threshold = Math.max(rect.width, rect.height) * 1.4
+      // Activation radius: 1.5× the larger dimension so the magnet "reaches out"
+      const radius = Math.max(rect.width, rect.height) * 1.5
 
-      if (dist < threshold) {
-        const factor = (1 - dist / threshold) * strength
-        targetX = dx * factor
-        targetY = dy * factor
+      if (dist < radius) {
+        if (!isNear) {
+          isNear    = true
+          isLeaving = false
+          onEnter?.()
+        }
+        // Ease-out falloff: full strength at center, 0 at radius edge
+        const falloff = Math.pow(1 - dist / radius, 1.1)
+        const safeDist = Math.max(dist, 1)
+        // Normalise direction then scale by falloff × maxPx
+        targetX = (dx / safeDist) * falloff * maxPx
+        targetY = (dy / safeDist) * falloff * maxPx
       } else {
-        targetX = 0
-        targetY = 0
+        if (isNear) {
+          isNear    = false
+          isLeaving = true
+          onLeave?.()
+          targetX = 0
+          targetY = 0
+        }
       }
     }
 
     const tick = () => {
-      currentX += (targetX - currentX) * ease
-      currentY += (targetY - currentY) * ease
+      // Boost lerp on return-to-centre for a snappier spring feel
+      const lerpFactor = isLeaving ? Math.min(1, ease * 2.8) : ease
 
-      if (Math.abs(currentX) > 0.05 || Math.abs(currentY) > 0.05) {
-        el.style.transform = `translate(${currentX}px, ${currentY}px)`
-      } else if (targetX === 0 && targetY === 0) {
+      currentX += (targetX - currentX) * lerpFactor
+      currentY += (targetY - currentY) * lerpFactor
+
+      const settled = Math.abs(currentX) < 0.05 && Math.abs(currentY) < 0.05
+
+      if (settled && targetX === 0 && targetY === 0) {
         el.style.transform = 'translate(0, 0)'
+        if (isLeaving) isLeaving = false
+      } else {
+        el.style.transform = `translate(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px)`
       }
 
       raf = requestAnimationFrame(tick)
@@ -60,7 +102,9 @@ export function useMagnet({ strength = 0.32, ease = 0.12 } = {}) {
       window.removeEventListener('mousemove', onMove)
       el.style.transform = ''
     }
-  }, [strength, ease])
+  // maxPx / ease are numbers — stable after first render, no dependency churn
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maxPx, ease])
 
   return ref
 }
