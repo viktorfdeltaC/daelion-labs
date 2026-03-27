@@ -4,9 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design tokens ──────────────────────────────────────── */
+:root {
+  --color-bg:          #08080F;
+  --color-accent:      #8B5CF6;
+  --color-accent-dim:  #7C3AED;
+  --color-accent-muted: rgba(139, 92, 246, 0.5);
+  --color-text:        #F4F4F5;
+  --color-sub:         #71717A;
+  --color-border:      rgba(255, 255, 255, 0.07);
+
+  /* Scroll progress gradient uses these tokens */
+  --progress-bg: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent), #A78BFA);
+}
+
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth intentionally omitted — Lenis handles smooth scrolling */
   }
 
   body {
