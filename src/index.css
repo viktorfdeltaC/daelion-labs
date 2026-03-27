@@ -404,7 +404,13 @@
   .cap-list.cap-list-visible .cap-row:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
   .cap-list.cap-list-visible .cap-row:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 225ms; }
 
-  .cap-row { contain: layout style; }
+  /* backface-visibility:hidden promotes each row to its own GPU compositor layer.
+     No overflow:hidden → Lenis transform-scroll doesn't need to re-clip 4 regions per frame.
+     No contain:layout → browser can batch layout across all rows in one pass. */
+  .cap-row {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
 
   /* Left accent bar */
   .cap-bar {

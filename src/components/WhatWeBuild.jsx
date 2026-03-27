@@ -85,7 +85,7 @@ function CapabilityRow({ number, title, description, tag, icon, index }) {
   return (
     <div
       ref={rowRef}
-      className="cap-row relative border-b border-brand-border overflow-hidden"
+      className="cap-row relative border-b border-brand-border"
       style={{ '--row-index': index, cursor: isTouch ? 'pointer' : 'default' }}
       {...handlers}
     >
