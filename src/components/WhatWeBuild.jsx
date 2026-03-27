@@ -53,14 +53,20 @@ const capabilities = [
 function CapabilityRow({ number, title, description, tag, icon, index, sectionInView }) {
   const [expanded, setExpanded] = useState(false)
 
+  // Touch devices don't fire hover events — use click to toggle instead.
+  // Mouse devices use onMouseEnter/Leave so hover is instant.
+  const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
+  const touchHandlers = isTouch
+    ? { onClick: () => setExpanded(v => !v) }
+    : { onMouseEnter: () => setExpanded(true), onMouseLeave: () => setExpanded(false) }
+
   return (
     <div
-      className={`relative group border-b border-brand-border cursor-default overflow-hidden transition-[opacity,transform] duration-500 ease-out ${
+      className={`relative group border-b border-brand-border overflow-hidden transition-[opacity,transform] duration-500 ease-out ${
         sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
       }`}
-      style={{ transitionDelay: `${index * 75}ms` }}
-      onMouseEnter={() => setExpanded(true)}
-      onMouseLeave={() => setExpanded(false)}
+      style={{ transitionDelay: `${index * 75}ms`, cursor: isTouch ? 'pointer' : 'default' }}
+      {...touchHandlers}
     >
       {/* Left accent bar — scaleY 0→1 on hover */}
       <div

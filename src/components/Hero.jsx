@@ -173,7 +173,7 @@ export default function Hero() {
               <span
                 className="block text-gradient leading-[0.88]"
                 style={{
-                  fontSize: 'clamp(3.5rem, 13vw, 11rem)',
+                  fontSize: 'clamp(2.2rem, 11vw, 11rem)',
                   letterSpacing: 'var(--tracking-display)',
                   animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.32s both',
                   fontVariantNumeric: 'tabular-nums',
@@ -185,7 +185,7 @@ export default function Hero() {
               <span
                 className="block text-brand-accent leading-[0.88]"
                 style={{
-                  fontSize: 'clamp(2rem, 8vw, 7rem)',
+                  fontSize: 'clamp(1.4rem, 7vw, 7rem)',
                   letterSpacing: '-0.01em',
                   paddingLeft: 'clamp(1rem, 4vw, 5rem)',
                   animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.44s both',

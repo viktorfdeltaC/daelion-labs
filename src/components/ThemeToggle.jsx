@@ -14,7 +14,7 @@ export default function ThemeToggle({ className = '' }) {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln'}
-      className={`relative flex items-center justify-center w-9 h-9 rounded-none text-brand-sub hover:text-brand-text transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg ${className}`}
+      className={`relative flex items-center justify-center w-11 h-11 rounded-none text-brand-sub hover:text-brand-text transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg ${className}`}
       style={{ overflow: 'hidden' }}
     >
       {/* Sun icon — visible in dark mode (click → go light) */}

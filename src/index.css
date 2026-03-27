@@ -128,6 +128,25 @@
 
   #root { width: 100%; }
 
+  /* Scroll lock when mobile nav overlay is open */
+  body.nav-open { overflow: hidden; }
+
+  /* ── Slow-connection performance mode ─────────────────
+     Applied by useNetworkOptimize() when saveData or 2G detected.
+     Disables non-essential GPU-heavy visuals.                    */
+  html.perf-reduce .grain-overlay  { display: none; }
+  html.perf-reduce .section-orb    { display: none; }
+  html.perf-reduce .dot-grid        { display: none; }
+  /* Pause marquee scrolling */
+  html.perf-reduce [style*="marquee"] { animation-play-state: paused !important; }
+
+  /* Hide horizontal scrollbar on carousel tracks (all browsers) */
+  .carousel-track {
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
+  }
+  .carousel-track::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;

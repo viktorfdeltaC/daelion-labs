@@ -63,7 +63,7 @@ export default function Footer() {
                   <a
                     href={href}
                     aria-label={name}
-                    className="text-brand-sub hover:text-brand-accent transition-colors duration-200 cursor-pointer block"
+                    className="text-brand-sub hover:text-brand-accent transition-colors duration-200 cursor-pointer flex items-center justify-center w-11 h-11"
                   >
                     {icon}
                   </a>

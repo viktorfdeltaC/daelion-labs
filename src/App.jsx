@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useNetworkOptimize } from './hooks/useNetworkOptimize'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
@@ -42,6 +43,9 @@ function ScrollProgress() {
 
 export default function App() {
   const progressRef = useRef(null)
+
+  // Disable expensive visuals on slow connections / data-saver mode
+  useNetworkOptimize()
 
   // Lenis: smooth scroll, anchor handling, RAF loop.
   // Passes onScroll to update the progress bar from the lerped position.
