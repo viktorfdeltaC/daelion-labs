@@ -57,7 +57,16 @@ export default function WinsSection() {
             className="font-display font-extrabold text-brand-text leading-none tracking-tight"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           >
-            Was du<br />davon hast.
+            {['Was du', 'davon hast.'].map((line, i) => (
+              <span key={line} className="block overflow-hidden pb-1">
+                <span
+                  className="block"
+                  style={{ animation: headInView ? `reveal-up 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.09}s both` : 'none' }}
+                >
+                  {line}
+                </span>
+              </span>
+            ))}
           </h2>
           <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
             Kein anderes Angebot bringt dir das.
@@ -89,11 +98,19 @@ export default function WinsSection() {
             <div className="mb-5">
               <span
                 className="font-display font-extrabold text-brand-accent block leading-none"
-                style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}
+                style={{
+                  fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
+                  animation: gridInView ? `count-in 0.7s cubic-bezier(0.16,1,0.3,1) ${i * 0.1}s both` : 'none',
+                }}
               >
                 {win.metric}
               </span>
-              <span className="section-label text-brand-sub/60 mt-1 block">{win.unit}</span>
+              <span
+                className="section-label text-brand-sub/60 mt-1 block"
+                style={{ animation: gridInView ? `fade-up 0.6s ease ${0.1 + i * 0.1}s both` : 'none' }}
+              >
+                {win.unit}
+              </span>
             </div>
 
             {/* Title */}

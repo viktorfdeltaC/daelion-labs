@@ -107,21 +107,37 @@ export default function Hero() {
           </div>
 
           {/* ── Stats ─────────────────────────────── */}
-          <div
-            className="flex flex-wrap items-center gap-3 mt-10 md:mt-12"
-            style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.74s both' }}
-          >
+          <div className="flex flex-wrap items-center gap-3 mt-10 md:mt-12">
             {[
               { num: '12+', label: 'Projekte' },
               { num: '100%', label: 'Custom Code' },
               { num: '<24h', label: 'Antwortzeit' },
-            ].map(({ num, label }) => (
-              <div key={num} className="glass flex items-center gap-3 px-4 py-2.5">
+            ].map(({ num, label }, i) => (
+              <div
+                key={num}
+                className="glass flex items-center gap-3 px-4 py-2.5"
+                style={{ animation: `badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) ${0.8 + i * 0.13}s both` }}
+              >
                 <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
                 <span className="section-label text-brand-sub/60">{label}</span>
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* ── Scroll indicator ──────────────────────── */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 z-20"
+        style={{ animation: 'fade-up 1s ease 1.3s both' }}
+        aria-hidden="true"
+      >
+        <span className="section-label text-brand-sub/30" style={{ letterSpacing: '0.2em' }}>SCROLL</span>
+        <div className="relative w-px h-10 bg-brand-border overflow-hidden">
+          <div
+            className="absolute inset-x-0 top-0 h-full bg-brand-accent"
+            style={{ animation: 'scroll-line 1.8s cubic-bezier(0.4,0,0.6,1) infinite' }}
+          />
         </div>
       </div>
 

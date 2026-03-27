@@ -31,7 +31,7 @@ export default function CTASection() {
       {/* Main content */}
       <div
         ref={ref}
-        className={`relative z-10 flex-1 flex flex-col justify-between px-6 md:px-10 lg:px-16 pt-16 md:pt-24 pb-12 md:pb-16 transition-all duration-700 ease-out ${
+        className={`relative z-10 flex-1 flex flex-col justify-between px-6 md:px-10 lg:px-16 pt-16 md:pt-24 pb-12 md:pb-16 transition-[opacity,transform] duration-700 ease-out ${
           inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
@@ -41,9 +41,21 @@ export default function CTASection() {
             className="font-display font-extrabold text-white leading-[0.88] tracking-tighter"
             style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
           >
-            Lass uns<br />dein Problem<br />lösen.
+            {['Lass uns', 'dein Problem', 'lösen.'].map((line, i) => (
+              <span key={line} className="block overflow-hidden pb-1">
+                <span
+                  className="block"
+                  style={{ animation: inView ? `reveal-up 1s cubic-bezier(0.16,1,0.3,1) ${i * 0.1}s both` : 'none' }}
+                >
+                  {line}
+                </span>
+              </span>
+            ))}
           </h2>
-          <p className="text-white/60 text-base md:text-lg leading-relaxed mt-8 max-w-md">
+          <p
+            className="text-white/60 text-base md:text-lg leading-relaxed mt-8 max-w-md"
+            style={{ animation: inView ? 'fade-up 0.8s ease 0.4s both' : 'none' }}
+          >
             Schreib uns kurz, womit du kämpfst. Wir antworten innerhalb von 24 Stunden — mit einem konkreten ersten Ansatz, kostenlos.
           </p>
         </div>

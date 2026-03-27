@@ -279,3 +279,24 @@
   from { opacity: 0; transform: translateY(30px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Text pushes up through an invisible mask — editorial reveal */
+@keyframes reveal-up {
+  from { transform: translateY(108%); }
+  to   { transform: translateY(0); }
+}
+
+/* Metric numbers pop in with scale */
+@keyframes count-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.88); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Scroll indicator line — flows downward infinitely */
+@keyframes scroll-line {
+  0%      { transform: translateY(-100%); opacity: 1; }
+  49%     { transform: translateY(100%);  opacity: 1; }
+  49.999% { transform: translateY(-100%); opacity: 0; }
+  50%     { transform: translateY(-100%); opacity: 0; }
+  100%    { transform: translateY(100%);  opacity: 1; }
+}

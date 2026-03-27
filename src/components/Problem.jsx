@@ -70,15 +70,24 @@ export default function Problem() {
             Standardtools lösen 70&nbsp;% deines Problems.
           </h2>
 
-          <div className="h-px bg-brand-border mb-8" />
+          <div
+            className="h-px bg-brand-accent/40 mb-8 origin-left"
+            style={{ animation: sectionInView ? 'line-draw 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both' : 'none' }}
+          />
 
           <div className="space-y-5">
-            <p className="text-brand-sub text-base leading-relaxed">
-              Calendly, Notion, Standard-CRMs — all das ist für den Durchschnitt gebaut. Dein Unternehmen hat Workflows, Sonderfälle und Abläufe, die über Jahre im echten Betrieb gewachsen sind. Generische Software löst das Allgemeine, nicht das Deine.
-            </p>
-            <p className="text-brand-sub text-base leading-relaxed">
-              Diese fehlenden 30&nbsp;% kosten dich täglich Stunden, erzwingen manuelle Workarounds und frustrieren dein Team. Sie sind der Engpass, der dein Wachstum deckelt. Genau dort setzen wir an.
-            </p>
+            {[
+              'Calendly, Notion, Standard-CRMs — all das ist für den Durchschnitt gebaut. Dein Unternehmen hat Workflows, Sonderfälle und Abläufe, die über Jahre im echten Betrieb gewachsen sind. Generische Software löst das Allgemeine, nicht das Deine.',
+              'Diese fehlenden 30\u00a0% kosten dich täglich Stunden, erzwingen manuelle Workarounds und frustrieren dein Team. Sie sind der Engpass, der dein Wachstum deckelt. Genau dort setzen wir an.',
+            ].map((text, i) => (
+              <p
+                key={i}
+                className="text-brand-sub text-base leading-relaxed"
+                style={{ animation: sectionInView ? `fade-up 0.7s cubic-bezier(0.22,1,0.36,1) ${0.45 + i * 0.15}s both` : 'none' }}
+              >
+                {text}
+              </p>
+            ))}
           </div>
         </div>
       </div>
