@@ -380,6 +380,65 @@
     }
   }
 
+  /* ── WhatWeBuild capability rows — pure CSS, zero React re-renders ─
+     All hover effects live here. JS only toggles .is-expanded class.
+     GPU-composited properties only (transform, opacity) to avoid layout. */
+
+  .cap-row { contain: layout style; }
+
+  /* Left accent bar */
+  .cap-bar {
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cap-row.is-expanded .cap-bar { transform: scaleY(1); }
+
+  /* Row background tint */
+  .cap-bg { transition: background 0.2s ease; }
+  .cap-row.is-expanded .cap-bg { background: rgba(255,255,255,0.02); }
+
+  /* Icon */
+  .cap-icon {
+    opacity: 0.4;
+    transform: translateY(2px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .cap-row.is-expanded .cap-icon { opacity: 1; transform: translateY(0); }
+
+  /* Title slide */
+  .cap-title {
+    transform: translateX(0);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+  }
+  .cap-row.is-expanded .cap-title { transform: translateX(10px); color: #fff; }
+
+  /* Description grid-reveal */
+  .cap-desc-grid {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cap-row.is-expanded .cap-desc-grid { grid-template-rows: 1fr; }
+
+  .cap-desc-text {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+  }
+  .cap-row.is-expanded .cap-desc-text { opacity: 1; transform: translateY(0); }
+
+  /* Arrow */
+  .cap-arrow {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cap-row.is-expanded .cap-arrow { opacity: 1; transform: translateX(0); }
+
+  /* Tag */
+  .cap-tag { transition: color 0.25s ease; }
+  .cap-row.is-expanded .cap-tag { color: rgb(var(--c-accent) / 0.7); }
+
   /* ── Nav link hover underline ───────────────────────── */
   .nav-link {
     position: relative;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import { useInView } from '../hooks/useInView'
 import { DisplayHeadlineLines } from './DisplayHeadline'
 
@@ -51,84 +51,54 @@ const capabilities = [
 ]
 
 function CapabilityRow({ number, title, description, tag, icon, index, sectionInView }) {
-  const [expanded, setExpanded] = useState(false)
+  const rowRef = useRef(null)
 
-  // Touch devices don't fire hover events — use click to toggle instead.
-  // Mouse devices use onMouseEnter/Leave so hover is instant.
+  // Detect once — no useState, no re-render
   const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
-  const touchHandlers = isTouch
-    ? { onClick: () => setExpanded(v => !v) }
-    : { onMouseEnter: () => setExpanded(true), onMouseLeave: () => setExpanded(false) }
+
+  const expand  = () => rowRef.current?.classList.add('is-expanded')
+  const collapse = () => rowRef.current?.classList.remove('is-expanded')
+  const toggle  = () => rowRef.current?.classList.toggle('is-expanded')
+
+  const handlers = isTouch
+    ? { onClick: toggle }
+    : { onMouseEnter: expand, onMouseLeave: collapse }
 
   return (
     <div
-      className={`relative group border-b border-brand-border overflow-hidden transition-[opacity,transform] duration-500 ease-out ${
+      ref={rowRef}
+      className={`cap-row relative border-b border-brand-border overflow-hidden transition-[opacity,transform] duration-500 ease-out ${
         sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
       }`}
       style={{ transitionDelay: `${index * 75}ms`, cursor: isTouch ? 'pointer' : 'default' }}
-      {...touchHandlers}
+      {...handlers}
     >
-      {/* Left accent bar — scaleY 0→1 on hover */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-[2px] bg-brand-accent origin-top"
-        style={{
-          transform: expanded ? 'scaleY(1)' : 'scaleY(0)',
-          transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1)',
-        }}
-        aria-hidden="true"
-      />
+      {/* Left accent bar */}
+      <div className="cap-bar absolute left-0 top-0 bottom-0 w-[2px] bg-brand-accent origin-top" aria-hidden="true" />
 
-      <div className="flex items-start justify-between px-6 md:px-10 lg:px-16 py-6 md:py-8 group-hover:bg-white/[0.02] transition-colors duration-200">
+      <div className="cap-bg flex items-start justify-between px-6 md:px-10 lg:px-16 py-6 md:py-8">
 
-        {/* Number superscript */}
-        <span className="section-label text-brand-accent shrink-0 w-8 mr-4 md:mr-8 pt-1 group-hover:text-brand-accent transition-colors">
+        {/* Number */}
+        <span className="section-label text-brand-accent shrink-0 w-8 mr-4 md:mr-8 pt-1">
           {number}
         </span>
 
         {/* Title + description */}
         <div className="flex-1 min-w-0">
-          {/* Icon + Title row */}
-          <div className="flex items-center gap-3 mb-0">
-            <span
-              className="text-brand-accent/50 group-hover:text-brand-accent transition-colors duration-300 shrink-0"
-              style={{
-                opacity: expanded ? 1 : 0.4,
-                transform: expanded ? 'translateY(0)' : 'translateY(2px)',
-                transition: 'opacity 0.3s, transform 0.3s',
-              }}
-            >
-              {icon}
-            </span>
+          <div className="flex items-center gap-3">
+            <span className="cap-icon text-brand-accent shrink-0">{icon}</span>
             <h3
-              className="font-display font-bold text-brand-sub group-hover:text-white leading-tight transition-colors duration-250"
-              style={{
-                fontSize: 'clamp(1.8rem, 4vw, 3.5rem)',
-                transform: expanded ? 'translateX(10px)' : 'translateX(0)',
-                transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1), color 0.25s',
-                letterSpacing: '-0.01em',
-              }}
+              className="cap-title font-display font-bold text-brand-sub leading-tight"
+              style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)', letterSpacing: '-0.01em' }}
             >
               {title}
             </h3>
           </div>
 
-          {/* grid-template-rows reveal — no maxHeight hack */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateRows: expanded ? '1fr' : '0fr',
-              transition: 'grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1)',
-            }}
-          >
+          {/* Grid-reveal for description */}
+          <div className="cap-desc-grid">
             <div className="overflow-hidden">
-              <p
-                className="text-brand-sub text-sm leading-relaxed pr-4 md:pr-16 pt-3 pb-1"
-                style={{
-                  opacity: expanded ? 1 : 0,
-                  transform: expanded ? 'translateY(0)' : 'translateY(4px)',
-                  transition: 'opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s',
-                }}
-              >
+              <p className="cap-desc-text text-brand-sub text-sm leading-relaxed pr-4 md:pr-16 pt-3 pb-1">
                 {description}
               </p>
             </div>
@@ -137,22 +107,12 @@ function CapabilityRow({ number, title, description, tag, icon, index, sectionIn
 
         {/* Arrow + Tag */}
         <div className="flex items-center gap-4 ml-4 shrink-0 pt-1">
-          <div
-            className="text-brand-accent"
-            style={{
-              opacity: expanded ? 1 : 0,
-              transform: expanded ? 'translateX(0)' : 'translateX(-8px)',
-              transition: 'opacity 0.3s, transform 0.3s cubic-bezier(0.22,1,0.36,1)',
-            }}
-            aria-hidden="true"
-          >
+          <div className="cap-arrow text-brand-accent" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </div>
-          <span className="section-label text-brand-sub/40 group-hover:text-brand-accent/60 transition-colors hidden sm:inline">
-            {tag}
-          </span>
+          <span className="cap-tag section-label text-brand-sub/40 hidden sm:inline">{tag}</span>
         </div>
       </div>
     </div>
