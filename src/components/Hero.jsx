@@ -152,41 +152,46 @@ export default function Hero() {
 
           {/* ── Headline ──────────────────────────────────── */}
           <div ref={headlineRef} style={{ willChange: 'transform' }}>
-            <h1 className="font-display font-extrabold overflow-hidden">
+            <h1 className="font-display font-extrabold overflow-visible">
+              {/* Qualifier label — sets the stage */}
               <span
-                className="block text-brand-text/40"
+                className="block text-brand-sub/50"
                 style={{
-                  fontSize: 'clamp(0.75rem, 1.4vw, 1.3rem)',
-                  letterSpacing: '0.22em',
+                  fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)',
+                  fontSize: 'clamp(0.7rem, 1.1vw, 1.1rem)',
+                  letterSpacing: '0.28em',
                   fontWeight: 400,
                   lineHeight: 1,
-                  marginBottom: 'clamp(0.6rem, 1.2vw, 1rem)',
+                  marginBottom: 'clamp(0.8rem, 1.5vw, 1.4rem)',
                   animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both',
                 }}
               >
                 WIR BAUEN
               </span>
 
-              {/* LÖSUNGEN — scrambled on load, subtle gradient */}
+              {/* LÖSUNGEN — full-bleed architectural word, breaks container */}
               <span
-                className="block text-gradient leading-[0.88]"
+                className="block text-gradient leading-[0.85]"
                 style={{
-                  fontSize: 'clamp(2.2rem, 11vw, 11rem)',
-                  letterSpacing: 'var(--tracking-display)',
-                  animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.32s both',
+                  fontSize: 'clamp(4.5rem, 14vw, 13rem)',
+                  letterSpacing: '-0.02em',
+                  animation: 'fade-up 0.9s cubic-bezier(0.22,1,0.36,1) 0.28s both',
                   fontVariantNumeric: 'tabular-nums',
+                  marginLeft: 'clamp(-0.5rem, -1vw, -1.5rem)',
                 }}
               >
                 {scrambled}
               </span>
 
+              {/* DIE BLEIBEN — indented, accent colour, creates lateral rhythm */}
               <span
                 className="block text-brand-accent leading-[0.88]"
                 style={{
-                  fontSize: 'clamp(1.4rem, 7vw, 7rem)',
-                  letterSpacing: '-0.01em',
-                  paddingLeft: 'clamp(1rem, 4vw, 5rem)',
+                  fontSize: 'clamp(1.6rem, 5.5vw, 5.5rem)',
+                  letterSpacing: '0.01em',
+                  paddingLeft: 'clamp(2rem, 6vw, 7rem)',
                   animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.44s both',
+                  marginTop: 'clamp(0.4rem, 0.8vw, 0.8rem)',
                 }}
               >
                 DIE BLEIBEN.

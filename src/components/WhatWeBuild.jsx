@@ -102,9 +102,10 @@ function CapabilityRow({ number, title, description, tag, icon, index, sectionIn
             <h3
               className="font-display font-bold text-brand-sub group-hover:text-white leading-tight transition-colors duration-250"
               style={{
-                fontSize: 'clamp(1.4rem, 3vw, 2.8rem)',
-                transform: expanded ? 'translateX(6px)' : 'translateX(0)',
-                transition: 'transform 0.35s cubic-bezier(0.22,1,0.36,1), color 0.25s',
+                fontSize: 'clamp(1.8rem, 4vw, 3.5rem)',
+                transform: expanded ? 'translateX(10px)' : 'translateX(0)',
+                transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1), color 0.25s',
+                letterSpacing: '-0.01em',
               }}
             >
               {title}

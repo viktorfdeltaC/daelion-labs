@@ -32,42 +32,41 @@ export default function CTASection() {
       {/* Main content */}
       <div
         ref={ref}
-        className={`relative z-10 flex-1 flex flex-col justify-between px-6 md:px-10 lg:px-16 pt-16 md:pt-24 pb-12 md:pb-16 transition-[opacity,transform] duration-700 ease-out ${
+        className={`relative z-10 flex-1 flex flex-col justify-between px-6 md:px-10 lg:px-16 pt-10 md:pt-16 pb-12 md:pb-16 transition-[opacity,transform] duration-700 ease-out ${
           inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        {/* Headline block */}
-        <div className="overflow-hidden">
-          <h2
-            className="font-display font-extrabold text-white leading-[0.88] tracking-tighter"
-            style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
-          >
-            {['Lass uns', 'dein Problem', 'lösen.'].map((line, i) => (
-              <span key={line} className="block overflow-hidden pb-1">
-                <span
-                  className="block"
-                  style={{ animation: inView ? `reveal-up 1s cubic-bezier(0.16,1,0.3,1) ${i * 0.1}s both` : 'none' }}
-                >
-                  {line}
-                </span>
-              </span>
-            ))}
-          </h2>
+        {/* Massive hero word — fills the room */}
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="overflow-hidden">
+            <h2
+              className="font-display font-extrabold text-white leading-[0.82] tracking-tighter"
+              style={{
+                fontSize: 'clamp(6rem, 18vw, 16rem)',
+                animation: inView ? 'reveal-up 1.1s cubic-bezier(0.16,1,0.3,1) 0s both' : 'none',
+                marginLeft: 'clamp(-0.3rem, -0.5vw, -1rem)',
+              }}
+            >
+              Bereit.
+            </h2>
+          </div>
+
+          {/* Supporting copy — small, bottom-left contrast */}
           <p
-            className="text-white/60 text-base md:text-lg leading-relaxed mt-8 max-w-md"
-            style={{ animation: inView ? 'fade-up 0.8s ease 0.4s both' : 'none' }}
+            className="text-white/50 text-sm leading-relaxed mt-8 max-w-xs"
+            style={{ animation: inView ? 'fade-up 0.8s ease 0.5s both' : 'none' }}
           >
             Schreib uns kurz, womit du kämpfst. Wir antworten innerhalb von 24 Stunden — mit einem konkreten ersten Ansatz, kostenlos.
           </p>
         </div>
 
-        {/* Action row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-14">
+        {/* Action row — prominent button */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-10 md:mt-14">
           <MagneticButton
             as="a"
             href="mailto:hello@daelionlabs.com"
             aria-label="Lösung anfragen per E-Mail"
-            className="btn-shimmer btn-glass text-white font-sans font-semibold text-sm px-10 py-5 cursor-pointer whitespace-nowrap inline-block"
+            className="btn-shimmer btn-glass text-white font-sans font-semibold text-base px-16 py-6 cursor-pointer whitespace-nowrap inline-block"
             style={{ borderRadius: 0 }}
           >
             <span className="btn-inner">
