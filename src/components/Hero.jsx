@@ -213,16 +213,18 @@ export default function Hero() {
             <a
               ref={ctaRef}
               href="#contact"
-              className="btn-shimmer bg-brand-accent text-white font-sans font-semibold text-sm px-8 py-4 hover:bg-violet-500 transition-colors duration-200 cursor-pointer whitespace-nowrap inline-block"
-              style={{ borderRadius: 0, boxShadow: '0 0 32px rgba(139,92,246,0.3)', willChange: 'transform' }}
+              className="btn-shimmer btn-purple bg-brand-accent hover:bg-violet-500 text-white font-sans font-semibold text-sm px-8 py-4 cursor-pointer whitespace-nowrap inline-block"
+              style={{ borderRadius: 0, willChange: 'transform' }}
             >
-              Projekt starten →
+              <span className="btn-inner">
+                Projekt starten <span className="btn-arrow">→</span>
+              </span>
             </a>
             <a
               href="#problem"
-              className="text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"
+              className="btn-text text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"
             >
-              Mehr erfahren
+              Mehr erfahren <span className="btn-text-arrow">→</span>
             </a>
           </div>
 

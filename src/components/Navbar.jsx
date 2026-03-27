@@ -79,16 +79,10 @@ export default function Navbar() {
           <a
             ref={ctaRef}
             href="#contact"
-            className="btn-shimmer text-sm font-semibold text-white bg-brand-accent px-5 py-2.5 hover:bg-violet-500 transition-colors duration-200 cursor-pointer hidden sm:inline-flex items-center"
-            style={{
-              borderRadius: 0,
-              minHeight: '44px',
-              boxShadow: scrolled ? '0 0 20px rgba(139,92,246,0.3)' : 'none',
-              transition: 'background 0.2s, box-shadow 0.3s',
-              willChange: 'transform',
-            }}
+            className="btn-shimmer btn-purple text-sm font-semibold text-white bg-brand-accent hover:bg-violet-500 px-5 py-2.5 cursor-pointer hidden sm:inline-flex items-center"
+            style={{ borderRadius: 0, minHeight: '44px', willChange: 'transform' }}
           >
-            Projekt starten
+            <span className="btn-inner">Projekt starten</span>
           </a>
 
           {/* Hamburger */}
@@ -131,10 +125,10 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={handleLinkClick}
-            className="btn-shimmer mt-4 text-sm font-semibold text-white bg-brand-accent px-5 py-3 text-center hover:bg-violet-500 transition-colors duration-200"
+            className="btn-shimmer btn-purple mt-4 text-sm font-semibold text-white bg-brand-accent hover:bg-violet-500 px-5 py-3 text-center inline-block"
             style={{ borderRadius: 0 }}
           >
-            Projekt starten
+            <span className="btn-inner">Projekt starten</span>
           </a>
         </nav>
       </div>

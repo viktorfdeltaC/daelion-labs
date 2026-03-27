@@ -67,17 +67,12 @@ export default function CTASection() {
           <a
             ref={ctaRef}
             href="mailto:hello@daelionlabs.com"
-            className="btn-shimmer text-white font-sans font-semibold text-sm px-10 py-5 hover:bg-white/[0.12] transition-colors duration-300 cursor-pointer whitespace-nowrap inline-block"
-            style={{
-              borderRadius: 0,
-              background: 'rgba(255,255,255,0.08)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              boxShadow: '0 0 0 1px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 60px rgba(0,0,0,0.25)',
-              willChange: 'transform',
-            }}
+            className="btn-shimmer btn-glass text-white font-sans font-semibold text-sm px-10 py-5 cursor-pointer whitespace-nowrap inline-block"
+            style={{ borderRadius: 0, willChange: 'transform' }}
           >
-            Lösung anfragen →
+            <span className="btn-inner">
+              Lösung anfragen <span className="btn-arrow">→</span>
+            </span>
           </a>
           <span className="section-label text-white/30 hidden sm:inline">
             hello@daelionlabs.com
