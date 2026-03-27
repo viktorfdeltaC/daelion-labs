@@ -118,15 +118,20 @@ export default function WinsSection() {
               `}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              {/* Hover accent top */}
+              {/* Dark hover background — slides up from bottom */}
               <div
-                className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                style={{ background: 'linear-gradient(90deg, transparent, rgb(var(--c-accent)/0.5), transparent)' }}
+                className="win-hover-bg absolute inset-0 pointer-events-none"
+                aria-hidden="true"
+              />
+              {/* Accent top line on hover */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                style={{ background: 'linear-gradient(90deg, transparent, rgb(var(--c-accent)/0.8), transparent)' }}
                 aria-hidden="true"
               />
 
               {/* Metric */}
-              <div className="mb-5">
+              <div className="relative z-10 mb-5">
                 <span
                   className="font-display font-extrabold text-brand-accent block leading-none"
                   style={{
@@ -137,7 +142,7 @@ export default function WinsSection() {
                   {win.metric}
                 </span>
                 <span
-                  className="section-label text-brand-sub/60 mt-1 block"
+                  className="section-label text-brand-sub/60 group-hover:text-white/40 mt-1 block transition-colors duration-300"
                   style={{ animation: gridInView ? `fade-up 0.6s ease ${0.1 + i * 0.1}s both` : 'none' }}
                 >
                   {win.unit}
@@ -145,13 +150,15 @@ export default function WinsSection() {
               </div>
 
               <h3
-                className="font-display font-bold text-brand-text leading-tight mb-3 group-hover:text-white transition-colors duration-200"
+                className="relative z-10 font-display font-bold text-brand-text group-hover:text-white leading-tight mb-3 transition-colors duration-300"
                 style={{ fontSize: 'clamp(1rem, 1.5vw, 1.3rem)' }}
               >
                 {win.title}
               </h3>
 
-              <p className="text-brand-sub text-sm leading-relaxed">{win.description}</p>
+              <p className="relative z-10 text-brand-sub group-hover:text-white/60 text-sm leading-relaxed transition-colors duration-300">
+                {win.description}
+              </p>
             </div>
           ))}
         </div>
