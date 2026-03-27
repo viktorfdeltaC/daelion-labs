@@ -22,7 +22,7 @@ export default function Problem() {
       {/* ── Split layout ──────────────────────────── */}
       <div
         ref={sectionRef}
-        className={`relative z-10 grid lg:grid-cols-2 border-b border-brand-border transition-all duration-700 ease-out ${
+        className={`relative z-10 grid lg:grid-cols-2 border-b border-brand-border transition-[opacity,transform] duration-700 ease-out ${
           sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >

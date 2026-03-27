@@ -4,8 +4,8 @@ export default function Hero() {
 
       {/* ── Background orbs ───────────────────────── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-        <div className="section-orb" style={{ width: '70vw', height: '70vw', top: '-5%', right: '-10%', background: 'radial-gradient(circle, rgba(139,92,246,0.13) 0%, transparent 65%)', animation: 'float 12s ease-in-out infinite', maxWidth: '900px', maxHeight: '900px' }} />
-        <div className="section-orb" style={{ width: '40vw', height: '40vw', bottom: '5%', left: '-8%', background: 'radial-gradient(circle, rgba(109,40,217,0.08) 0%, transparent 65%)', animation: 'float-alt 16s ease-in-out infinite', maxWidth: '520px', maxHeight: '520px' }} />
+        <div className="section-orb" style={{ width: '70vw', height: '70vw', top: '-5%', right: '-10%', background: 'radial-gradient(circle, rgba(139,92,246,0.13) 0%, transparent 65%)', animation: 'float 12s ease-in-out infinite', maxWidth: '900px', maxHeight: '900px', willChange: 'transform' }} />
+        <div className="section-orb" style={{ width: '40vw', height: '40vw', bottom: '5%', left: '-8%', background: 'radial-gradient(circle, rgba(109,40,217,0.08) 0%, transparent 65%)', animation: 'float-alt 16s ease-in-out infinite', maxWidth: '520px', maxHeight: '520px', willChange: 'transform' }} />
       </div>
 
       {/* ── Dot grid ──────────────────────────────── */}

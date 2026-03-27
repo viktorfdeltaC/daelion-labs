@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
@@ -12,13 +12,15 @@ import Marquee from './components/Marquee'
 import Cursor from './components/Cursor'
 
 function ScrollProgress() {
-  const [progress, setProgress] = useState(0)
+  const barRef = useRef(null)
   useEffect(() => {
+    const bar = barRef.current
+    if (!bar) return
     const onScroll = () => {
       const doc = document.documentElement
-      const scrollTop = window.scrollY || doc.scrollTop
       const scrollHeight = doc.scrollHeight - doc.clientHeight
-      setProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0)
+      const pct = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0
+      bar.style.width = `${pct}%`
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -26,16 +28,16 @@ function ScrollProgress() {
 
   return (
     <div
+      ref={barRef}
       aria-hidden="true"
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         height: '2px',
-        width: `${progress}%`,
+        width: '0%',
         background: 'linear-gradient(90deg, #7C3AED, #8B5CF6, #A78BFA)',
         zIndex: 9999,
-        transition: 'width 0.08s linear',
         boxShadow: '0 0 8px rgba(139,92,246,0.8)',
       }}
     />

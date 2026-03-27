@@ -33,7 +33,7 @@ function CapabilityRow({ number, title, description, tag, index, sectionInView }
 
   return (
     <div
-      className={`relative group border-b border-brand-border cursor-default overflow-hidden transition-all duration-500 ease-out ${
+      className={`relative group border-b border-brand-border cursor-default overflow-hidden transition-[opacity,transform] duration-500 ease-out ${
         sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
       }`}
       style={{ transitionDelay: `${index * 75}ms` }}
@@ -129,7 +129,7 @@ export default function WhatWeBuild() {
       {/* Header */}
       <div
         ref={headRef}
-        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-all duration-700 ${
+        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-[opacity,transform] duration-700 ${
           headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >

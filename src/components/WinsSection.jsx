@@ -48,7 +48,7 @@ export default function WinsSection() {
       {/* Header */}
       <div
         ref={headRef}
-        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-all duration-700 ${
+        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-[opacity,transform] duration-700 ${
           headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >
@@ -73,7 +73,7 @@ export default function WinsSection() {
         {wins.map((win, i) => (
           <div
             key={win.title}
-            className={`relative group border-b sm:border-b-0 ${i < wins.length - 1 ? 'lg:border-r' : ''} ${i % 2 === 0 ? 'sm:border-r' : ''} border-brand-border p-8 md:p-10 lg:p-12 overflow-hidden transition-all duration-700 ease-out ${
+            className={`relative group border-b sm:border-b-0 ${i < wins.length - 1 ? 'lg:border-r' : ''} ${i % 2 === 0 ? 'sm:border-r' : ''} border-brand-border p-8 md:p-10 lg:p-12 overflow-hidden transition-[opacity,transform] duration-700 ease-out ${
               gridInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
             style={{ transitionDelay: `${i * 80}ms` }}

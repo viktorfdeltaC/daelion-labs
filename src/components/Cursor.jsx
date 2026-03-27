@@ -9,40 +9,29 @@ export default function Cursor() {
 
     document.body.classList.add('has-custom-cursor')
 
-    const state = { mx: -200, my: -200, rx: -200, ry: -200 }
-    let raf
+    const pos = { mx: -200, my: -200, rx: -200, ry: -200 }
+    let raf, lastTs = 0
 
-    const onMove = (e) => {
-      state.mx = e.clientX
-      state.my = e.clientY
-    }
-
-    const onMouseOver = (e) => {
-      if (e.target.closest('a, button, [role="button"]')) {
-        ringRef.current?.classList.add('is-hovering')
-      }
-    }
-
-    const onMouseOut = (e) => {
-      if (e.target.closest('a, button, [role="button"]')) {
-        ringRef.current?.classList.remove('is-hovering')
-      }
-    }
+    const onMove = (e) => { pos.mx = e.clientX; pos.my = e.clientY }
+    const onOver = (e) => { if (e.target.closest('a, button, [role="button"]')) ringRef.current?.classList.add('is-hovering') }
+    const onOut  = (e) => { if (e.target.closest('a, button, [role="button"]')) ringRef.current?.classList.remove('is-hovering') }
 
     window.addEventListener('mousemove', onMove, { passive: true })
-    document.addEventListener('mouseover', onMouseOver)
-    document.addEventListener('mouseout', onMouseOut)
+    document.addEventListener('mouseover', onOver)
+    document.addEventListener('mouseout', onOut)
 
-    const tick = () => {
-      state.rx += (state.mx - state.rx) * 0.1
-      state.ry += (state.my - state.ry) * 0.1
+    // Time-based lerp — consistent speed regardless of frame rate (60Hz, 120Hz, etc.)
+    const tick = (ts) => {
+      const dt = lastTs > 0 ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016
+      lastTs = ts
+      const f = 1 - Math.exp(-9 * dt) // ~0.139 at 60fps, ~0.072 at 120fps — same visual speed
 
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${state.mx}px, ${state.my}px, 0) translate(-50%, -50%)`
-      }
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${state.rx}px, ${state.ry}px, 0) translate(-50%, -50%)`
-      }
+      pos.rx += (pos.mx - pos.rx) * f
+      pos.ry += (pos.my - pos.ry) * f
+
+      dotRef.current?.style.setProperty('transform', `translate3d(${pos.mx}px,${pos.my}px,0) translate(-50%,-50%)`)
+      ringRef.current?.style.setProperty('transform', `translate3d(${pos.rx}px,${pos.ry}px,0) translate(-50%,-50%)`)
+
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
@@ -50,8 +39,8 @@ export default function Cursor() {
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseover', onMouseOver)
-      document.removeEventListener('mouseout', onMouseOut)
+      document.removeEventListener('mouseover', onOver)
+      document.removeEventListener('mouseout', onOut)
       document.body.classList.remove('has-custom-cursor')
     }
   }, [])

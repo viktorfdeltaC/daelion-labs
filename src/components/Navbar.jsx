@@ -25,12 +25,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background,border-color,box-shadow,backdrop-filter] duration-300 ${
         scrolled
           ? 'glass border-b border-white/[0.06] shadow-xl shadow-black/30'
           : 'bg-transparent border-b border-transparent'
       }`}
-      style={{ transitionDuration: '350ms' }}
     >
       {/* Purple accent line at top — appears on scroll */}
       <div
@@ -96,13 +95,13 @@ export default function Navbar() {
             onClick={() => setMenuOpen((v) => !v)}
           >
             <span
-              className={`block h-px w-5 bg-current transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
+              className={`block h-px w-5 bg-current transition-[transform] duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
             />
             <span
-              className={`block h-px w-5 bg-current transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`}
+              className={`block h-px w-5 bg-current transition-[opacity,transform] duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`}
             />
             <span
-              className={`block h-px w-5 bg-current transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
+              className={`block h-px w-5 bg-current transition-[transform] duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
             />
           </button>
         </div>
@@ -110,7 +109,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden glass border-t border-white/[0.06] overflow-hidden transition-all duration-300 ease-out ${
+        className={`md:hidden glass border-t border-white/[0.06] overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${
           menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >

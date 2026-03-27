@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useInView } from '../hooks/useInView'
 
 const steps = [
@@ -19,19 +20,29 @@ const steps = [
 ]
 
 function Step({ number, title, description, index, inView, isLast }) {
+  const rafId = useRef(null)
+
   const handleMouseMove = (e) => {
+    if (rafId.current) return
     const el = e.currentTarget
-    const rect = el.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 100
-    const y = ((e.clientY - rect.top) / rect.height) * 100
-    el.style.setProperty('--glow-x', `${x}%`)
-    el.style.setProperty('--glow-y', `${y}%`)
-    const rotX = ((e.clientY - rect.top) / rect.height - 0.5) * -6
-    const rotY = ((e.clientX - rect.left) / rect.width - 0.5) * 6
-    el.style.setProperty('--tilt-x', `${rotX}deg`)
-    el.style.setProperty('--tilt-y', `${rotY}deg`)
+    const cx = e.clientX
+    const cy = e.clientY
+    rafId.current = requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect()
+      const x = ((cx - rect.left) / rect.width) * 100
+      const y = ((cy - rect.top) / rect.height) * 100
+      el.style.setProperty('--glow-x', `${x}%`)
+      el.style.setProperty('--glow-y', `${y}%`)
+      const rotX = ((cy - rect.top) / rect.height - 0.5) * -5
+      const rotY = ((cx - rect.left) / rect.width - 0.5) * 5
+      el.style.setProperty('--tilt-x', `${rotX}deg`)
+      el.style.setProperty('--tilt-y', `${rotY}deg`)
+      rafId.current = null
+    })
   }
+
   const handleMouseLeave = (e) => {
+    if (rafId.current) { cancelAnimationFrame(rafId.current); rafId.current = null }
     const el = e.currentTarget
     el.style.setProperty('--tilt-x', '0deg')
     el.style.setProperty('--tilt-y', '0deg')
@@ -39,7 +50,7 @@ function Step({ number, title, description, index, inView, isLast }) {
 
   return (
     <div
-      className={`relative group tilt-card overflow-hidden ${!isLast ? 'border-r border-brand-border' : ''} transition-all duration-700 ease-out ${
+      className={`relative group tilt-card overflow-hidden ${!isLast ? 'border-r border-brand-border' : ''} transition-[opacity,transform] duration-700 ease-out ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
       style={{ transitionDelay: `${index * 120}ms` }}
@@ -108,7 +119,7 @@ export default function HowItWorks() {
       {/* Section headline */}
       <div
         ref={headRef}
-        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-all duration-700 ${
+        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-[opacity,transform] duration-700 ${
           headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >
