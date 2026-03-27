@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useMagnet } from '../hooks/useMagnet'
 
 const navLinks = [
   { label: 'Leistungen', href: '#solutions' },
@@ -9,6 +10,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const ctaRef = useMagnet({ strength: 0.25, ease: 0.1 })
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -75,6 +77,7 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-4">
           <a
+            ref={ctaRef}
             href="#contact"
             className="btn-shimmer text-sm font-semibold text-white bg-brand-accent px-5 py-2.5 hover:bg-violet-500 transition-colors duration-200 cursor-pointer hidden sm:inline-flex items-center"
             style={{
@@ -82,6 +85,7 @@ export default function Navbar() {
               minHeight: '44px',
               boxShadow: scrolled ? '0 0 20px rgba(139,92,246,0.3)' : 'none',
               transition: 'background 0.2s, box-shadow 0.3s',
+              willChange: 'transform',
             }}
           >
             Projekt starten
