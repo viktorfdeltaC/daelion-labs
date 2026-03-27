@@ -1,4 +1,5 @@
 import { useNetworkOptimize } from './hooks/useNetworkOptimize'
+import { useViewportHeight } from './hooks/useViewportHeight'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
@@ -18,6 +19,8 @@ let _progressFadeTimer = null
 export default function App() {
   // Disable GPU-heavy visuals on slow connections / data-saver mode
   useNetworkOptimize()
+  // Keep --vh in sync for iOS Safari @supports fallback
+  useViewportHeight()
 
   // Lenis: smooth scroll on desktop, native scroll fallback on
   // touch-primary devices and when prefers-reduced-motion is set.
