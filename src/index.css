@@ -33,8 +33,14 @@
   --color-sub:            rgb(var(--c-sub));
   --color-border:         rgba(255, 255, 255, 0.07);
 
-  /* Progress bar gradient */
-  --progress-bg: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent), rgb(var(--c-accent) / 0.75));
+  /* ── Scroll progress bar ───────────────────────────── */
+  --progress-height: 2px;
+  --progress-bg: linear-gradient(
+    90deg,
+    var(--color-accent-dim),
+    var(--color-accent) 55%,
+    rgb(var(--c-accent) / 0.65)
+  );
 
   /* ── Type scale ─────────────────────────────────────── */
   --text-xs:    0.75rem;     /* 12px */
@@ -139,6 +145,25 @@
   html.perf-reduce .dot-grid        { display: none; }
   /* Pause marquee scrolling */
   html.perf-reduce [style*="marquee"] { animation-play-state: paused !important; }
+
+  /* ── Scroll progress bar ─────────────────────────────────────
+     Driven by useLenis onScroll → width set via JS.
+     .done class fades it out after reaching 100%.              */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: var(--progress-height);
+    width: 0%;
+    background: var(--progress-bg);
+    z-index: 9999;
+    pointer-events: none;
+    will-change: width, opacity;
+    box-shadow: 0 0 10px var(--color-accent-muted);
+    /* opacity transition only — width is set raw for perf */
+    transition: opacity 0.3s ease;
+  }
+  .scroll-progress.done { opacity: 0; }
 
   /* Hide horizontal scrollbar on carousel tracks (all browsers) */
   .carousel-track {

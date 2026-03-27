@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { useNetworkOptimize } from './hooks/useNetworkOptimize'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -13,47 +12,32 @@ import Marquee from './components/Marquee'
 import Cursor from './components/Cursor'
 import { useLenis } from './hooks/useLenis'
 
-/**
- * Scroll progress bar — driven by Lenis scroll events so it reflects the
- * smoothed position, not the raw browser scroll.
- */
-function ScrollProgress() {
-  const barRef = useRef(null)
-
-  // onScroll callback is passed into useLenis from App so we share the instance
-  // This component just exposes its ref; wiring happens in App via prop
-  return (
-    <div
-      ref={barRef}
-      aria-hidden="true"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '2px',
-        width: '0%',
-        background: 'linear-gradient(90deg, var(--color-accent-dim), var(--color-accent), #A78BFA)',
-        zIndex: 9999,
-        boxShadow: '0 0 8px rgba(139,92,246,0.7)',
-        pointerEvents: 'none',
-      }}
-    />
-  )
-}
+// Fade-out timer — lives outside React state to avoid triggering re-renders
+let _progressFadeTimer = null
 
 export default function App() {
-  const progressRef = useRef(null)
-
-  // Disable expensive visuals on slow connections / data-saver mode
+  // Disable GPU-heavy visuals on slow connections / data-saver mode
   useNetworkOptimize()
 
-  // Lenis: smooth scroll, anchor handling, RAF loop.
-  // Passes onScroll to update the progress bar from the lerped position.
+  // Lenis: smooth scroll on desktop, native scroll fallback on
+  // touch-primary devices and when prefers-reduced-motion is set.
+  // The onScroll callback updates the progress bar directly on the DOM
+  // (no setState) so it never causes a React re-render.
   useLenis({
     onScroll: ({ progress }) => {
-      // progressRef is a forwarded ref — find the bar via the DOM directly
       const bar = document.querySelector('[data-scroll-progress]')
-      if (bar) bar.style.width = `${progress * 100}%`
+      if (!bar) return
+
+      bar.style.width = `${progress * 100}%`
+
+      // Fade out after reaching the bottom; restore when scrolling back up
+      if (progress >= 0.999) {
+        clearTimeout(_progressFadeTimer)
+        _progressFadeTimer = setTimeout(() => bar.classList.add('done'), 300)
+      } else {
+        clearTimeout(_progressFadeTimer)
+        bar.classList.remove('done')
+      }
     },
   })
 
@@ -62,21 +46,15 @@ export default function App() {
       <Cursor />
       <div className="grain-overlay" aria-hidden="true" />
 
-      {/* Scroll progress — driven by Lenis onScroll callback above */}
+      {/*
+        Scroll progress bar
+        Styled via .scroll-progress + .done in index.css
+        Width driven by useLenis onScroll — zero re-renders
+      */}
       <div
         data-scroll-progress
+        className="scroll-progress"
         aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          height: '2px',
-          width: '0%',
-          background: 'linear-gradient(90deg, var(--color-accent-dim), var(--color-accent), #A78BFA)',
-          zIndex: 9999,
-          boxShadow: '0 0 8px rgba(139,92,246,0.7)',
-          pointerEvents: 'none',
-        }}
       />
 
       <Navbar />
