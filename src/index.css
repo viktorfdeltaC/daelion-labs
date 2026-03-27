@@ -244,6 +244,35 @@
   }
   .carousel-track::-webkit-scrollbar { display: none; }
 
+  /* ── Safe-area / keyboard-aware input layout ──────────
+     Requires viewport-fit=cover in index.html <meta>.
+     env() values are 0 on non-notch devices — no side effects. */
+
+  /* Inputs stay visible when the soft keyboard pushes the viewport up */
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  textarea {
+    scroll-margin-bottom: 300px; /* room for keyboard + floating UI */
+  }
+
+  /* Sticky input sections (e.g. ProblemFinder) */
+  .input-section {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* CTA buttons near the bottom edge on notch devices */
+  .cta-button {
+    margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+  }
+
+  @media (max-width: 768px) {
+    .input-section { margin-bottom: 20px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
