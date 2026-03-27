@@ -392,6 +392,18 @@
      All hover effects live here. JS only toggles .is-expanded class.
      GPU-composited properties only (transform, opacity) to avoid layout. */
 
+  /* Entrance animation — driven by CSS class added via IntersectionObserver,
+     zero React re-renders. nth-child stagger replaces transitionDelay prop. */
+  .cap-list .cap-row {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cap-list.cap-list-visible .cap-row:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+  .cap-list.cap-list-visible .cap-row:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 75ms; }
+  .cap-list.cap-list-visible .cap-row:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
+  .cap-list.cap-list-visible .cap-row:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 225ms; }
+
   .cap-row { contain: layout style; }
 
   /* Left accent bar */

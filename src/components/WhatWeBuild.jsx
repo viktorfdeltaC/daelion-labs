@@ -1,6 +1,24 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useInView } from '../hooks/useInView'
 import { DisplayHeadlineLines } from './DisplayHeadline'
+
+// Adds a CSS class directly to the DOM element — zero React re-renders
+function useDomInView(className = 'in-view', threshold = 0.05) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.classList.add(className)
+        observer.disconnect()
+      }
+    }, { threshold })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+  return ref
+}
 
 const capabilities = [
   {
@@ -50,7 +68,7 @@ const capabilities = [
   },
 ]
 
-function CapabilityRow({ number, title, description, tag, icon, index, sectionInView }) {
+function CapabilityRow({ number, title, description, tag, icon, index }) {
   const rowRef = useRef(null)
 
   // Detect once — no useState, no re-render
@@ -67,10 +85,8 @@ function CapabilityRow({ number, title, description, tag, icon, index, sectionIn
   return (
     <div
       ref={rowRef}
-      className={`cap-row relative border-b border-brand-border overflow-hidden transition-[opacity,transform] duration-500 ease-out ${
-        sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-      }`}
-      style={{ transitionDelay: `${index * 75}ms`, cursor: isTouch ? 'pointer' : 'default' }}
+      className="cap-row relative border-b border-brand-border overflow-hidden"
+      style={{ '--row-index': index, cursor: isTouch ? 'pointer' : 'default' }}
       {...handlers}
     >
       {/* Left accent bar */}
@@ -121,7 +137,7 @@ function CapabilityRow({ number, title, description, tag, icon, index, sectionIn
 
 export default function WhatWeBuild() {
   const [headRef, headInView] = useInView()
-  const [listRef, listInView] = useInView()
+  const listRef = useDomInView('cap-list-visible')
 
   return (
     <section id="solutions" className="relative bg-brand-bg overflow-hidden">
@@ -152,10 +168,10 @@ export default function WhatWeBuild() {
         </div>
       </div>
 
-      {/* Capability rows */}
-      <div ref={listRef} className="relative z-10">
+      {/* Capability rows — stagger via CSS, zero React re-renders on scroll */}
+      <div ref={listRef} className="cap-list relative z-10">
         {capabilities.map((cap, i) => (
-          <CapabilityRow key={cap.number} {...cap} index={i} sectionInView={listInView} />
+          <CapabilityRow key={cap.number} {...cap} index={i} />
         ))}
       </div>
     </section>
