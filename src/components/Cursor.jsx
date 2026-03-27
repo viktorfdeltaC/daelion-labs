@@ -1,5 +1,15 @@
 import { useEffect, useRef } from 'react'
 
+/**
+ * Custom cursor — two-layer design:
+ *   dot  — snaps to cursor instantly, mix-blend-mode: difference for color inversion
+ *   ring — lerps behind with smooth lag (time-based, consistent at 60/120Hz)
+ *
+ * Feature detection (all must pass):
+ *   ✓ (hover: hover)   — device supports hover
+ *   ✓ (pointer: fine)  — mouse, not touch
+ * Adds .has-custom-cursor to body → CSS hides the native cursor
+ */
 export default function Cursor() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)

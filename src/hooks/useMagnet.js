@@ -13,7 +13,9 @@ export function useMagnet({ strength = 0.32, ease = 0.12 } = {}) {
 
   useEffect(() => {
     const el = ref.current
-    if (!el || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (!el) return
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let targetX = 0, targetY = 0
     let currentX = 0, currentY = 0
