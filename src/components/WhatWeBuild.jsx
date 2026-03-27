@@ -1,9 +1,7 @@
-import { useRef, useEffect } from 'react'
-import { useInView } from '../hooks/useInView'
-import { DisplayHeadlineLines } from './DisplayHeadline'
+import { useRef, useEffect, memo } from 'react'
 
-// Adds a CSS class directly to the DOM element — zero React re-renders
-function useDomInView(className = 'in-view', threshold = 0.05) {
+// Adds a CSS class directly to the DOM element — zero React state, zero re-renders
+function useDomInView(className, threshold = 0.05) {
   const ref = useRef(null)
   useEffect(() => {
     const el = ref.current
@@ -68,10 +66,10 @@ const capabilities = [
   },
 ]
 
-function CapabilityRow({ number, title, description, tag, icon, index }) {
+// memo → React skips re-render if props are identical (all props are static strings/numbers/JSX)
+const CapabilityRow = memo(function CapabilityRow({ number, title, description, tag, icon, index }) {
   const rowRef = useRef(null)
 
-  // Detect once — no useState, no re-render
   const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
 
   const expand  = () => rowRef.current?.classList.add('is-expanded')
@@ -86,7 +84,7 @@ function CapabilityRow({ number, title, description, tag, icon, index }) {
     <div
       ref={rowRef}
       className="cap-row relative border-b border-brand-border"
-      style={{ '--row-index': index, cursor: isTouch ? 'pointer' : 'default' }}
+      style={{ cursor: isTouch ? 'pointer' : 'default' }}
       {...handlers}
     >
       {/* Left accent bar */}
@@ -133,11 +131,12 @@ function CapabilityRow({ number, title, description, tag, icon, index }) {
       </div>
     </div>
   )
-}
+})
 
 export default function WhatWeBuild() {
-  const [headRef, headInView] = useInView()
-  const listRef = useDomInView('cap-list-visible')
+  // Both use DOM-direct — WhatWeBuild has zero React state, never re-renders after mount
+  const headRef = useDomInView('whb-head-visible', 0.3)
+  const listRef = useDomInView('cap-list-visible', 0.05)
 
   return (
     <section id="solutions" className="relative bg-brand-bg overflow-hidden">
@@ -153,22 +152,23 @@ export default function WhatWeBuild() {
         <div className="section-orb" style={{ width: '500px', height: '500px', bottom: '-10%', left: '-5%', background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%)' }} />
       </div>
 
-      {/* Header */}
+      {/* Header — animates via CSS class, no React state */}
       <div
         ref={headRef}
-        className={`relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border transition-[opacity,transform] duration-700 ${
-          headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-        }`}
+        className="whb-head relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border"
       >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <DisplayHeadlineLines lines={['Was wir', 'bauen']} inView={headInView} />
-          <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
+          <h2 className="font-display font-bold text-brand-text" style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', letterSpacing: 'var(--tracking-heading)', lineHeight: 'var(--leading-display)' }}>
+            <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">Was wir</span></span>
+            <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">bauen</span></span>
+          </h2>
+          <p className="whb-sub text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
             Für jede Branche. Für jeden Sonderfall. Überall.
           </p>
         </div>
       </div>
 
-      {/* Capability rows — stagger via CSS, zero React re-renders on scroll */}
+      {/* Capability rows — stagger via CSS, zero React re-renders */}
       <div ref={listRef} className="cap-list relative z-10">
         {capabilities.map((cap, i) => (
           <CapabilityRow key={cap.number} {...cap} index={i} />
