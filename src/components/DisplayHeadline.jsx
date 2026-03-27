@@ -8,30 +8,31 @@
  *   <DisplayHeadline size="section" lines={['Was wir', 'bauen']} inView={headInView} />
  */
 
+// SIZE_STYLES reference CSS variables — single source of truth in index.css
 const SIZE_STYLES = {
-  /** Full-bleed hero word — 3.5rem → 11rem */
+  /** Full-bleed hero word — uses --text-hero (clamp 2.5→5rem) */
   hero: {
-    fontSize: 'clamp(3.5rem, 13vw, 11rem)',
+    fontSize: 'clamp(3.5rem, 13vw, 11rem)',   /* extra-large display override */
     letterSpacing: 'var(--tracking-display)',
-    lineHeight: 0.88,
+    lineHeight: 'var(--leading-display)',
   },
-  /** Section heading — 2.5rem → 5.5rem */
+  /** Section heading — clamp 2.5→5.5rem */
   section: {
     fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
     letterSpacing: 'var(--tracking-heading)',
-    lineHeight: 0.92,
+    lineHeight: 'var(--leading-display)',
   },
-  /** Sub-heading / card title — 1.5rem → 2.5rem */
+  /** Sub-heading / card title */
   sub: {
-    fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+    fontSize: 'var(--text-h2)',
     letterSpacing: 'var(--tracking-sub)',
-    lineHeight: 1.1,
+    lineHeight: 'var(--leading-heading)',
   },
-  /** CTA headline — 3.5rem → 8.5rem */
+  /** CTA headline */
   cta: {
     fontSize: 'clamp(3.5rem, 9vw, 8.5rem)',
     letterSpacing: 'var(--tracking-display)',
-    lineHeight: 0.88,
+    lineHeight: 'var(--leading-display)',
   },
 }
 
