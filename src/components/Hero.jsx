@@ -169,12 +169,12 @@ export default function Hero() {
                 WIR BAUEN
               </span>
 
-              {/* LÖSUNGEN — scrambled on load */}
+              {/* LÖSUNGEN — scrambled on load, subtle gradient */}
               <span
-                className="block text-white leading-[0.88]"
+                className="block text-gradient leading-[0.88]"
                 style={{
                   fontSize: 'clamp(3.5rem, 13vw, 11rem)',
-                  letterSpacing: '-0.02em',
+                  letterSpacing: 'var(--tracking-display)',
                   animation: 'fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.32s both',
                   fontVariantNumeric: 'tabular-nums',
                 }}

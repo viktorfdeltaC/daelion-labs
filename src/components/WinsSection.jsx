@@ -1,4 +1,5 @@
 import { useInView } from '../hooks/useInView'
+import { DisplayHeadlineLines } from './DisplayHeadline'
 
 const wins = [
   {
@@ -53,21 +54,7 @@ export default function WinsSection() {
         }`}
       >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <h2
-            className="font-display font-extrabold text-brand-text leading-none tracking-tight"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
-          >
-            {['Was du', 'davon hast.'].map((line, i) => (
-              <span key={line} className="block overflow-hidden pb-1">
-                <span
-                  className="block"
-                  style={{ animation: headInView ? `reveal-up 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.09}s both` : 'none' }}
-                >
-                  {line}
-                </span>
-              </span>
-            ))}
-          </h2>
+          <DisplayHeadlineLines lines={['Was du', 'davon hast.']} inView={headInView} />
           <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
             Kein anderes Angebot bringt dir das.
           </p>

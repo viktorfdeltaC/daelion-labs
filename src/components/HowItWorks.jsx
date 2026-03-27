@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useInView } from '../hooks/useInView'
+import { DisplayHeadlineLines } from './DisplayHeadline'
 
 const steps = [
   {
@@ -123,21 +124,7 @@ export default function HowItWorks() {
           headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >
-        <h2
-          className="font-display font-extrabold text-brand-text leading-none tracking-tight"
-          style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
-        >
-          {['So arbeiten', 'wir'].map((line, i) => (
-            <span key={line} className="block overflow-hidden pb-1">
-              <span
-                className="block"
-                style={{ animation: headInView ? `reveal-up 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.09}s both` : 'none' }}
-              >
-                {line}
-              </span>
-            </span>
-          ))}
-        </h2>
+        <DisplayHeadlineLines lines={['So arbeiten', 'wir']} inView={headInView} />
       </div>
 
       {/* Steps grid */}

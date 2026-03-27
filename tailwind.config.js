@@ -19,9 +19,13 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Bricolage Grotesque', 'system-ui', 'sans-serif'],
+        // Clash Display — geometric, high-contrast, premium agency feel
+        // Bricolage Grotesque as variable-weight fallback
+        display: ['"Clash Display"', 'Bricolage Grotesque', 'system-ui', 'sans-serif'],
+        // Instrument Sans — refined body & UI text
         sans:    ['Instrument Sans', 'system-ui', 'sans-serif'],
-        mono:    ['Instrument Sans', 'system-ui', 'sans-serif'],
+        // Instrument Sans doubles as mono for labels (tracked + uppercase = distinct)
+        mono:    ['Instrument Sans', 'ui-monospace', 'monospace'],
       },
       letterSpacing: {
         widest2: '0.2em',
