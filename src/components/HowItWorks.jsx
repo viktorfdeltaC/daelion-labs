@@ -6,17 +6,17 @@ const steps = [
   {
     number: '01',
     title: 'Discovery',
-    description: 'Wir verstehen dein konkretes Problem in der Tiefe — die Workflows, die Sonderfälle, die genaue Lücke, die dich aufhält.',
+    description: 'Wir verstehen dein Problem genau: die Workflows, die Sonderfälle, die Lücke, die dich täglich aufhält.',
   },
   {
     number: '02',
     title: 'Architektur',
-    description: 'Wir entwerfen die exakte Lösung für deinen Fall. Keine Templates. Kein Standard-Denken. Reine individuelle Architektur.',
+    description: 'Wir entwerfen die Lösung, die zu deinem Fall passt. Keine Templates, kein Standarddenken. Reine Architektur für dich.',
   },
   {
     number: '03',
     title: 'Build & Deploy',
-    description: 'Wir implementieren und liefern. Präzise Umsetzung, saubere Übergabe und Support, wo das Projekt es erfordert.',
+    description: 'Wir bauen und liefern. Saubere Umsetzung, klare Übergabe und Support dort, wo du ihn brauchst.',
   },
 ]
 

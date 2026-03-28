@@ -7,25 +7,25 @@ const wins = [
     metric: '10+ Std.',
     unit: 'pro Woche',
     title: 'Zeit zurückgewinnen',
-    description: 'Was heute Stunden frisst, läuft morgen automatisch. Unsere Kunden gewinnen wertvolle Zeit für die Arbeit, die wirklich zählt.',
+    description: 'Was dich heute jeden Morgen eine Stunde kostet, läuft morgen automatisch. Unsere Kunden merken es spätestens nach einer Woche.',
   },
   {
     metric: '0 €',
     unit: 'laufende Gebühren',
     title: 'Kein Abo, kein Lock-in',
-    description: 'Einmal entwickelt gehört die Lösung vollständig dir. Kein monatlicher SaaS-Vertrag, keine versteckte Abhängigkeit.',
+    description: 'Einmal gebaut, gehört dir alles. Kein Abo, keine Abhängigkeit, kein monatliches Danke.',
   },
   {
     metric: '100%',
     unit: 'maßgeschneidert',
     title: 'Echter Wettbewerbsvorteil',
-    description: 'Eine individuelle Lösung kann dein Wettbewerber nicht kaufen. Du baust damit einen Prozessvorteil, den niemand kopiert.',
+    description: 'Eine individuelle Lösung gibt es nicht im App Store. Dein Wettbewerber kann sie weder kaufen noch kopieren.',
   },
   {
     metric: 'Wochen',
     unit: 'nicht Monate',
     title: 'Schnell und direkt',
-    description: 'Kein Account-Manager-Ping-Pong. Direkter Draht zum Team, das baut — erste funktionsfähige Version in wenigen Wochen.',
+    description: 'Kein Account-Manager-Ping-Pong. Du sprichst direkt mit dem Team, das baut. Erste funktionsfähige Version in wenigen Wochen.',
   },
 ]
 
@@ -80,7 +80,7 @@ export default function WinsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <DisplayHeadlineLines lines={['Was du', 'davon hast.']} inView={headInView} />
           <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
-            Kein anderes Angebot bringt dir das.
+            Kein SaaS-Tool passt genau. Kein Freelancer denkt das zu Ende.
           </p>
         </div>
       </div>

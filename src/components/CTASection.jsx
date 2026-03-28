@@ -56,7 +56,7 @@ export default function CTASection() {
             className="text-white/50 text-sm leading-relaxed mt-8 max-w-xs"
             style={{ animation: inView ? 'fade-up 0.8s ease 0.5s both' : 'none' }}
           >
-            Schreib uns kurz, womit du kämpfst. Wir antworten innerhalb von 24 Stunden — mit einem konkreten ersten Ansatz, kostenlos.
+            Schreib uns kurz, was dich täglich ausbremst. Wir antworten innerhalb von 24 Stunden mit einem ersten konkreten Ansatz. Kostenlos.
           </p>
         </div>
 

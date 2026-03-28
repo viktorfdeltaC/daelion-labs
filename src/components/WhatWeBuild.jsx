@@ -23,7 +23,7 @@ const capabilities = [
   {
     number: '01',
     title: 'Individuelle Buchungs- & Automatisierungssysteme',
-    description: 'Kein manuelles Koordinieren mehr. Buchungen, Planungslogik und Pipelines laufen automatisch — exakt so, wie dein Betrieb funktioniert. Mehr Kapazität, weniger Fehler.',
+    description: 'Buchungen, Planungslogik, Sales-Pipelines. Alles läuft automatisch, so wie dein Team es braucht. Mehr Kapazität, weniger Koordinationsaufwand.',
     tag: 'Automation',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -34,7 +34,7 @@ const capabilities = [
   {
     number: '02',
     title: 'KI-gestützte Workflow-Optimierungen',
-    description: 'Routineaufgaben, die heute Stunden fressen, erledigen sich morgen von selbst. KI übernimmt das Repetitive — du behältst den Kopf frei für Entscheidungen, die wirklich zählen.',
+    description: 'Routineaufgaben, die heute Stunden kosten, laufen morgen automatisch. KI übernimmt das Repetitive. Du behältst den Kopf frei.',
     tag: 'AI / ML',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -45,7 +45,7 @@ const capabilities = [
   {
     number: '03',
     title: 'Interne Business-Tools & digitale Assistenten',
-    description: 'Dashboards und Tools, die dein Team wirklich nutzt — weil sie für eure genauen Abläufe gebaut wurden, nicht für irgendeinen Durchschnittskunden.',
+    description: 'Dashboards und Tools, die dein Team tatsächlich nutzt. Gebaut für eure Abläufe, nicht für irgendeinen Durchschnittskunden.',
     tag: 'Tooling',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -57,7 +57,7 @@ const capabilities = [
   {
     number: '04',
     title: 'Prozessautomatisierungen, die sich rechnen',
-    description: 'Komplexe Abläufe, die heute Nerven und Budget kosten, laufen morgen vollautomatisch. Weniger Fehler, niedrigere Kosten, mehr Kapazität — ohne zusätzliches Personal.',
+    description: 'Abläufe, die heute Nerven und Budget kosten, laufen vollautomatisch. Weniger Fehler, niedrigere Kosten, mehr Output. Ohne neues Personal.',
     tag: 'Process',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -160,7 +160,7 @@ export default function WhatWeBuild() {
             <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">bauen</span></span>
           </h2>
           <p className="whb-sub text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
-            Für jede Branche. Für jeden Sonderfall. Überall.
+            Kein Template. Kein Standard. Genau was du brauchst.
           </p>
         </div>
       </div>

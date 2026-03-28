@@ -73,7 +73,7 @@ export default function Pricing() {
           </div>
 
           <p className="text-brand-sub text-sm leading-relaxed mb-10">
-            Deckt die vollständige Entwicklung und Implementierung deiner individuellen Lösung ab. Projektgenau kalkuliert — keine versteckten Extras, keine stundenbasierten Überraschungen.
+            Deckt die gesamte Entwicklung und Implementierung deiner Lösung ab. Projektgenau kalkuliert, keine Überraschungsrechnungen.
           </p>
 
           <ul className="space-y-3">
@@ -110,7 +110,7 @@ export default function Pricing() {
           </div>
 
           <p className="text-brand-sub text-sm leading-relaxed mb-10">
-            Wo deine Lösung laufende Infrastruktur, Wartung oder iterative Updates erfordert — bieten wir einen projektabhängigen Retainer. Nur dort, wo es Sinn ergibt.
+            Wenn deine Lösung laufende Infrastruktur, Wartung oder Updates braucht, bieten wir einen projektabhängigen Retainer. Nur wenn es wirklich Sinn ergibt.
           </p>
 
           <ul className="space-y-3">
