@@ -445,49 +445,41 @@
   }
   .cap-row.is-expanded .cap-bar { transform: scaleY(1); }
 
-  /* Row background tint — snaps instantly, no repaint per frame */
-  .cap-row.is-expanded .cap-bg { background: rgba(255,255,255,0.02); }
-
   /* Icon — opacity + transform only (GPU composited) */
   .cap-icon {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: translateY(2px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.35s ease, transform 0.35s ease;
   }
   .cap-row.is-expanded .cap-icon { opacity: 1; transform: translateY(0); }
 
-  /* Title — transform only (GPU). Color snaps, no per-frame repaint */
+  /* Title — GPU transform only. No color change = no paint. */
   .cap-title {
-    transform: translateX(0);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
   }
-  .cap-row.is-expanded .cap-title { transform: translateX(10px); color: var(--color-accent); }
+  .cap-row.is-expanded .cap-title { transform: translateX(8px); opacity: 1; }
 
-  /* Description grid-reveal — NO transition on grid-template-rows.
-     Height snaps instantly (1 layout reflow) instead of per-frame layout. */
-  .cap-desc-grid {
-    display: grid;
-    grid-template-rows: 0fr;
-  }
-  .cap-row.is-expanded .cap-desc-grid { grid-template-rows: 1fr; }
-
+  /* Description — always in layout. opacity-only = zero layout reflow, pure GPU. */
   .cap-desc-text {
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+    opacity: 0.35;
+    transition: opacity 0.35s ease;
   }
-  .cap-row.is-expanded .cap-desc-text { opacity: 1; transform: translateY(0); }
+  .cap-row.is-expanded .cap-desc-text { opacity: 1; }
 
-  /* Arrow */
+  /* Arrow — GPU only */
   .cap-arrow {
     opacity: 0;
-    transform: translateX(-8px);
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .cap-row.is-expanded .cap-arrow { opacity: 1; transform: translateX(0); }
 
-  /* Tag — color snaps, no repaint per frame */
-  .cap-row.is-expanded .cap-tag { color: rgb(var(--c-accent) / 0.7); }
+  /* Tag — GPU opacity only */
+  .cap-tag {
+    opacity: 0.4;
+    transition: opacity 0.35s ease;
+  }
+  .cap-row.is-expanded .cap-tag { opacity: 1; }
 
   /* ── Nav link hover underline ───────────────────────── */
   .nav-link {

@@ -110,14 +110,10 @@ const CapabilityRow = memo(function CapabilityRow({ number, title, description, 
             </h3>
           </div>
 
-          {/* Grid-reveal for description */}
-          <div className="cap-desc-grid">
-            <div className="overflow-hidden">
-              <p className="cap-desc-text text-brand-sub text-sm leading-relaxed pr-4 md:pr-16 pt-3 pb-1">
-                {description}
-              </p>
-            </div>
-          </div>
+          {/* Description — always in layout, opacity-only on hover = zero layout reflow */}
+          <p className="cap-desc-text text-brand-sub text-sm leading-relaxed pr-4 md:pr-16 pt-3 pb-1">
+            {description}
+          </p>
         </div>
 
         {/* Arrow + Tag */}
