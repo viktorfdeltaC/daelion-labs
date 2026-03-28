@@ -173,7 +173,7 @@ export default function Hero() {
               <span
                 className="block text-gradient leading-[0.85]"
                 style={{
-                  fontSize: 'clamp(4.5rem, 14vw, 13rem)',
+                  fontSize: 'clamp(2.2rem, 13vw, 13rem)',
                   letterSpacing: '-0.02em',
                   animation: 'fade-up 0.9s cubic-bezier(0.22,1,0.36,1) 0.28s both',
                   fontVariantNumeric: 'tabular-nums',
