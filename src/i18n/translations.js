@@ -79,6 +79,15 @@ export const translations = {
       },
     },
 
+    // ── Problem ─────────────────────────────────────────────
+    problem_section_right: 'Das Problem',
+    problem_label:    'Die letzten 30 % kosten dich am meisten.',
+    problem_headline: 'Standardtools lösen 70\u00a0% deines Problems.',
+    problem_body: [
+      'Calendly, Notion, Standard-CRMs: all das ist für den Durchschnitt gebaut. Dein Unternehmen hat Workflows, Sonderfälle und Abläufe, die über Jahre im echten Betrieb gewachsen sind. Generische Software löst das Allgemeine, nicht das Deine.',
+      'Diese fehlenden 30\u00a0% kosten dich täglich Stunden, erzwingen manuelle Workarounds und frustrieren dein Team. Sie sind der Engpass, der dein Wachstum deckelt. Genau dort setzen wir an.',
+    ],
+
     // ── WhatWeBuild ─────────────────────────────────────────
     wwb_section_right: 'Leistungen',
     wwb_h1:  'Was wir',
@@ -267,6 +276,15 @@ export const translations = {
         href:     '#contact',
       },
     },
+
+    // ── Problem ─────────────────────────────────────────────
+    problem_section_right: 'The Problem',
+    problem_label:    'The last 30% cost you the most.',
+    problem_headline: 'Standard tools solve 70% of your problem.',
+    problem_body: [
+      "Calendly, Notion, off-the-shelf CRMs: all built for the average case. Your business has workflows, edge cases, and processes that evolved over years of real operations. Generic software solves the general, not yours.",
+      "Those missing 30% cost you hours every day, force manual workarounds, and frustrate your team. They're the bottleneck capping your growth. That's exactly where we come in.",
+    ],
 
     // ── WhatWeBuild ─────────────────────────────────────────
     wwb_section_right: 'Services',

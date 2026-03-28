@@ -1,7 +1,9 @@
 import { useInView } from '../hooks/useInView'
 import { useCountUp } from '../hooks/useCountUp'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Problem() {
+  const { t } = useLanguage()
   const [sectionRef, sectionInView] = useInView()
   const [countRef, count] = useCountUp(70)
 
@@ -11,7 +13,7 @@ export default function Problem() {
       {/* ── Section header bar ─────────────────────── */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
         <span className="section-label text-brand-accent">002 / PROBLEM</span>
-        <span className="section-label text-brand-sub">Das Problem</span>
+        <span className="section-label text-brand-sub">{t('problem_section_right')}</span>
       </div>
 
       {/* ── Background orb ────────────────────────── */}
@@ -74,7 +76,7 @@ export default function Problem() {
               className="relative section-label text-brand-accent/70 mt-6"
               style={{ animation: sectionInView ? 'fade-up 0.6s ease 0.7s both' : 'none' }}
             >
-              — Die letzten 30 % kosten dich am meisten.
+              {t('problem_label')}
             </p>
           </div>
         </div>
@@ -85,7 +87,7 @@ export default function Problem() {
             className="font-display font-bold text-brand-text leading-[1.05] tracking-tight mb-6"
             style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
           >
-            Standardtools lösen 70&nbsp;% deines Problems.
+            {t('problem_headline')}
           </h2>
 
           <div
@@ -94,10 +96,7 @@ export default function Problem() {
           />
 
           <div className="space-y-5">
-            {[
-              'Calendly, Notion, Standard-CRMs — all das ist für den Durchschnitt gebaut. Dein Unternehmen hat Workflows, Sonderfälle und Abläufe, die über Jahre im echten Betrieb gewachsen sind. Generische Software löst das Allgemeine, nicht das Deine.',
-              'Diese fehlenden 30\u00a0% kosten dich täglich Stunden, erzwingen manuelle Workarounds und frustrieren dein Team. Sie sind der Engpass, der dein Wachstum deckelt. Genau dort setzen wir an.',
-            ].map((text, i) => (
+            {t('problem_body').map((text, i) => (
               <p
                 key={i}
                 className="text-brand-sub text-base leading-relaxed"
