@@ -1,24 +1,7 @@
 import { useRef } from 'react'
 import { useInView } from '../hooks/useInView'
 import { DisplayHeadlineLines } from './DisplayHeadline'
-
-const steps = [
-  {
-    number: '01',
-    title: 'Discovery',
-    description: 'Wir verstehen dein Problem genau: die Workflows, die Sonderfälle, die Lücke, die dich täglich aufhält.',
-  },
-  {
-    number: '02',
-    title: 'Architektur',
-    description: 'Wir entwerfen die Lösung, die zu deinem Fall passt. Keine Templates, kein Standarddenken. Reine Architektur für dich.',
-  },
-  {
-    number: '03',
-    title: 'Build & Deploy',
-    description: 'Wir bauen und liefern. Saubere Umsetzung, klare Übergabe und Support dort, wo du ihn brauchst.',
-  },
-]
+import { useLanguage } from '../contexts/LanguageContext'
 
 function Step({ number, title, description, index, inView, isLast }) {
   const rafId = useRef(null)
@@ -100,6 +83,8 @@ function Step({ number, title, description, index, inView, isLast }) {
 }
 
 export default function HowItWorks() {
+  const { t } = useLanguage()
+  const steps = t('hiw_steps')
   const [headRef, headInView] = useInView()
   const [stepsRef, stepsInView] = useInView()
 
@@ -109,7 +94,7 @@ export default function HowItWorks() {
       {/* Section header bar */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
         <span className="section-label text-brand-accent">005 / PROCESS</span>
-        <span className="section-label text-brand-sub">So arbeiten wir</span>
+        <span className="section-label text-brand-sub">{t('hiw_section_right')}</span>
       </div>
 
       {/* Background orb */}
@@ -124,7 +109,7 @@ export default function HowItWorks() {
           headInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >
-        <DisplayHeadlineLines lines={['So arbeiten', 'wir']} inView={headInView} />
+        <DisplayHeadlineLines lines={[t('hiw_h1'), t('hiw_h2')]} inView={headInView} />
       </div>
 
       {/* Steps grid */}

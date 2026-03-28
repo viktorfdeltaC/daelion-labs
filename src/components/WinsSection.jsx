@@ -1,35 +1,11 @@
 import { useRef, useState, useEffect } from 'react'
 import { useInView } from '../hooks/useInView'
 import { DisplayHeadlineLines } from './DisplayHeadline'
-
-const wins = [
-  {
-    metric: '10+ Std.',
-    unit: 'pro Woche',
-    title: 'Zeit zurückgewinnen',
-    description: 'Was dich heute jeden Morgen eine Stunde kostet, läuft morgen automatisch. Unsere Kunden merken es spätestens nach einer Woche.',
-  },
-  {
-    metric: '0 €',
-    unit: 'laufende Gebühren',
-    title: 'Kein Abo, kein Lock-in',
-    description: 'Einmal gebaut, gehört dir alles. Kein Abo, keine Abhängigkeit, kein monatliches Danke.',
-  },
-  {
-    metric: '100%',
-    unit: 'maßgeschneidert',
-    title: 'Echter Wettbewerbsvorteil',
-    description: 'Eine individuelle Lösung gibt es nicht im App Store. Dein Wettbewerber kann sie weder kaufen noch kopieren.',
-  },
-  {
-    metric: 'Wochen',
-    unit: 'nicht Monate',
-    title: 'Schnell und direkt',
-    description: 'Kein Account-Manager-Ping-Pong. Du sprichst direkt mit dem Team, das baut. Erste funktionsfähige Version in wenigen Wochen.',
-  },
-]
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function WinsSection() {
+  const { t } = useLanguage()
+  const wins = t('wins_cards')
   const [headRef, headInView] = useInView()
   const [gridRef, gridInView] = useInView()
 
@@ -62,7 +38,7 @@ export default function WinsSection() {
       {/* Section header bar */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
         <span className="section-label text-brand-accent">004 / IMPACT</span>
-        <span className="section-label text-brand-sub">Dein Vorteil</span>
+        <span className="section-label text-brand-sub">{t('wins_section_right')}</span>
       </div>
 
       {/* Background orb */}
@@ -78,9 +54,9 @@ export default function WinsSection() {
         }`}
       >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <DisplayHeadlineLines lines={['Was du', 'davon hast.']} inView={headInView} />
+          <DisplayHeadlineLines lines={[t('wins_h1'), t('wins_h2')]} inView={headInView} />
           <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
-            Kein SaaS-Tool passt genau. Kein Freelancer denkt das zu Ende.
+            {t('wins_sub')}
           </p>
         </div>
       </div>
@@ -157,7 +133,7 @@ export default function WinsSection() {
               </h3>
 
               <p className="relative z-10 text-brand-sub group-hover:text-white/60 text-sm leading-relaxed transition-colors duration-300">
-                {win.description}
+                {win.desc}
               </p>
             </div>
           ))}

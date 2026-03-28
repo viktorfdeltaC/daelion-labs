@@ -1,4 +1,5 @@
 import { useRef, useEffect, memo } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 // Adds a CSS class directly to the DOM element — zero React state, zero re-renders
 function useDomInView(className, threshold = 0.05) {
@@ -19,52 +20,21 @@ function useDomInView(className, threshold = 0.05) {
   return ref
 }
 
-const capabilities = [
-  {
-    number: '01',
-    title: 'Individuelle Buchungs- & Automatisierungssysteme',
-    description: 'Buchungen, Planungslogik, Sales-Pipelines. Alles läuft automatisch, so wie dein Team es braucht. Mehr Kapazität, weniger Koordinationsaufwand.',
-    tag: 'Automation',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-      </svg>
-    ),
-  },
-  {
-    number: '02',
-    title: 'KI-gestützte Workflow-Optimierungen',
-    description: 'Routineaufgaben, die heute Stunden kosten, laufen morgen automatisch. KI übernimmt das Repetitive. Du behältst den Kopf frei.',
-    tag: 'AI / ML',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-      </svg>
-    ),
-  },
-  {
-    number: '03',
-    title: 'Interne Business-Tools & digitale Assistenten',
-    description: 'Dashboards und Tools, die dein Team tatsächlich nutzt. Gebaut für eure Abläufe, nicht für irgendeinen Durchschnittskunden.',
-    tag: 'Tooling',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
-        <path d="M17.5 14v6M14.5 17h6"/>
-      </svg>
-    ),
-  },
-  {
-    number: '04',
-    title: 'Prozessautomatisierungen, die sich rechnen',
-    description: 'Abläufe, die heute Nerven und Budget kosten, laufen vollautomatisch. Weniger Fehler, niedrigere Kosten, mehr Output. Ohne neues Personal.',
-    tag: 'Process',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-      </svg>
-    ),
-  },
+// Icons only — text comes from translations
+const CAP_ICONS = [
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+  </svg>,
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+  </svg>,
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+    <path d="M17.5 14v6M14.5 17h6"/>
+  </svg>,
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+  </svg>,
 ]
 
 // memo → React skips re-render if props are identical (all props are static strings/numbers/JSX)
@@ -131,9 +101,14 @@ const CapabilityRow = memo(function CapabilityRow({ number, title, description, 
 })
 
 export default function WhatWeBuild() {
-  // Both use DOM-direct — WhatWeBuild has zero React state, never re-renders after mount
+  const { t } = useLanguage()
   const headRef = useDomInView('whb-head-visible', 0.3)
   const listRef = useDomInView('cap-list-visible', 0.05)
+
+  const capabilities = t('wwb_capabilities').map((cap, i) => ({
+    ...cap,
+    icon: CAP_ICONS[i],
+  }))
 
   return (
     <section id="solutions" className="relative bg-brand-bg overflow-hidden">
@@ -141,7 +116,7 @@ export default function WhatWeBuild() {
       {/* Section header bar */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
         <span className="section-label text-brand-accent">003 / CAPABILITIES</span>
-        <span className="section-label text-brand-sub">Leistungen</span>
+        <span className="section-label text-brand-sub">{t('wwb_section_right')}</span>
       </div>
 
       {/* Background orb */}
@@ -149,26 +124,34 @@ export default function WhatWeBuild() {
         <div className="section-orb" style={{ width: '500px', height: '500px', bottom: '-10%', left: '-5%', background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%)' }} />
       </div>
 
-      {/* Header — animates via CSS class, no React state */}
+      {/* Header */}
       <div
         ref={headRef}
         className="whb-head relative z-10 px-6 md:px-10 lg:px-16 pt-14 pb-12 border-b border-brand-border"
       >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <h2 className="font-display font-bold text-brand-text" style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', letterSpacing: 'var(--tracking-heading)', lineHeight: 'var(--leading-display)' }}>
-            <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">Was wir</span></span>
-            <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">bauen</span></span>
+            <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">{t('wwb_h1')}</span></span>
+            <span className="whb-line block overflow-hidden pb-[0.06em]"><span className="whb-line-inner block">{t('wwb_h2')}</span></span>
           </h2>
           <p className="whb-sub text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
-            Kein Template. Kein Standard. Genau was du brauchst.
+            {t('wwb_sub')}
           </p>
         </div>
       </div>
 
-      {/* Capability rows — stagger via CSS, zero React re-renders */}
+      {/* Capability rows */}
       <div ref={listRef} className="cap-list relative z-10">
         {capabilities.map((cap, i) => (
-          <CapabilityRow key={cap.number} {...cap} index={i} />
+          <CapabilityRow
+            key={cap.number}
+            number={cap.number}
+            title={cap.title}
+            description={cap.desc}
+            tag={cap.tag}
+            icon={cap.icon}
+            index={i}
+          />
         ))}
       </div>
     </section>

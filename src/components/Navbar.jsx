@@ -2,19 +2,23 @@ import { useEffect, useState } from 'react'
 import { useActiveSection } from '../hooks/useActiveSection'
 import ThemeToggle from './ThemeToggle'
 import MagneticButton from './MagneticButton'
+import { useLanguage } from '../contexts/LanguageContext'
 
-const navLinks = [
-  { label: 'Leistungen', href: '#solutions' },
-  { label: 'Prozess', href: '#process' },
-  { label: 'Preise', href: '#pricing' },
-]
+const NAV_HREFS = ['#solutions', '#process', '#pricing']
 
-const SECTION_IDS = navLinks.map(l => l.href.slice(1))
+const SECTION_IDS = NAV_HREFS.map(h => h.slice(1))
 
 export default function Navbar() {
+  const { lang, t, toggle } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const activeSection = useActiveSection(SECTION_IDS)
+
+  const navLinks = [
+    { label: t('nav_services'), href: '#solutions' },
+    { label: t('nav_process'),  href: '#process' },
+    { label: t('nav_pricing'),  href: '#pricing' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -83,22 +87,31 @@ export default function Navbar() {
 
           {/* Right controls */}
           <div className="flex items-center gap-2">
+            {/* Language toggle */}
+            <button
+              onClick={toggle}
+              aria-label={lang === 'de' ? 'Switch to English' : 'Zu Deutsch wechseln'}
+              className="section-label text-brand-sub hover:text-brand-accent transition-colors duration-200 px-2 h-11 flex items-center"
+              style={{ letterSpacing: '0.12em' }}
+            >
+              {lang === 'de' ? 'EN' : 'DE'}
+            </button>
             <ThemeToggle />
             <MagneticButton
               as="a"
               href="#contact"
-              aria-label="Projekt starten"
+              aria-label={t('nav_cta')}
               maxPx={7}
               className="btn-shimmer btn-purple text-sm font-semibold text-white bg-brand-accent px-5 cursor-pointer hidden sm:inline-flex items-center"
               style={{ borderRadius: 0, minHeight: '44px' }}
             >
-              <span className="btn-inner">Projekt starten</span>
+              <span className="btn-inner">{t('nav_cta')}</span>
             </MagneticButton>
 
             {/* Hamburger — 44×44 tap target */}
             <button
               className="md:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 text-brand-sub hover:text-brand-text transition-colors"
-              aria-label={menuOpen ? 'Menu schließen' : 'Menu öffnen'}
+              aria-label={menuOpen ? t('nav_menu_close') : t('nav_menu_open')}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               onClick={() => setMenuOpen(v => !v)}
@@ -133,7 +146,7 @@ export default function Navbar() {
           </a>
           <button
             className="flex items-center justify-center w-11 h-11 text-brand-sub"
-            aria-label="Menu schließen"
+            aria-label={t('nav_menu_close')}
             onClick={close}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -175,7 +188,7 @@ export default function Navbar() {
           <MagneticButton
             as="a"
             href="#contact"
-            aria-label="Projekt starten"
+            aria-label={t('nav_cta')}
             onClick={close}
             className="btn-shimmer btn-purple mt-8 text-white font-semibold text-sm inline-flex items-center justify-center"
             style={{
@@ -186,7 +199,7 @@ export default function Navbar() {
               transition: `opacity 0.4s ease 0.35s, transform 0.45s cubic-bezier(0.22,1,0.36,1) 0.35s`,
             }}
           >
-            <span className="btn-inner">Projekt starten <span className="btn-arrow">→</span></span>
+            <span className="btn-inner">{t('nav_cta')} <span className="btn-arrow">→</span></span>
           </MagneticButton>
         </nav>
 

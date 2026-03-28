@@ -2,15 +2,17 @@ import { useEffect, useRef } from 'react'
 import { useScramble } from '../hooks/useScramble'
 import ProblemFinder from './ProblemFinder'
 import MagneticButton from './MagneticButton'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Hero() {
+  const { t } = useLanguage()
   const heroRef = useRef(null)
   const circle1Ref = useRef(null)
   const circle2Ref = useRef(null)
   const headlineRef = useRef(null)
 
-  // Scramble the main word on load
-  const scrambled = useScramble('LÖSUNGEN', { startDelay: 300, tickMs: 32, resolveEvery: 2 })
+  // Scramble the main word — re-scrambles when language switches
+  const scrambled = useScramble(t('hero_word'), { startDelay: 100, tickMs: 32, resolveEvery: 2 })
 
   // Mouse parallax — lerped, direct DOM, no React re-renders
   useEffect(() => {
@@ -131,7 +133,7 @@ export default function Hero() {
         style={{ animation: 'fade-up 0.5s ease 0.05s both' }}
       >
         <span className="section-label text-brand-accent">001 / HERO</span>
-        <span className="section-label text-brand-sub/60">Solution Architecture</span>
+        <span className="section-label text-brand-sub/60">{t('hero_section_right')}</span>
       </div>
 
       {/* ── Main content ───────────────────────────────────── */}
@@ -166,10 +168,10 @@ export default function Hero() {
                   animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both',
                 }}
               >
-                WIR BAUEN
+                {t('hero_qualifier')}
               </span>
 
-              {/* LÖSUNGEN — full-bleed architectural word, breaks container */}
+              {/* Main word — scrambled, full-bleed */}
               <span
                 className="block text-gradient leading-[0.85]"
                 style={{
@@ -183,7 +185,7 @@ export default function Hero() {
                 {scrambled}
               </span>
 
-              {/* DIE BLEIBEN — indented, accent colour, creates lateral rhythm */}
+              {/* Sub-line — indented, accent colour */}
               <span
                 className="block text-brand-accent leading-[0.88]"
                 style={{
@@ -194,7 +196,7 @@ export default function Hero() {
                   marginTop: 'clamp(0.4rem, 0.8vw, 0.8rem)',
                 }}
               >
-                DIE BLEIBEN.
+                {t('hero_sub')}
               </span>
             </h1>
           </div>
@@ -204,7 +206,7 @@ export default function Hero() {
             className="text-brand-sub text-base md:text-lg leading-relaxed mt-8 md:mt-10 max-w-lg"
             style={{ animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.56s both' }}
           >
-            Jeden Tag verlierst du Stunden an Aufgaben, für die kein fertiges Tool gemacht wurde. Das kostet mehr als Zeit. Wir bauen genau das, was fehlt.
+            {t('hero_desc')}
           </p>
 
           {/* ── Problem Finder ──────────────────────────────── */}
@@ -219,28 +221,28 @@ export default function Hero() {
             <MagneticButton
               as="a"
               href="#contact"
-              aria-label="Projekt starten"
+              aria-label={t('hero_cta_primary')}
               className="btn-shimmer btn-purple bg-brand-accent text-white font-sans font-semibold text-sm px-8 py-4 cursor-pointer whitespace-nowrap inline-block"
               style={{ borderRadius: 0 }}
             >
               <span className="btn-inner">
-                Projekt starten <span className="btn-arrow">→</span>
+                {t('hero_cta_primary')} <span className="btn-arrow">→</span>
               </span>
             </MagneticButton>
             <a
               href="#problem"
               className="btn-text text-brand-sub text-sm font-medium hover:text-brand-text transition-colors duration-200 cursor-pointer"
             >
-              Mehr erfahren <span className="btn-text-arrow">→</span>
+              {t('hero_cta_secondary')} <span className="btn-text-arrow">→</span>
             </a>
           </div>
 
           {/* ── Stats — individual badge-pop ──────────────── */}
           <div className="flex flex-wrap items-center gap-3 mt-10 md:mt-12">
             {[
-              { num: '12+', label: 'Projekte' },
-              { num: '100%', label: 'Custom Code' },
-              { num: '<24h', label: 'Antwortzeit' },
+              { num: '12+',  label: t('hero_stat_projects') },
+              { num: '100%', label: t('hero_stat_code') },
+              { num: '<24h', label: t('hero_stat_response') },
             ].map(({ num, label }, i) => (
               <div
                 key={num}

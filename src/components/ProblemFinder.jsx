@@ -1,73 +1,34 @@
 import { useState, useRef, useId } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
-const SUGGESTIONS = [
-  { text: 'Manuelle Dateneingabe kostet Stunden', category: 'automation' },
-  { text: 'Berichte werden von Hand zusammengestellt', category: 'data' },
-  { text: 'Kundenkommunikation ist unstrukturiert', category: 'communication' },
-  { text: 'Wir nutzen zu viele verschiedene Tools', category: 'tooling' },
-  { text: 'Wiederkehrende Aufgaben lassen sich nicht automatisieren', category: 'automation' },
-  { text: 'Datenauswertung dauert zu lange', category: 'data' },
-  { text: 'Angebote und Rechnungen werden manuell erstellt', category: 'automation' },
-  { text: 'Interne Prozesse sind nicht dokumentiert', category: 'tooling' },
-  { text: 'KI soll in unsere Workflows integriert werden', category: 'ai' },
-  { text: 'Unser Team kommuniziert über zu viele Kanäle', category: 'communication' },
-]
-
+// Language-aware keyword maps (regex can't be stored in JSON)
 const KEYWORD_MAP = {
-  automation:    /(automatisier|manuell|händisch|wiederkehr|routine|aufgabe|eingabe|rechnung|angebot)/i,
-  data:          /(daten|bericht|auswertung|analyse|report|tabelle|excel|csv|dashboard)/i,
-  communication: /(kommunikation|kanal|email|nachricht|kunde|team|feedback|anfrage)/i,
-  ai:            /(ki\b|chatgpt|sprachmodell|llm|gpt|intelligenz|machine.learning)/i,
-  tooling:       /(tool|software|system|integration|workflow|prozess|app|plattform|schnittstelle)/i,
-}
-
-const RESPONSES = {
-  automation: {
-    tag: 'Automatisierung',
-    headline: 'Das klingt nach einem klaren Fall für Automatisierung.',
-    body: 'Manuelle Arbeit, die sich wiederholt, gehört in eine Pipeline — nicht auf deinen Tisch. Wir bauen das.',
-    cta: 'Automatisierung anfragen',
-    href: '#contact',
+  de: {
+    automation:    /(automatisier|manuell|händisch|wiederkehr|routine|aufgabe|eingabe|rechnung|angebot)/i,
+    data:          /(daten|bericht|auswertung|analyse|report|tabelle|excel|csv|dashboard)/i,
+    communication: /(kommunikation|kanal|email|nachricht|kunde|team|feedback|anfrage)/i,
+    ai:            /(ki\b|chatgpt|sprachmodell|llm|gpt|intelligenz|machine.learning)/i,
+    tooling:       /(tool|software|system|integration|workflow|prozess|app|plattform|schnittstelle)/i,
   },
-  data: {
-    tag: 'Daten-Pipeline',
-    headline: 'Deine Daten arbeiten noch nicht für dich.',
-    body: 'Berichte, die sich selbst schreiben — Dashboards, die immer aktuell sind. Das ist lösbar.',
-    cta: 'Daten-Lösung besprechen',
-    href: '#contact',
-  },
-  communication: {
-    tag: 'Kommunikations-Tool',
-    headline: 'Chaos in der Kommunikation kostet echte Zeit.',
-    body: 'Ein zentrales System, das Anfragen sortiert, beantwortet und weiterleitet — maßgeschneidert für euren Prozess.',
-    cta: 'Lösung ansehen',
-    href: '#contact',
-  },
-  ai: {
-    tag: 'KI-Integration',
-    headline: 'KI macht erst Sinn, wenn sie in deinen Prozess passt.',
-    body: 'Kein generisches ChatGPT-Wrapper — wir bauen KI-Funktionen, die direkt in deine Abläufe greifen.',
-    cta: 'KI-Projekt starten',
-    href: '#contact',
-  },
-  tooling: {
-    tag: 'System-Integration',
-    headline: 'Zu viele Tools — zu wenig System.',
-    body: 'Wir verbinden, was getrennt ist, und ersetzen, was nicht funktioniert. Eine Plattform statt zehn Tabs.',
-    cta: 'Analyse starten',
-    href: '#contact',
+  en: {
+    automation:    /(automat|manual|repetit|routine|task|invoice|proposal|entry|recurring)/i,
+    data:          /(data|report|analys|dashboard|excel|csv|spreadsheet|metric|insight)/i,
+    communication: /(communicat|channel|email|message|customer|team|feedback|request)/i,
+    ai:            /(\bai\b|chatgpt|llm|gpt|machine.learning|artificial|intelligent)/i,
+    tooling:       /(tool|software|system|integrat|workflow|process|app|platform|interface)/i,
   },
 }
 
-function detectCategory(text) {
+function detectCategory(text, lang) {
   const t = text.toLowerCase()
-  for (const [cat, regex] of Object.entries(KEYWORD_MAP)) {
+  for (const [cat, regex] of Object.entries(KEYWORD_MAP[lang] ?? KEYWORD_MAP.de)) {
     if (regex.test(t)) return cat
   }
   return null
 }
 
 export default function ProblemFinder() {
+  const { lang, t } = useLanguage()
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
   const [focused, setFocused] = useState(-1)
@@ -80,9 +41,12 @@ export default function ProblemFinder() {
   const listboxId = `${uid}-listbox`
   const activeId = focused >= 0 ? `${uid}-opt-${focused}` : undefined
 
+  const suggestions = t('pf_suggestions')
+  const responses   = t('pf_responses')
+
   const filtered = value.trim().length > 0
-    ? SUGGESTIONS.filter(s => s.text.toLowerCase().includes(value.toLowerCase()))
-    : SUGGESTIONS
+    ? suggestions.filter(s => s.text.toLowerCase().includes(value.toLowerCase()))
+    : suggestions
 
   const showList = open && filtered.length > 0
 
@@ -90,8 +54,8 @@ export default function ProblemFinder() {
     setValue(text)
     setOpen(false)
     setFocused(-1)
-    const cat = detectCategory(text)
-    setResult(cat ? RESPONSES[cat] : 'generic')
+    const cat = detectCategory(text, lang)
+    setResult(cat ? responses[cat] : 'generic')
     setResultKey(k => k + 1)
     inputRef.current?.blur()
   }
@@ -131,10 +95,6 @@ export default function ProblemFinder() {
       className="mt-8 md:mt-10"
       style={{
         animation: 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.58s both',
-        // position:relative + z-index creates a stacking context that sits
-        // above the CTA row which follows in the DOM. Without this the
-        // dropdown (z-50) is clipped by the CTA row's own stacking context
-        // (created by its animation property).
         position: 'relative',
         zIndex: 10,
       }}
@@ -145,7 +105,7 @@ export default function ProblemFinder() {
         className="block section-label text-brand-sub/60 mb-3"
         style={{ letterSpacing: '0.18em' }}
       >
-        WAS KOSTET DICH AM MEISTEN ZEIT?
+        {t('pf_label')}
       </label>
 
       {/* Combobox */}
@@ -167,7 +127,7 @@ export default function ProblemFinder() {
             aria-autocomplete="list"
             aria-controls={listboxId}
             aria-activedescendant={activeId}
-            placeholder="z. B. manuelle Berichte, Datenpflege …"
+            placeholder={t('pf_placeholder')}
             className="w-full bg-transparent border border-brand-border text-brand-text text-sm placeholder:text-brand-sub/30 px-4 py-3 pr-12 outline-none focus:border-brand-accent transition-colors duration-200"
             style={{ borderRadius: 0 }}
             onChange={e => { setValue(e.target.value); setOpen(true); setFocused(-1) }}
@@ -178,7 +138,7 @@ export default function ProblemFinder() {
           {/* Submit arrow */}
           <button
             type="button"
-            aria-label="Analysieren"
+            aria-label={t('pf_aria_analyze')}
             tabIndex={-1}
             onClick={() => value.trim() && commit(value)}
             className="absolute right-3 text-brand-sub/40 hover:text-brand-accent transition-colors duration-200 flex items-center justify-center w-6 h-6"
@@ -195,7 +155,7 @@ export default function ProblemFinder() {
             ref={listRef}
             id={listboxId}
             role="listbox"
-            aria-label="Vorschläge"
+            aria-label={t('pf_aria_suggestions')}
             className="absolute left-0 right-0 top-full z-50 border border-brand-border border-t-0 bg-brand-bg max-h-56 overflow-y-auto"
             style={{ boxShadow: '0 12px 40px rgba(0,0,0,0.4)' }}
           >
@@ -226,7 +186,7 @@ export default function ProblemFinder() {
           key={resultKey}
           role="region"
           aria-live="polite"
-          aria-label="Ergebnis"
+          aria-label={t('pf_aria_result')}
           className="mt-5 max-w-lg border border-brand-border p-5"
           style={{
             borderLeft: '2px solid var(--color-accent)',
@@ -269,16 +229,16 @@ export default function ProblemFinder() {
           }}
         >
           <p className="text-brand-text text-sm font-medium leading-snug mb-1">
-            Klingt nach einem guten Fall für uns.
+            {t('pf_generic_headline')}
           </p>
           <p className="text-brand-sub text-sm leading-relaxed mb-4">
-            Wir schauen uns das gemeinsam an — kein Verkaufsgespräch, nur ehrliche Einschätzung.
+            {t('pf_generic_body')}
           </p>
           <a
             href="#contact"
             className="inline-flex items-center gap-2 text-brand-accent text-sm font-medium hover:gap-3 transition-all duration-200"
           >
-            Projekt besprechen
+            {t('pf_generic_cta')}
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M2 6h8M7 3l3 3-3 3" />
             </svg>
@@ -288,11 +248,8 @@ export default function ProblemFinder() {
 
       {/* noscript fallback */}
       <noscript>
-        <a
-          href="#contact"
-          className="mt-5 inline-flex items-center gap-2 text-brand-accent text-sm font-medium"
-        >
-          Projekt besprechen →
+        <a href="#contact" className="mt-5 inline-flex items-center gap-2 text-brand-accent text-sm font-medium">
+          {t('pf_generic_cta')} →
         </a>
       </noscript>
     </div>

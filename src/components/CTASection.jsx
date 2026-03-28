@@ -1,7 +1,9 @@
 import { useInView } from '../hooks/useInView'
 import MagneticButton from './MagneticButton'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function CTASection() {
+  const { t } = useLanguage()
   const [ref, inView] = useInView()
 
   return (
@@ -26,7 +28,7 @@ export default function CTASection() {
       {/* Section label */}
       <div className="relative z-10 border-b border-white/10 px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between shrink-0">
         <span className="section-label text-white/60">007 / CONTACT</span>
-        <span className="section-label text-white/40">Jetzt starten</span>
+        <span className="section-label text-white/40">{t('cta_section_right')}</span>
       </div>
 
       {/* Main content */}
@@ -47,7 +49,7 @@ export default function CTASection() {
                 marginLeft: 'clamp(-0.3rem, -0.5vw, -1rem)',
               }}
             >
-              Bereit.
+              {t('cta_headline')}
             </h2>
           </div>
 
@@ -56,7 +58,7 @@ export default function CTASection() {
             className="text-white/50 text-sm leading-relaxed mt-8 max-w-xs"
             style={{ animation: inView ? 'fade-up 0.8s ease 0.5s both' : 'none' }}
           >
-            Schreib uns kurz, was dich täglich ausbremst. Wir antworten innerhalb von 24 Stunden mit einem ersten konkreten Ansatz. Kostenlos.
+            {t('cta_desc')}
           </p>
         </div>
 
@@ -69,9 +71,7 @@ export default function CTASection() {
             className="btn-shimmer btn-glass text-white font-sans font-semibold text-base px-16 py-6 cursor-pointer whitespace-nowrap inline-block"
             style={{ borderRadius: 0 }}
           >
-            <span className="btn-inner">
-              Lösung anfragen <span className="btn-arrow">→</span>
-            </span>
+            <span className="btn-inner">{t('cta_button')}</span>
           </MagneticButton>
           <span className="section-label text-white/30 hidden sm:inline">
             hello@daelionlabs.com

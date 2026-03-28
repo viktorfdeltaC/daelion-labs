@@ -1,6 +1,8 @@
 import { useInView } from '../hooks/useInView'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Pricing() {
+  const { t } = useLanguage()
   const [headRef, headInView] = useInView()
   const [bodyRef, bodyInView] = useInView()
 
@@ -10,7 +12,7 @@ export default function Pricing() {
       {/* Section header bar */}
       <div className="border-b border-brand-border px-6 md:px-10 lg:px-16 py-4 flex items-center justify-between">
         <span className="section-label text-brand-accent">006 / PRICING</span>
-        <span className="section-label text-brand-sub">Preismodell</span>
+        <span className="section-label text-brand-sub">{t('pricing_section_right')}</span>
       </div>
 
       {/* Background orb */}
@@ -30,10 +32,10 @@ export default function Pricing() {
             className="font-display font-extrabold text-brand-text leading-none tracking-tight"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           >
-            Einfach.<br />Transparent.
+            {t('pricing_h1')}<br />{t('pricing_h2')}
           </h2>
           <p className="text-brand-sub text-sm max-w-xs leading-relaxed md:text-right">
-            Jedes Projekt wird individuell kalkuliert. Kein Abo. Kein Lock-in.
+            {t('pricing_sub')}
           </p>
         </div>
       </div>
@@ -62,8 +64,8 @@ export default function Pricing() {
 
           <div className="flex items-start justify-between mb-10">
             <div>
-              <span className="section-label text-brand-accent block mb-3">Setup Fee</span>
-              <h3 className="font-display font-bold text-brand-text text-3xl md:text-4xl">Einmalig</h3>
+              <span className="section-label text-brand-accent block mb-3">{t('pricing_setup_label')}</span>
+              <h3 className="font-display font-bold text-brand-text text-3xl md:text-4xl">{t('pricing_setup_title')}</h3>
             </div>
             <div className="w-10 h-10 border border-brand-accent-border flex items-center justify-center shrink-0 mt-1" style={{ background: 'rgba(139,92,246,0.07)' }} aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -73,11 +75,11 @@ export default function Pricing() {
           </div>
 
           <p className="text-brand-sub text-sm leading-relaxed mb-10">
-            Deckt die gesamte Entwicklung und Implementierung deiner Lösung ab. Projektgenau kalkuliert, keine Überraschungsrechnungen.
+            {t('pricing_setup_desc')}
           </p>
 
           <ul className="space-y-3">
-            {['Projektgenau kalkuliert', 'Vollständige Entwicklung inklusive', 'Keine Überraschungsrechnungen'].map((item) => (
+            {t('pricing_setup_bullets').map((item) => (
               <li key={item} className="flex items-center gap-3 text-brand-sub text-sm">
                 <span className="w-1.5 h-1.5 bg-brand-accent shrink-0" aria-hidden="true" />
                 {item}
@@ -96,11 +98,11 @@ export default function Pricing() {
 
           <div className="flex items-start justify-between mb-10">
             <div>
-              <span className="section-label text-brand-sub block mb-3">Retainer</span>
+              <span className="section-label text-brand-sub block mb-3">{t('pricing_retainer_label')}</span>
               <h3 className="font-display font-bold text-brand-text text-3xl md:text-4xl">
-                Optional
+                {t('pricing_retainer_title')}
               </h3>
-              <span className="text-brand-sub text-sm font-normal">/ projektabhängig</span>
+              <span className="text-brand-sub text-sm font-normal">{t('pricing_retainer_sub')}</span>
             </div>
             <div className="w-10 h-10 border border-brand-border flex items-center justify-center shrink-0 mt-1" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A0A0B0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -110,11 +112,11 @@ export default function Pricing() {
           </div>
 
           <p className="text-brand-sub text-sm leading-relaxed mb-10">
-            Wenn deine Lösung laufende Infrastruktur, Wartung oder Updates braucht, bieten wir einen projektabhängigen Retainer. Nur wenn es wirklich Sinn ergibt.
+            {t('pricing_retainer_desc')}
           </p>
 
           <ul className="space-y-3">
-            {['Laufendes Hosting & Wartung', 'Updates und Weiterentwicklung', 'Kontinuierlicher Support'].map((item) => (
+            {t('pricing_retainer_bullets').map((item) => (
               <li key={item} className="flex items-center gap-3 text-brand-sub text-sm">
                 <span className="w-1.5 h-1.5 bg-brand-sub shrink-0" aria-hidden="true" />
                 {item}
