@@ -3,7 +3,7 @@ import { useInView } from '../hooks/useInView'
 import { DisplayHeadlineLines } from './DisplayHeadline'
 import { useLanguage } from '../contexts/LanguageContext'
 
-function Step({ number, title, description, index, inView, isLast }) {
+function Step({ number, title, desc, index, inView, isLast }) {
   const rafId = useRef(null)
 
   const handleMouseMove = (e) => {
@@ -76,7 +76,7 @@ function Step({ number, title, description, index, inView, isLast }) {
 
         <div className="h-px bg-brand-border mb-5 group-hover:bg-brand-accent/25 transition-colors duration-300" />
 
-        <p className="text-brand-sub text-sm leading-relaxed">{description}</p>
+        <p className="text-brand-sub text-sm leading-relaxed">{desc}</p>
       </div>
     </div>
   )
