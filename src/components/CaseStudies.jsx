@@ -1,93 +1,61 @@
-import { useRef } from 'react'
 import { useInView } from '../hooks/useInView'
 import { DisplayHeadlineLines } from './DisplayHeadline'
 import { useLanguage } from '../contexts/LanguageContext'
 
 function CaseCard({ tag, metric, unit, title, problem, solution, result, index, inView, labelProblem, labelSolution, labelResult }) {
-  const rafId = useRef(null)
-
-  const handleMouseMove = (e) => {
-    if (rafId.current) return
-    const el = e.currentTarget
-    const cx = e.clientX
-    const cy = e.clientY
-    rafId.current = requestAnimationFrame(() => {
-      const rect = el.getBoundingClientRect()
-      el.style.setProperty('--glow-x', `${((cx - rect.left) / rect.width) * 100}%`)
-      el.style.setProperty('--glow-y', `${((cy - rect.top) / rect.height) * 100}%`)
-      rafId.current = null
-    })
-  }
-
-  const handleMouseLeave = (e) => {
-    if (rafId.current) { cancelAnimationFrame(rafId.current); rafId.current = null }
-  }
-
   return (
     <div
-      className={`relative group overflow-hidden border-b border-brand-border lg:border-b-0 lg:border-r last:border-r-0 last:border-b-0 transition-[opacity,transform] duration-700 ease-out ${
-        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-      }`}
-      style={{ transitionDelay: `${index * 100}ms` }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      className={`relative group border-b border-brand-border lg:border-b-0 lg:border-r last:border-r-0 last:border-b-0 transition-[opacity,transform] duration-700 ease-out`}
+      style={{ transitionDelay: `${index * 100}ms`, opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(24px)' }}
     >
-      {/* Hover bg slide-up */}
-      <div
-        className="win-hover-bg absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-      />
-
-      {/* Mouse glow */}
-      <div className="card-mouse-glow" aria-hidden="true" />
-
       {/* Top accent line on hover */}
       <div
-        className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.6), transparent)' }}
+        className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.7), transparent)' }}
         aria-hidden="true"
       />
+
+      {/* Hover tint — theme aware */}
+      <div className="absolute inset-0 bg-brand-accent/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-10 p-8 md:p-10 lg:p-12 flex flex-col h-full">
 
-        {/* Tag */}
-        <span className="section-label text-brand-accent mb-6 block">{tag}</span>
-
-        {/* Metric */}
-        <div className="mb-5">
+        {/* Tag + metric row */}
+        <div className="mb-6">
+          <span className="section-label text-brand-accent block mb-4">{tag}</span>
           <span
-            className="font-display font-extrabold text-brand-accent leading-none block"
-            style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)' }}
+            className="font-display font-extrabold text-brand-text leading-none block group-hover:text-brand-accent transition-colors duration-300"
+            style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)' }}
           >
             {metric}
           </span>
-          <span className="section-label text-brand-sub/60 mt-1 block">{unit}</span>
+          <span className="section-label text-brand-sub/50 mt-1.5 block">{unit}</span>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-brand-border mb-5 group-hover:bg-brand-accent/25 transition-colors duration-300" />
+        <div className="h-px bg-brand-border mb-6 group-hover:bg-brand-accent/30 transition-colors duration-300" />
 
         {/* Title */}
         <h3
-          className="font-display font-bold text-brand-text leading-tight mb-6 group-hover:text-brand-accent transition-colors duration-300"
-          style={{ fontSize: 'clamp(1rem, 1.4vw, 1.2rem)' }}
+          className="font-display font-bold text-brand-text leading-snug mb-7 group-hover:text-brand-accent transition-colors duration-300"
+          style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.15rem)' }}
         >
           {title}
         </h3>
 
-        {/* Body: Problem / Solution / Result */}
-        <dl className="space-y-3 mt-auto">
+        {/* Problem / Solution / Result */}
+        <dl className="space-y-4 mt-auto">
           <div>
-            <dt className="section-label text-brand-sub/40 mb-0.5">{labelProblem}</dt>
-            <dd className="text-brand-sub text-sm leading-relaxed group-hover:text-brand-sub/80 transition-colors duration-300">{problem}</dd>
+            <dt className="section-label text-brand-sub/40 mb-1">{labelProblem}</dt>
+            <dd className="text-brand-sub text-sm leading-relaxed">{problem}</dd>
           </div>
           <div>
-            <dt className="section-label text-brand-sub/40 mb-0.5">{labelSolution}</dt>
-            <dd className="text-brand-sub text-sm leading-relaxed group-hover:text-brand-sub/80 transition-colors duration-300">{solution}</dd>
+            <dt className="section-label text-brand-sub/40 mb-1">{labelSolution}</dt>
+            <dd className="text-brand-sub text-sm leading-relaxed">{solution}</dd>
           </div>
-          <div>
-            <dt className="section-label text-brand-accent/70 mb-0.5">{labelResult}</dt>
-            <dd className="text-brand-text text-sm leading-relaxed font-medium">{result}</dd>
+          <div className="pt-1 border-t border-brand-border/60">
+            <dt className="section-label text-brand-accent mb-1">{labelResult}</dt>
+            <dd className="text-brand-text text-sm leading-relaxed font-semibold">{result}</dd>
           </div>
         </dl>
       </div>
