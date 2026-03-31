@@ -51,7 +51,11 @@ export default function Hero() {
     <section ref={heroRef} className="relative min-h-dvh flex flex-col overflow-hidden bg-brand-bg pt-16">
 
       {/* ── Floating SVG paths ──────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none text-brand-accent/30 overflow-hidden z-0" aria-hidden="true">
+      <div
+        className="absolute inset-0 pointer-events-none text-brand-accent/30 overflow-hidden z-0"
+        style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 92%)', WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 92%)' }}
+        aria-hidden="true"
+      >
         <FloatingPaths position={1} />
         <FloatingPaths position={-1} />
       </div>
