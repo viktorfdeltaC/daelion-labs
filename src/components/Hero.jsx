@@ -240,7 +240,7 @@ export default function Hero() {
           {/* ── Stats — individual badge-pop ──────────────── */}
           <div className="flex flex-wrap items-center gap-3 mt-10 md:mt-12">
             {[
-              { num: '12+',  label: t('hero_stat_projects') },
+              { num: '75+',  label: t('hero_stat_projects') },
               { num: '100%', label: t('hero_stat_code') },
               { num: '<24h', label: t('hero_stat_response') },
             ].map(({ num, label }, i) => (
