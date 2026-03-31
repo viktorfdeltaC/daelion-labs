@@ -132,7 +132,7 @@ export default function ProblemFinder() {
             style={{ borderRadius: 0 }}
             onChange={e => { setValue(e.target.value); setOpen(true); setFocused(-1) }}
             onFocus={() => setOpen(true)}
-            onBlur={() => setTimeout(() => setOpen(false), 120)}
+            onBlur={() => setTimeout(() => setOpen(false), 200)}
             onKeyDown={handleKey}
           />
           {/* Submit arrow */}
@@ -156,7 +156,8 @@ export default function ProblemFinder() {
             id={listboxId}
             role="listbox"
             aria-label={t('pf_aria_suggestions')}
-            className="absolute left-0 right-0 top-full z-50 border border-brand-border border-t-0 bg-brand-bg max-h-56 overflow-y-auto"
+            data-lenis-prevent
+            className="absolute left-0 right-0 top-full z-50 border border-brand-border border-t-0 bg-brand-bg max-h-56 overflow-y-auto overscroll-contain"
             style={{ boxShadow: '0 12px 40px rgba(0,0,0,0.4)' }}
           >
             {filtered.map((s, i) => (
