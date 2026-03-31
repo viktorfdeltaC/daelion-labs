@@ -252,7 +252,7 @@ export default function Hero() {
           {/* ── Stats ────────────────────────────────────── */}
           <div className="mt-10 md:mt-12">
             {/* Mobile: simple inline row */}
-            <div className="flex items-center gap-6 md:hidden">
+            <div className="flex items-center justify-between md:hidden border-t border-brand-border pt-5">
               {[
                 { num: '75+',  label: t('hero_stat_projects') },
                 { num: '100%', label: t('hero_stat_code') },
@@ -260,10 +260,10 @@ export default function Hero() {
               ].map(({ num, label }, i) => (
                 <div
                   key={num}
-                  className="flex items-center gap-2"
+                  className="flex flex-col items-center gap-1"
                   style={{ animation: `badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) ${0.8 + i * 0.13}s both` }}
                 >
-                  <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
+                  <span className="font-display font-bold text-brand-text text-base leading-none">{num}</span>
                   <span className="section-label text-brand-sub/50">{label}</span>
                 </div>
               ))}
