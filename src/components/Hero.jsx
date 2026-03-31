@@ -249,21 +249,41 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* ── Stats — individual badge-pop ──────────────── */}
-          <div className="flex flex-wrap items-center gap-3 mt-10 md:mt-12">
-            {[
-              { num: '75+',  label: t('hero_stat_projects') },
-              { num: '100%', label: t('hero_stat_code') },
-              { num: '<24h', label: t('hero_stat_response') },
-            ].map(({ num, label }, i) => (
-              <HoverBorderGradient
-                key={num}
-                style={{ animation: `badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) ${0.8 + i * 0.13}s both` }}
-              >
-                <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
-                <span className="section-label text-brand-sub/60 ml-3">{label}</span>
-              </HoverBorderGradient>
-            ))}
+          {/* ── Stats ────────────────────────────────────── */}
+          <div className="mt-10 md:mt-12">
+            {/* Mobile: simple inline row */}
+            <div className="flex items-center gap-6 md:hidden">
+              {[
+                { num: '75+',  label: t('hero_stat_projects') },
+                { num: '100%', label: t('hero_stat_code') },
+                { num: '<24h', label: t('hero_stat_response') },
+              ].map(({ num, label }, i) => (
+                <div
+                  key={num}
+                  className="flex items-center gap-2"
+                  style={{ animation: `badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) ${0.8 + i * 0.13}s both` }}
+                >
+                  <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
+                  <span className="section-label text-brand-sub/50">{label}</span>
+                </div>
+              ))}
+            </div>
+            {/* Desktop: animated border badges */}
+            <div className="hidden md:flex flex-wrap items-center gap-3">
+              {[
+                { num: '75+',  label: t('hero_stat_projects') },
+                { num: '100%', label: t('hero_stat_code') },
+                { num: '<24h', label: t('hero_stat_response') },
+              ].map(({ num, label }, i) => (
+                <HoverBorderGradient
+                  key={num}
+                  style={{ animation: `badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) ${0.8 + i * 0.13}s both` }}
+                >
+                  <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
+                  <span className="section-label text-brand-sub/60 ml-3">{label}</span>
+                </HoverBorderGradient>
+              ))}
+            </div>
           </div>
         </div>
       </div>
