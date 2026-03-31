@@ -1,6 +1,6 @@
 import { useInView } from '../hooks/useInView'
-import MagneticButton from './MagneticButton'
 import { useLanguage } from '../contexts/LanguageContext'
+import { ShinyButton } from './ShinyButton'
 
 export default function CTASection() {
   const { t } = useLanguage()
@@ -68,15 +68,13 @@ export default function CTASection() {
 
         {/* Action row — prominent button */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-10 md:mt-14">
-          <MagneticButton
+          <ShinyButton
             as="a"
             href="mailto:hello@daelionlabs.com"
             aria-label="Lösung anfragen per E-Mail"
-            className="btn-shimmer btn-cta-solid font-sans font-semibold text-base px-16 py-6 cursor-pointer whitespace-nowrap inline-block"
-            style={{ borderRadius: 0 }}
           >
-            <span className="btn-inner">{t('cta_button')}</span>
-          </MagneticButton>
+            {t('cta_button')}
+          </ShinyButton>
           <span className="section-label text-white/30 hidden sm:inline">
             hello@daelionlabs.com
           </span>
