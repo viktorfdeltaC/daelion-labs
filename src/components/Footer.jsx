@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { useLanguage } from '../contexts/LanguageContext'
+
 const socials = [
   {
     name: 'LinkedIn',
@@ -33,6 +36,7 @@ const socials = [
 ]
 
 export default function Footer() {
+  const { t } = useLanguage()
   return (
     <footer className="bg-brand-bg border-t border-brand-border">
 
@@ -52,7 +56,7 @@ export default function Footer() {
                 LABS
               </span>
             </div>
-            <p className="text-brand-sub text-sm">Wir bauen Lösungen.</p>
+            <p className="text-brand-sub text-sm">{t('footer_tagline')}</p>
           </div>
 
           {/* Socials */}
@@ -77,11 +81,16 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="px-6 md:px-10 lg:px-16 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <p className="section-label text-brand-sub/50">
-          © {new Date().getFullYear()} Daelion Labs. Alle Rechte vorbehalten.
+          © {new Date().getFullYear()} Daelion Labs. {t('footer_rights')}
         </p>
-        <p className="section-label text-brand-sub/25">
-          Individuelle Lösungsarchitektur.
-        </p>
+        <nav className="flex items-center gap-6">
+          <Link to="/impressum" className="section-label text-brand-sub/40 hover:text-brand-sub transition-colors duration-200">
+            {t('footer_impressum')}
+          </Link>
+          <Link to="/datenschutz" className="section-label text-brand-sub/40 hover:text-brand-sub transition-colors duration-200">
+            {t('footer_datenschutz')}
+          </Link>
+        </nav>
       </div>
     </footer>
   )

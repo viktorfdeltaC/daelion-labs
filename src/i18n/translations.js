@@ -194,6 +194,12 @@ export const translations = {
     cta_headline: 'Bereit.',
     cta_desc:     'Schreib uns kurz, was dich täglich ausbremst. Wir antworten innerhalb von 24 Stunden mit einem ersten konkreten Ansatz. Kostenlos.',
     cta_button:   'Lösung anfragen →',
+
+    // ── Footer ──────────────────────────────────────────────
+    footer_tagline:     'Wir bauen Lösungen.',
+    footer_rights:      'Alle Rechte vorbehalten.',
+    footer_impressum:   'Impressum',
+    footer_datenschutz: 'Datenschutz',
   },
 
   // ────────────────────────────────────────────────────────────────────────────
@@ -392,5 +398,11 @@ export const translations = {
     cta_headline: 'Ready.',
     cta_desc:     "Tell us briefly what's slowing you down every day. We respond within 24 hours with a first concrete approach. Free.",
     cta_button:   'Request solution →',
+
+    // ── Footer ──────────────────────────────────────────────
+    footer_tagline:     'We build solutions.',
+    footer_rights:      'All rights reserved.',
+    footer_impressum:   'Legal Notice',
+    footer_datenschutz: 'Privacy Policy',
   },
 }
