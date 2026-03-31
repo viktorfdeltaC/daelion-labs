@@ -3,6 +3,7 @@ import { useScramble } from '../hooks/useScramble'
 import ProblemFinder from './ProblemFinder'
 import MagneticButton from './MagneticButton'
 import { useLanguage } from '../contexts/LanguageContext'
+import { FloatingPaths } from './BackgroundPaths'
 
 export default function Hero() {
   const { t } = useLanguage()
@@ -48,6 +49,12 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="relative min-h-dvh flex flex-col overflow-hidden bg-brand-bg pt-16">
+
+      {/* ── Floating SVG paths ──────────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none text-brand-accent/30 overflow-hidden z-0" aria-hidden="true">
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
+      </div>
 
       {/* ── Geometric background — architectural, not blobby ── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
@@ -259,7 +266,7 @@ export default function Hero() {
 
       {/* ── Scroll indicator ──────────────────────────────── */}
       <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 z-20"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 z-50"
         style={{ animation: 'fade-up 1s ease 1.3s both' }}
         aria-hidden="true"
       >
