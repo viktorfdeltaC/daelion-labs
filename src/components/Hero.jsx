@@ -4,6 +4,7 @@ import ProblemFinder from './ProblemFinder'
 import MagneticButton from './MagneticButton'
 import { useLanguage } from '../contexts/LanguageContext'
 import { FloatingPaths } from './BackgroundPaths'
+import { HoverBorderGradient } from './HoverBorderGradient'
 
 export default function Hero() {
   const { t } = useLanguage()
@@ -255,14 +256,13 @@ export default function Hero() {
               { num: '100%', label: t('hero_stat_code') },
               { num: '<24h', label: t('hero_stat_response') },
             ].map(({ num, label }, i) => (
-              <div
+              <HoverBorderGradient
                 key={num}
-                className="glass flex items-center gap-3 px-4 py-2.5"
                 style={{ animation: `badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) ${0.8 + i * 0.13}s both` }}
               >
                 <span className="font-display font-bold text-brand-text text-sm leading-none">{num}</span>
-                <span className="section-label text-brand-sub/60">{label}</span>
-              </div>
+                <span className="section-label text-brand-sub/60 ml-3">{label}</span>
+              </HoverBorderGradient>
             ))}
           </div>
         </div>
