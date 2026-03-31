@@ -274,7 +274,7 @@ export default function Hero() {
         style={{ animation: 'fade-up 1s ease 1.3s both' }}
         aria-hidden="true"
       >
-        <span className="section-label text-brand-sub/30" style={{ letterSpacing: '0.2em' }}>SCROLL</span>
+        <span className="section-label text-brand-sub/60" style={{ letterSpacing: '0.2em' }}>SCROLL</span>
         <div className="relative w-px h-10 bg-brand-border overflow-hidden">
           <div
             className="absolute inset-x-0 top-0 h-full bg-brand-accent"
