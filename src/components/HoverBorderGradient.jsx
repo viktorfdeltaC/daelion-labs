@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+
+const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 
 const movingMap = {
   TOP:    'radial-gradient(20.7% 50% at 50% 0%, rgba(139,92,246,0.9) 0%, rgba(139,92,246,0) 100%)',
@@ -41,7 +43,7 @@ export function HoverBorderGradient({
     <Element
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`relative flex items-center justify-center overflow-hidden bg-brand-bg/60 backdrop-blur-sm p-px ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden bg-brand-bg/60 backdrop-blur-sm p-px w-fit ${className}`}
       style={{ borderRadius: 0 }}
       {...props}
     >
@@ -50,16 +52,20 @@ export function HoverBorderGradient({
         {children}
       </div>
 
-      {/* Animated gradient border */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ filter: 'blur(2px)', width: '100%', height: '100%' }}
-        initial={{ background: movingMap[direction] }}
-        animate={{
-          background: hovered ? [movingMap[direction], highlight] : movingMap[direction],
-        }}
-        transition={{ ease: 'linear', duration }}
-      />
+      {/* Animated gradient border — desktop only */}
+      {isTouch ? (
+        <div className="absolute inset-0 z-0" style={{ background: 'rgba(139,92,246,0.5)' }} />
+      ) : (
+        <motion.div
+          className="absolute inset-0 z-0"
+          style={{ filter: 'blur(2px)', width: '100%', height: '100%' }}
+          initial={{ background: movingMap[direction] }}
+          animate={{
+            background: hovered ? [movingMap[direction], highlight] : movingMap[direction],
+          }}
+          transition={{ ease: 'linear', duration }}
+        />
+      )}
 
       {/* Inner bg cutout — 1px inset */}
       <div className="absolute inset-[1px] z-[1] bg-brand-bg" />
