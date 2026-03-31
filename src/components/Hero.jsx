@@ -53,7 +53,7 @@ export default function Hero() {
       {/* ── Floating SVG paths ──────────────────────────────── */}
       <div
         className="absolute inset-0 pointer-events-none text-brand-accent/30 overflow-hidden z-0"
-        style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 92%)', WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 92%)' }}
+        style={{ maskImage: 'linear-gradient(to bottom, black 40%, transparent 72%)', WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 72%)' }}
         aria-hidden="true"
       >
         <FloatingPaths position={1} />
