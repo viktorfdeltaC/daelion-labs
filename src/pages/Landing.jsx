@@ -2,6 +2,7 @@ import Hero from '../components/Hero'
 import Problem from '../components/Problem'
 import WhatWeBuild from '../components/WhatWeBuild'
 import WinsSection from '../components/WinsSection'
+import CaseStudies from '../components/CaseStudies'
 import HowItWorks from '../components/HowItWorks'
 import Pricing from '../components/Pricing'
 import CTASection from '../components/CTASection'
@@ -16,6 +17,7 @@ export default function Landing() {
       <Marquee />
       <WhatWeBuild />
       <WinsSection />
+      <CaseStudies />
       <HowItWorks />
       <Pricing />
       <CTASection />
