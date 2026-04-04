@@ -87,7 +87,7 @@ export default function Cursor() {
     const tick = (ts) => {
       const dt = lastTs > 0 ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016
       lastTs = ts
-      const f = 1 - Math.exp(-9 * dt)
+      const f = 1 - Math.exp(-20 * dt)
 
       pos.rx += (pos.mx - pos.rx) * f
       pos.ry += (pos.my - pos.ry) * f
