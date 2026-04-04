@@ -160,7 +160,7 @@ export default function ContactModal({ open, onClose }) {
           pointerEvents: 'none',
         }}
       >
-        {/* Card */}
+        {/* Card — flex column so header stays fixed and body scrolls */}
         <div
           onClick={(e) => e.stopPropagation()}
           style={{
@@ -168,7 +168,8 @@ export default function ContactModal({ open, onClose }) {
             width: '100%',
             maxWidth: 520,
             maxHeight: '90dvh',
-            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
             background: '#ffffff',
             boxShadow: '0 40px 100px rgba(0,0,0,0.22), 0 0 0 1px rgba(139,92,246,0.12)',
             borderTop: '2px solid #8B5CF6',
@@ -187,8 +188,9 @@ export default function ContactModal({ open, onClose }) {
             <line x1="100%" y1="100%" x2="100%" y2="calc(100% - 18px)" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.25" />
           </svg>
 
-          {/* ── Header ── */}
+          {/* ── Header — flex-shrink: 0 so it never collapses ── */}
           <div style={{
+            flexShrink: 0,
             padding: '18px 28px',
             borderBottom: '1px solid #f3f4f6',
             display: 'flex',
@@ -229,8 +231,8 @@ export default function ContactModal({ open, onClose }) {
             </button>
           </div>
 
-          {/* ── Body ── */}
-          <div style={{ padding: '24px 28px 48px' }}>
+          {/* ── Body — scrollable ── */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '24px 28px 48px' }}>
             {submitted ? (
               /* Success */
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 20, padding: '20px 0' }}>
