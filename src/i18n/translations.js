@@ -251,6 +251,9 @@ export const translations = {
     modal_topic_ai:         'KI-Integration',
     modal_topic_process:    'Prozessoptimierung',
     modal_topic_other:      'Anderes',
+    modal_file:       'Anhang (optional)',
+    modal_file_hint:  'Bild oder PDF · max. 1 MB',
+    modal_file_error: 'Datei zu groß. Maximal 1 MB erlaubt.',
 
     // ── Footer ──────────────────────────────────────────────
     footer_tagline:     'Wir bauen Lösungen.',
@@ -512,6 +515,9 @@ export const translations = {
     modal_topic_ai:         'AI Integration',
     modal_topic_process:    'Process Optimisation',
     modal_topic_other:      'Other',
+    modal_file:       'Attachment (optional)',
+    modal_file_hint:  'Image or PDF · max. 1 MB',
+    modal_file_error: 'File too large. Maximum 1 MB allowed.',
 
     // ── Footer ──────────────────────────────────────────────
     footer_tagline:     'We build solutions.',

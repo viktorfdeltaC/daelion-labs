@@ -43,13 +43,18 @@ export default function ContactModal({ open, onClose }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({ name: '', email: '', topic: '', message: '' })
+  const [file, setFile] = useState(null)
+  const [fileError, setFileError] = useState(null)
   const [mounted, setMounted] = useState(false)
   const firstFieldRef = useRef(null)
+  const fileInputRef = useRef(null)
 
   useEffect(() => {
     if (open) {
       setSubmitted(false)
       setForm({ name: '', email: '', topic: '', message: '' })
+      setFile(null)
+      setFileError(null)
       // Slight delay so CSS transition fires
       setTimeout(() => setMounted(true), 10)
       setTimeout(() => firstFieldRef.current?.focus(), 80)
@@ -71,22 +76,38 @@ export default function ContactModal({ open, onClose }) {
 
   if (!open) return null
 
+  const handleFileChange = (e) => {
+    const f = e.target.files?.[0]
+    if (!f) return
+    if (f.size > 1_000_000) {
+      setFileError(t('modal_file_error'))
+      setFile(null)
+      e.target.value = ''
+    } else {
+      setFileError(null)
+      setFile(f)
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (fileError) return
     setLoading(true)
     setError(null)
     try {
+      const fd = new FormData()
+      fd.append('access_key', W3F_KEY)
+      fd.append('subject', `[${form.topic || 'Anfrage'}] ${form.name}`)
+      fd.append('name', form.name)
+      fd.append('email', form.email)
+      fd.append('thema', form.topic)
+      fd.append('message', form.message)
+      if (file) fd.append('attachment', file)
+
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: W3F_KEY,
-          subject: `[${form.topic || 'Anfrage'}] ${form.name}`,
-          name: form.name,
-          email: form.email,
-          thema: form.topic,
-          message: form.message,
-        }),
+        headers: { Accept: 'application/json' },
+        body: fd,
       })
       const data = await res.json()
       if (data.success) {
@@ -319,6 +340,76 @@ export default function ContactModal({ open, onClose }) {
                     onFocus={onFocus}
                     onBlur={onBlur}
                   />
+                </div>
+
+                {/* File upload */}
+                <div>
+                  <Label>{t('modal_file')}</Label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                    aria-label={t('modal_file')}
+                  />
+                  {file ? (
+                    /* File selected — show name + remove */
+                    <div style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      padding: '10px 14px',
+                      border: '1px solid #8B5CF6',
+                      background: '#faf5ff',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        <span style={{ fontSize: '0.8rem', color: '#111827', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {file.name}
+                        </span>
+                        <span style={{ fontSize: '0.7rem', color: '#9ca3af', flexShrink: 0 }}>
+                          ({(file.size / 1024).toFixed(0)} KB)
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => { setFile(null); setFileError(null); fileInputRef.current.value = '' }}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9ca3af', padding: '0 0 0 8px', flexShrink: 0, transition: 'color 0.15s' }}
+                        onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
+                        onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                        aria-label="Anhang entfernen"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                      </button>
+                    </div>
+                  ) : (
+                    /* Drop zone */
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current.click()}
+                      style={{
+                        width: '100%', padding: '16px 14px',
+                        border: '1px dashed #e5e7eb',
+                        background: 'transparent', cursor: 'pointer',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                        transition: 'border-color 0.18s, background 0.18s',
+                        borderRadius: 0,
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = '#8B5CF6'; e.currentTarget.style.background = '#faf5ff' }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = '#e5e7eb'; e.currentTarget.style.background = 'transparent' }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                      </svg>
+                      <span style={{ fontSize: '0.8rem', color: '#6b7280' }}>{t('modal_file_hint')}</span>
+                    </button>
+                  )}
+                  {fileError && (
+                    <p style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: 6 }}>{fileError}</p>
+                  )}
                 </div>
 
                 {/* Submit */}
