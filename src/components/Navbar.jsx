@@ -195,9 +195,9 @@ export default function Navbar() {
             style={{
               borderRadius: 0,
               minHeight: '52px',
-              background: '#8B5CF6',
+              background: '#07050F',
               color: '#fff',
-              border: 'none',
+              border: '1px solid rgba(139,92,246,0.35)',
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(14px)',
               transition: `opacity 0.4s ease 0.35s, transform 0.45s cubic-bezier(0.22,1,0.36,1) 0.35s`,
