@@ -191,7 +191,7 @@ export default function ContactModal({ open, onClose }) {
           {/* ── Header — flex-shrink: 0 so it never collapses ── */}
           <div style={{
             flexShrink: 0,
-            padding: '18px 28px',
+            padding: '14px 28px',
             borderBottom: '1px solid #f3f4f6',
             display: 'flex',
             alignItems: 'flex-start',
@@ -232,7 +232,7 @@ export default function ContactModal({ open, onClose }) {
           </div>
 
           {/* ── Body — scrollable ── */}
-          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '24px 28px 48px' }}>
+          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '20px 28px 32px' }}>
             {submitted ? (
               /* Success */
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 20, padding: '20px 0' }}>
@@ -268,7 +268,7 @@ export default function ContactModal({ open, onClose }) {
               </div>
             ) : (
               /* Form */
-              <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 
                 {/* Name + Email row */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
@@ -334,7 +334,7 @@ export default function ContactModal({ open, onClose }) {
                   <Label>{t('modal_message')}</Label>
                   <textarea
                     required
-                    rows={4}
+                    rows={3}
                     value={form.message}
                     onChange={(e) => setForm(f => ({ ...f, message: e.target.value }))}
                     style={{ ...fieldBase, resize: 'none', lineHeight: 1.6 }}
