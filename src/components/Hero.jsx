@@ -5,9 +5,11 @@ import MagneticButton from './MagneticButton'
 import { useLanguage } from '../contexts/LanguageContext'
 import { FloatingPaths } from './BackgroundPaths'
 import { HoverBorderGradient } from './HoverBorderGradient'
+import { useContactModal } from '../contexts/ContactModalContext'
 
 export default function Hero() {
   const { t } = useLanguage()
+  const { openModal } = useContactModal()
   const heroRef = useRef(null)
   const circle1Ref = useRef(null)
   const circle2Ref = useRef(null)
@@ -231,8 +233,8 @@ export default function Hero() {
           >
             {/* Magnetic primary CTA */}
             <MagneticButton
-              as="a"
-              href="#contact"
+              as="button"
+              onClick={openModal}
               aria-label={t('hero_cta_primary')}
               className="btn-shimmer btn-purple bg-brand-accent text-white font-sans font-semibold text-sm px-8 py-4 cursor-pointer whitespace-nowrap inline-block"
               style={{ borderRadius: 0 }}
