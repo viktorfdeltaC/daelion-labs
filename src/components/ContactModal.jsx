@@ -232,7 +232,7 @@ export default function ContactModal({ open, onClose }) {
           </div>
 
           {/* ── Body — scrollable ── */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '24px 28px 48px' }}>
+          <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '24px 28px 48px' }}>
             {submitted ? (
               /* Success */
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 20, padding: '20px 0' }}>
