@@ -3,6 +3,7 @@ import { useActiveSection } from '../hooks/useActiveSection'
 import ThemeToggle from './ThemeToggle'
 import MagneticButton from './MagneticButton'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useContactModal } from '../contexts/ContactModalContext'
 
 const NAV_HREFS = ['#solutions', '#process', '#pricing']
 
@@ -10,6 +11,7 @@ const SECTION_IDS = NAV_HREFS.map(h => h.slice(1))
 
 export default function Navbar() {
   const { lang, t, toggle } = useLanguage()
+  const { openModal } = useContactModal()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const activeSection = useActiveSection(SECTION_IDS)
@@ -98,8 +100,8 @@ export default function Navbar() {
             </button>
             <ThemeToggle />
             <MagneticButton
-              as="a"
-              href="#contact"
+              as="button"
+              onClick={openModal}
               aria-label={t('nav_cta')}
               maxPx={7}
               className="btn-shimmer btn-purple text-sm font-semibold text-white bg-brand-accent px-5 cursor-pointer hidden sm:inline-flex items-center"
@@ -186,10 +188,9 @@ export default function Navbar() {
           {/* CTA — MagneticButton handles desktop hover; on mobile the menu
                overlay is touch-only so magnetic is automatically disabled */}
           <MagneticButton
-            as="a"
-            href="#contact"
+            as="button"
+            onClick={() => { openModal(); close() }}
             aria-label={t('nav_cta')}
-            onClick={close}
             className="btn-shimmer btn-purple mt-8 text-white font-semibold text-sm inline-flex items-center justify-center"
             style={{
               borderRadius: 0,

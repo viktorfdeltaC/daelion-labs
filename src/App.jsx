@@ -8,6 +8,7 @@ import Landing from './pages/Landing'
 import Impressum from './pages/Impressum'
 import Datenschutz from './pages/Datenschutz'
 import { useLenis } from './hooks/useLenis'
+import { ContactModalProvider } from './contexts/ContactModalContext'
 
 // Fade-out timer — lives outside React state to avoid triggering re-renders
 let _progressFadeTimer = null
@@ -41,6 +42,7 @@ export default function App() {
   })
 
   return (
+    <ContactModalProvider>
     <div className="bg-brand-bg min-h-screen font-sans antialiased relative">
       <Cursor />
       <div className="grain-overlay" aria-hidden="true" />
@@ -64,5 +66,6 @@ export default function App() {
       </Routes>
       <Footer />
     </div>
+    </ContactModalProvider>
   )
 }

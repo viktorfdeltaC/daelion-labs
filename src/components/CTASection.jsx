@@ -1,9 +1,11 @@
 import { useInView } from '../hooks/useInView'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useContactModal } from '../contexts/ContactModalContext'
 import { ShinyButton } from './ShinyButton'
 
 export default function CTASection() {
   const { t } = useLanguage()
+  const { openModal } = useContactModal()
   const [ref, inView] = useInView()
 
   return (
@@ -69,9 +71,9 @@ export default function CTASection() {
         {/* Action row — prominent button */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-10 md:mt-14">
           <ShinyButton
-            as="a"
-            href="mailto:hello@daelionlabs.com"
-            aria-label="Lösung anfragen per E-Mail"
+            as="button"
+            onClick={openModal}
+            aria-label="Kontaktformular öffnen"
           >
             {t('cta_button')}
           </ShinyButton>

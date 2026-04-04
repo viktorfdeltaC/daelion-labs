@@ -233,6 +233,22 @@ export const translations = {
     cta_desc:     'Schreib uns kurz, was dich täglich ausbremst. Wir antworten innerhalb von 24 Stunden mit einem ersten konkreten Ansatz. Kostenlos.',
     cta_button:   'Lösung anfragen →',
 
+    // ── ContactModal ─────────────────────────────────────────
+    modal_title:          'KONTAKT',
+    modal_headline:       'Projekt besprechen.',
+    modal_name:           'Name',
+    modal_email:          'E-Mail',
+    modal_topic:          'Thema',
+    modal_message:        'Nachricht',
+    modal_message_placeholder: 'Was möchtest du automatisieren oder lösen?',
+    modal_submit:         'Anfrage senden →',
+    modal_success_title:  'Nachricht angekommen.',
+    modal_success_body:   'Wir melden uns innerhalb von 24 Stunden mit einem ersten konkreten Ansatz. Kostenlos.',
+    modal_topic_automation: 'Automatisierung',
+    modal_topic_reporting:  'Reporting & Dashboards',
+    modal_topic_ai:         'KI-Integration',
+    modal_topic_other:      'Anderes',
+
     // ── Footer ──────────────────────────────────────────────
     footer_tagline:     'Wir bauen Lösungen.',
     footer_rights:      'Alle Rechte vorbehalten.',
@@ -474,6 +490,22 @@ export const translations = {
     cta_headline: 'Ready.',
     cta_desc:     "Tell us briefly what's slowing you down every day. We respond within 24 hours with a first concrete approach. Free.",
     cta_button:   'Request solution →',
+
+    // ── ContactModal ─────────────────────────────────────────
+    modal_title:          'CONTACT',
+    modal_headline:       'Let\'s talk.',
+    modal_name:           'Name',
+    modal_email:          'Email',
+    modal_topic:          'Topic',
+    modal_message:        'Message',
+    modal_message_placeholder: 'What would you like to automate or solve?',
+    modal_submit:         'Send request →',
+    modal_success_title:  'Message received.',
+    modal_success_body:   'We will get back to you within 24 hours with a first concrete approach. Free of charge.',
+    modal_topic_automation: 'Automation',
+    modal_topic_reporting:  'Reporting & Dashboards',
+    modal_topic_ai:         'AI Integration',
+    modal_topic_other:      'Other',
 
     // ── Footer ──────────────────────────────────────────────
     footer_tagline:     'We build solutions.',
