@@ -102,9 +102,12 @@ export default function ContactModal({ open, onClose }) {
   }
 
   const topics = [
+    t('modal_topic_web'),
     t('modal_topic_automation'),
+    t('modal_topic_tool'),
     t('modal_topic_reporting'),
     t('modal_topic_ai'),
+    t('modal_topic_process'),
     t('modal_topic_other'),
   ]
 

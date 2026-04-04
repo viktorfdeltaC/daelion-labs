@@ -244,9 +244,12 @@ export const translations = {
     modal_submit:         'Anfrage senden →',
     modal_success_title:  'Nachricht angekommen.',
     modal_success_body:   'Wir melden uns innerhalb von 24 Stunden mit einem ersten konkreten Ansatz. Kostenlos.',
-    modal_topic_automation: 'Automatisierung',
-    modal_topic_reporting:  'Reporting & Dashboards',
+    modal_topic_web:        'Webdesign & Webentwicklung',
+    modal_topic_automation: 'Automatisierung & Workflows',
+    modal_topic_tool:       'Individuelles Business-Tool',
+    modal_topic_reporting:  'Dashboard & Reporting',
     modal_topic_ai:         'KI-Integration',
+    modal_topic_process:    'Prozessoptimierung',
     modal_topic_other:      'Anderes',
 
     // ── Footer ──────────────────────────────────────────────
@@ -502,9 +505,12 @@ export const translations = {
     modal_submit:         'Send request →',
     modal_success_title:  'Message received.',
     modal_success_body:   'We will get back to you within 24 hours with a first concrete approach. Free of charge.',
-    modal_topic_automation: 'Automation',
-    modal_topic_reporting:  'Reporting & Dashboards',
+    modal_topic_web:        'Web Design & Development',
+    modal_topic_automation: 'Automation & Workflows',
+    modal_topic_tool:       'Custom Business Tool',
+    modal_topic_reporting:  'Dashboard & Reporting',
     modal_topic_ai:         'AI Integration',
+    modal_topic_process:    'Process Optimisation',
     modal_topic_other:      'Other',
 
     // ── Footer ──────────────────────────────────────────────
