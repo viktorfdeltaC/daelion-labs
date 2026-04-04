@@ -75,9 +75,12 @@ export default function CTASection() {
           >
             {t('cta_button')}
           </ShinyButton>
-          <span className="section-label text-white/30 hidden sm:inline">
+          <a
+            href="mailto:hello@daelionlabs.com"
+            className="section-label text-white/30 hover:text-white/60 transition-colors duration-200 hidden sm:inline"
+          >
             hello@daelionlabs.com
-          </span>
+          </a>
         </div>
       </div>
 
