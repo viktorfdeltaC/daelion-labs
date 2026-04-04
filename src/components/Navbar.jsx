@@ -191,10 +191,13 @@ export default function Navbar() {
             as="button"
             onClick={() => { openModal(); close() }}
             aria-label={t('nav_cta')}
-            className="btn-shimmer btn-purple mt-8 text-white font-semibold text-sm inline-flex items-center justify-center"
+            className="mt-8 text-white font-semibold text-sm inline-flex items-center justify-center"
             style={{
               borderRadius: 0,
               minHeight: '52px',
+              background: '#8B5CF6',
+              color: '#fff',
+              border: 'none',
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(14px)',
               transition: `opacity 0.4s ease 0.35s, transform 0.45s cubic-bezier(0.22,1,0.36,1) 0.35s`,
