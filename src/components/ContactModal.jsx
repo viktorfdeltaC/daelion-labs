@@ -35,7 +35,6 @@ const fieldBase = {
 const onFocus = (e) => { e.target.style.borderColor = '#8B5CF6'; e.target.style.background = '#fff' }
 const onBlur  = (e) => { e.target.style.borderColor = '#e5e7eb'; e.target.style.background = '#f9fafb' }
 
-const W3F_KEY = 'ab2fb790-a653-4757-b1bc-e8fe05600260'
 
 export default function ContactModal({ open, onClose }) {
   const { t } = useLanguage()
@@ -75,28 +74,26 @@ export default function ContactModal({ open, onClose }) {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: W3F_KEY,
-          subject: `[${form.topic || 'Anfrage'}] ${form.name}`,
           name: form.name,
           email: form.email,
-          thema: form.topic,
+          topic: form.topic,
           budget: form.budget,
-          zeitrahmen: form.timeline,
+          timeline: form.timeline,
           message: form.message,
         }),
       })
       const data = await res.json()
-      if (data.success) {
+      if (res.ok && data.success) {
         setSubmitted(true)
       } else {
-        setError('Etwas ist schiefgelaufen. Bitte versuch es nochmal.')
+        setError(t('modal_error'))
       }
     } catch {
-      setError('Netzwerkfehler. Bitte versuch es nochmal.')
+      setError(t('modal_error'))
     } finally {
       setLoading(false)
     }
