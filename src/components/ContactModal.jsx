@@ -306,52 +306,52 @@ export default function ContactModal({ open, onClose }) {
                   </div>
                 </div>
 
-                {/* Budget */}
-                <div>
-                  <Label>{t('modal_budget')}</Label>
-                  <div style={{ position: 'relative' }}>
-                    <select
-                      required
-                      value={form.budget}
-                      onChange={(e) => setForm(f => ({ ...f, budget: e.target.value }))}
-                      style={{ ...fieldBase, appearance: 'none', cursor: 'pointer', paddingRight: 36 }}
-                      onFocus={onFocus}
-                      onBlur={onBlur}
-                    >
-                      <option value="" disabled>—</option>
-                      <option value={t('modal_budget_u1k')}>{t('modal_budget_u1k')}</option>
-                      <option value={t('modal_budget_1_3k')}>{t('modal_budget_1_3k')}</option>
-                      <option value={t('modal_budget_3_8k')}>{t('modal_budget_3_8k')}</option>
-                      <option value={t('modal_budget_8kp')}>{t('modal_budget_8kp')}</option>
-                      <option value={t('modal_budget_open')}>{t('modal_budget_open')}</option>
-                    </select>
-                    <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
+                {/* Budget + Timeline row */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                  <div>
+                    <Label>{t('modal_budget')}</Label>
+                    <div style={{ position: 'relative' }}>
+                      <select
+                        required
+                        value={form.budget}
+                        onChange={(e) => setForm(f => ({ ...f, budget: e.target.value }))}
+                        style={{ ...fieldBase, appearance: 'none', cursor: 'pointer', paddingRight: 36 }}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                      >
+                        <option value="" disabled>—</option>
+                        <option value={t('modal_budget_u1k')}>{t('modal_budget_u1k')}</option>
+                        <option value={t('modal_budget_1_3k')}>{t('modal_budget_1_3k')}</option>
+                        <option value={t('modal_budget_3_8k')}>{t('modal_budget_3_8k')}</option>
+                        <option value={t('modal_budget_8kp')}>{t('modal_budget_8kp')}</option>
+                        <option value={t('modal_budget_open')}>{t('modal_budget_open')}</option>
+                      </select>
+                      <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
                   </div>
-                </div>
-
-                {/* Timeline */}
-                <div>
-                  <Label>{t('modal_timeline')}</Label>
-                  <div style={{ position: 'relative' }}>
-                    <select
-                      required
-                      value={form.timeline}
-                      onChange={(e) => setForm(f => ({ ...f, timeline: e.target.value }))}
-                      style={{ ...fieldBase, appearance: 'none', cursor: 'pointer', paddingRight: 36 }}
-                      onFocus={onFocus}
-                      onBlur={onBlur}
-                    >
-                      <option value="" disabled>—</option>
-                      <option value={t('modal_timeline_asap')}>{t('modal_timeline_asap')}</option>
-                      <option value={t('modal_timeline_4_6w')}>{t('modal_timeline_4_6w')}</option>
-                      <option value={t('modal_timeline_2_3m')}>{t('modal_timeline_2_3m')}</option>
-                      <option value={t('modal_timeline_flex')}>{t('modal_timeline_flex')}</option>
-                    </select>
-                    <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
+                  <div>
+                    <Label>{t('modal_timeline')}</Label>
+                    <div style={{ position: 'relative' }}>
+                      <select
+                        required
+                        value={form.timeline}
+                        onChange={(e) => setForm(f => ({ ...f, timeline: e.target.value }))}
+                        style={{ ...fieldBase, appearance: 'none', cursor: 'pointer', paddingRight: 36 }}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                      >
+                        <option value="" disabled>—</option>
+                        <option value={t('modal_timeline_asap')}>{t('modal_timeline_asap')}</option>
+                        <option value={t('modal_timeline_4_6w')}>{t('modal_timeline_4_6w')}</option>
+                        <option value={t('modal_timeline_2_3m')}>{t('modal_timeline_2_3m')}</option>
+                        <option value={t('modal_timeline_flex')}>{t('modal_timeline_flex')}</option>
+                      </select>
+                      <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
 
