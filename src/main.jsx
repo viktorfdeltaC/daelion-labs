@@ -1,12 +1,14 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 import App from './App.jsx'
 import { LanguageProvider } from './contexts/LanguageContext.jsx'
 
-createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root')
+
+const app = (
   <StrictMode>
     <BrowserRouter>
       <LanguageProvider>
@@ -14,5 +16,13 @@ createRoot(document.getElementById('root')).render(
       </LanguageProvider>
     </BrowserRouter>
     <Analytics />
-  </StrictMode>,
+  </StrictMode>
 )
+
+// If the container has prerendered HTML (from SSR/prerender build),
+// hydrate it. Otherwise, do a fresh client-side render.
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app)
+} else {
+  createRoot(container).render(app)
+}
