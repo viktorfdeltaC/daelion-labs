@@ -263,6 +263,9 @@ export const translations = {
     modal_timeline_4_6w: 'Innerhalb 4–6 Wochen',
     modal_timeline_2_3m: '2–3 Monate',
     modal_timeline_flex: 'Kein fixer Termin',
+    modal_file:         'Anhang (optional)',
+    modal_file_hint:    'Bild oder PDF · max. 1 MB',
+    modal_file_error:   'Datei zu groß. Maximal 1 MB erlaubt.',
 
     // ── Footer ──────────────────────────────────────────────
     footer_tagline:     'Wir bauen Lösungen.',
@@ -536,6 +539,9 @@ export const translations = {
     modal_timeline_4_6w: 'Within 4–6 weeks',
     modal_timeline_2_3m: '2–3 months',
     modal_timeline_flex: 'No fixed deadline',
+    modal_file:         'Attachment (optional)',
+    modal_file_hint:    'Image or PDF · max. 1 MB',
+    modal_file_error:   'File too large. Maximum 1 MB allowed.',
 
     // ── Footer ──────────────────────────────────────────────
     footer_tagline:     'We build solutions.',

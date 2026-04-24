@@ -42,13 +42,18 @@ export default function ContactModal({ open, onClose }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({ name: '', email: '', topic: '', budget: '', timeline: '', message: '' })
+  const [file, setFile] = useState(null)
+  const [fileError, setFileError] = useState(null)
   const [mounted, setMounted] = useState(false)
   const firstFieldRef = useRef(null)
+  const fileInputRef = useRef(null)
 
   useEffect(() => {
     if (open) {
       setSubmitted(false)
       setForm({ name: '', email: '', topic: '', budget: '', timeline: '', message: '' })
+      setFile(null)
+      setFileError(null)
       setTimeout(() => setMounted(true), 10)
       setTimeout(() => firstFieldRef.current?.focus(), 80)
     } else {
@@ -71,20 +76,23 @@ export default function ContactModal({ open, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (fileError) return
     setLoading(true)
     setError(null)
     try {
+      const fd = new FormData()
+      fd.append('name', form.name)
+      fd.append('email', form.email)
+      fd.append('topic', form.topic)
+      fd.append('budget', form.budget)
+      fd.append('timeline', form.timeline)
+      fd.append('message', form.message)
+      if (file) fd.append('attachment', file)
+
+      // No Content-Type header — browser sets multipart/form-data with boundary automatically
       const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          topic: form.topic,
-          budget: form.budget,
-          timeline: form.timeline,
-          message: form.message,
-        }),
+        body: fd,
       })
       const data = await res.json()
       if (res.ok && data.success) {
@@ -97,6 +105,35 @@ export default function ContactModal({ open, onClose }) {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleFileChange = (e) => {
+    const f = e.target.files?.[0]
+    if (!f) {
+      setFile(null)
+      setFileError(null)
+      return
+    }
+    if (f.size > 1_000_000) {
+      setFile(null)
+      setFileError(t('modal_file_error'))
+      if (fileInputRef.current) fileInputRef.current.value = ''
+      return
+    }
+    setFile(f)
+    setFileError(null)
+  }
+
+  const clearFile = () => {
+    setFile(null)
+    setFileError(null)
+    if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  const formatBytes = (bytes) => {
+    if (bytes < 1024) return `${bytes} B`
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
   }
 
   const topics = [
@@ -368,6 +405,122 @@ export default function ContactModal({ open, onClose }) {
                     onFocus={onFocus}
                     onBlur={onBlur}
                   />
+                </div>
+
+                {/* File attachment */}
+                <div>
+                  <Label>{t('modal_file')}</Label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                  />
+                  {!file ? (
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      style={{
+                        width: '100%',
+                        background: '#f9fafb',
+                        border: '1px dashed #d1d5db',
+                        color: '#6b7280',
+                        fontSize: '0.8rem',
+                        padding: '14px',
+                        outline: 'none',
+                        borderRadius: 0,
+                        fontFamily: 'inherit',
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        transition: 'border-color 0.18s, background 0.18s, color 0.18s',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = '#8B5CF6'
+                        e.currentTarget.style.background = '#fff'
+                        e.currentTarget.style.color = '#111827'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = '#d1d5db'
+                        e.currentTarget.style.background = '#f9fafb'
+                        e.currentTarget.style.color = '#6b7280'
+                      }}
+                    >
+                      <span style={{ display: 'block', fontWeight: 500 }}>+ Datei auswählen</span>
+                      <span style={{
+                        display: 'block',
+                        marginTop: 4,
+                        fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)',
+                        fontSize: '0.6rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: '#9ca3af',
+                      }}>
+                        {t('modal_file_hint')}
+                      </span>
+                    </button>
+                  ) : (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 12,
+                      background: '#f9fafb',
+                      border: '1px solid #e5e7eb',
+                      padding: '11px 14px',
+                    }}>
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <p style={{
+                          color: '#111827',
+                          fontSize: '0.85rem',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}>{file.name}</p>
+                        <p style={{
+                          color: '#9ca3af',
+                          fontSize: '0.7rem',
+                          fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)',
+                          marginTop: 2,
+                        }}>{formatBytes(file.size)}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={clearFile}
+                        aria-label="Datei entfernen"
+                        style={{
+                          flexShrink: 0,
+                          width: 28,
+                          height: 28,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          background: 'none',
+                          border: '1px solid #e5e7eb',
+                          cursor: 'pointer',
+                          color: '#9ca3af',
+                          transition: 'color 0.15s, border-color 0.15s',
+                          borderRadius: 0,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = '#111827'
+                          e.currentTarget.style.borderColor = '#111827'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = '#9ca3af'
+                          e.currentTarget.style.borderColor = '#e5e7eb'
+                        }}
+                      >
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                  {fileError && (
+                    <p style={{ marginTop: 8, fontSize: '0.75rem', color: '#ef4444' }}>{fileError}</p>
+                  )}
                 </div>
 
                 {/* Submit */}
