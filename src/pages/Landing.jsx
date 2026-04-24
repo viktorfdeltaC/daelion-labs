@@ -4,7 +4,7 @@ import WhatWeBuild from '../components/WhatWeBuild'
 import WinsSection from '../components/WinsSection'
 import CaseStudies from '../components/CaseStudies'
 import HowItWorks from '../components/HowItWorks'
-import Pricing from '../components/Pricing'
+import Packages from '../components/Packages'
 import CTASection from '../components/CTASection'
 import Marquee from '../components/Marquee'
 
@@ -19,7 +19,7 @@ export default function Landing() {
       <WinsSection />
       <CaseStudies />
       <HowItWorks />
-      <Pricing />
+      <Packages />
       <CTASection />
     </main>
   )
